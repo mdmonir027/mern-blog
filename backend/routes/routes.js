@@ -1,5 +1,6 @@
 const userRoutes = require('./userRoutes');
 const authRoutes = require('./authRoutes');
+const profileRouter = require('./author/profileRoutes');
 
 const routeArrays = [
   {
@@ -9,6 +10,10 @@ const routeArrays = [
   {
     path: '/auth',
     handler: authRoutes,
+  },
+  {
+    path: '/profile',
+    handler: profileRoutes,
   },
   {
     path: '/',

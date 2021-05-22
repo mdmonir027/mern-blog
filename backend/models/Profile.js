@@ -1,11 +1,6 @@
 const { Schema, model } = require('mongoose');
 
 const profileSchema = new Schema({
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-  },
   name: {
     type: String,
     required: true,
@@ -28,6 +23,11 @@ const profileSchema = new Schema({
     facebook: String,
     twitter: String,
     github: String,
+  },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
   },
   posts: [
     {
