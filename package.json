@@ -1,0 +1,17 @@
+{
+  "name": "mern-mvc-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:front": "npm start --prefix frontend",
+    "start:back": "npm run dev --prefix backend",
+    "start": "concurrently \"npm run start:back\" \"npm run start:front\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^6.1.0"
+  }
+}
