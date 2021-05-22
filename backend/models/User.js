@@ -20,7 +20,7 @@ const userSchema = new Schema(
     },
     profilePic: String,
   },
-  { timestamp: true }
+  { timestamps: true }
 );
 
 const User = model('User', userSchema);
