@@ -2,11 +2,6 @@ const { Schema, model } = require('mongoose');
 
 const categorySchema = new Schema(
   {
-    user: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
-    },
     name: {
       type: String,
       required: true,
@@ -19,10 +14,17 @@ const categorySchema = new Schema(
       type: Number,
       default: 1,
     },
-    posts: {
+    user: {
       type: Schema.Types.ObjectId,
-      ref: 'Post',
+      ref: 'User',
+      required: true,
     },
+    posts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Post',
+      },
+    ],
   },
   { timestamps: true }
 );

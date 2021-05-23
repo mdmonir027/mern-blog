@@ -1,6 +1,7 @@
 const userRoutes = require('./userRoutes');
 const authRoutes = require('./authRoutes');
 const profileRoutes = require('./author/profileRoutes');
+const categoryRoutes = require('./admin/categoryRoutes');
 
 const routeArrays = [
   {
@@ -14,6 +15,10 @@ const routeArrays = [
   {
     path: '/profile',
     handler: profileRoutes,
+  },
+  {
+    path: '/category',
+    handler: categoryRoutes,
   },
   {
     path: '/',
@@ -30,7 +35,7 @@ module.exports = (app) => {
     if (route.path === '/') {
       app.get(`${route.path}`, route.handler);
     } else {
-      app.use('/api' + route.path , route.handler);
+      app.use('/api' + route.path, route.handler);
     }
   });
 };
