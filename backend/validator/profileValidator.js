@@ -6,6 +6,7 @@ const linkValidator = (value) => {
     if (!validator.isURL(value)) {
       throw new Error('Please provide a valid url');
     }
+    return true;
   }
   return true;
 };
@@ -29,7 +30,6 @@ module.exports = [
     .withMessage('Please profile bio')
     .isLength({ max: 300 })
     .withMessage('Please provide a title less than 300 chars'),
-  ,
   body('website').custom(linkValidator),
   body('github').custom(linkValidator),
   body('twitter').custom(linkValidator),

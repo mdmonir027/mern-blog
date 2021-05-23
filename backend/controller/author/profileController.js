@@ -12,13 +12,11 @@ controller.getProfile = async (req, res) => {
     const profile = await Profile.findOne({ user: _id });
     if (!profile) {
       return res.status(404).json({
-        errors: {
-          error: 'No profile founded',
-        },
+        error: 'No profile found',
       });
     }
 
-    return res.status(2000).json(profile);
+    return res.status(200).json(profile);
   } catch (e) {
     console.log(e); // todo remove on production
     res.status(500).json({
@@ -41,9 +39,7 @@ controller.createProfile = async (req, res) => {
     const profile = await Profile.findOne({ user: _id });
     if (profile) {
       return res.status(400).json({
-        errors: {
-          error: 'Profile already set!',
-        },
+        error: 'Your Profile is already created!',
       });
     }
 
@@ -87,23 +83,35 @@ controller.updateProfile = async (req, res) => {
     const { _id } = req.user;
 
     const profile = await Profile.findOne({ user: _id });
-    if (profile) {
+    if (!profile) {
       return res.status(400).json({
-        errors: {
-          error: 'Profile already set!',
-        },
+        error: 'Please create your profile first!',
       });
     }
 
-    const profile = await Profile.findOneAndUpdate(
+    const { name, title, bio, website, twitter, facebook, github } = req.body;
+
+    const updateProfileObject = {
+      name,
+      title,
+      bio,
+      links: {
+        website: website ? website : '',
+        twitter: twitter ? twitter : '',
+        github: github ? github : '',
+        facebook: facebook ? facebook : '',
+      },
+    };
+
+    const profileUpdated = await Profile.findOneAndUpdate(
       { user: _id },
       {
-        $set: req.body,
+        $set: updateProfileObject,
       },
       { new: true }
     );
 
-    return res.status(200).json(profile);
+    return res.status(200).json(profileUpdated);
   } catch (error) {
     console.log(error); // todo remove on production
     res.status(500).json({

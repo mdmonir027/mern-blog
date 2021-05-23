@@ -6,10 +6,12 @@ const {
   updateProfile,
 } = require('../../controller/author/profileController');
 
+const authenticate = require('../../middleware/passport/authenticate');
+
 const profileValidator = require('../../validator/profileValidator');
 
-router.get('/', getProfile);
-router.post('/', profileValidator, createProfile);
-router.put('/', profileValidator, updateProfile);
+router.get('/', authenticate, getProfile);
+router.post('/', authenticate, profileValidator, createProfile);
+router.put('/', authenticate, profileValidator, updateProfile);
 
 module.exports = router;
