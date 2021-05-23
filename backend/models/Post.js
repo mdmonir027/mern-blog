@@ -2,16 +2,6 @@ const { Schema, model } = require('mongoose');
 
 const postSchema = new Schema(
   {
-    user: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
-    },
-    category: {
-      type: Schema.Types.ObjectId,
-      ref: 'Category',
-      required: true,
-    },
     title: {
       type: String,
       required: true,
@@ -26,6 +16,16 @@ const postSchema = new Schema(
     },
     thumbnail: String,
     readTime: String,
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
+    category: {
+      type: Schema.Types.ObjectId,
+      ref: 'Category',
+      required: true,
+    },
     likes: [
       {
         type: Schema.Types.ObjectId,
