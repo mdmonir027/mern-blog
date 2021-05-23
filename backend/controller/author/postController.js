@@ -5,6 +5,7 @@ const { internalServerError } = require('../../utils/errorResponses');
 const errorValidationFormatter = require('../../utils/errorValidationFormatter');
 const slugify = require('slugify');
 const readingTime = require('reading-time');
+const Category = require('../../models/Category');
 
 const controller = {};
 
@@ -27,13 +28,13 @@ controller.store = async (req, res) => {
   }
 
   try {
-    const { title, body, category } = req.body;
+    const { title, body, categoryId } = req.body;
 
     const postInstance = new Post({
       title,
-      slug: slugify(title),
+      slug: slugify(title).toLowerCase(),
       body,
-      category,
+      category: categoryId,
       readTime: readingTime(body).text,
       user: req.user._id,
       likes: [],
@@ -41,6 +42,17 @@ controller.store = async (req, res) => {
     });
 
     const postCreated = await postInstance.save();
+
+    await Category.findByIdAndUpdate(categoryId, {
+      $push: { posts: postCreated._id },
+    });
+
+    await Profile.findOneAndUpdate(
+      { user: req.user._id },
+      {
+        $push: { posts: postCreated._id },
+      }
+    );
 
     return res.status(201).json(postCreated);
   } catch (error) {
@@ -61,32 +73,34 @@ controller.show = async (req, res) => {
   }
 };
 controller.update = async (req, res) => {
+  const errors = validationResult(req).formatWith(errorValidationFormatter);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json(errors.mapped());
+  }
+
   try {
     const { slug } = req.params;
-    const { _id } = req.user;
 
-    const postFound = await Post.findOne({ slug, user: _id });
+    const postFound = await Post.findOne({ slug, user: req.user._id });
     if (!postFound) {
       return res.status(400).json({
         error: 'Post not found',
       });
     }
 
-    const { title, body, category } = req.body;
+    const { title, body, categoryId } = req.body;
 
-    const postObject = new Post({
+    const postObject = {
       title,
-      slug: slugify(title),
+      slug: slugify(title).toLowerCase(),
       body,
-      category,
+      category: categoryId,
       readTime: readingTime(body).text,
-      user: req.user._id,
-      likes: [],
-      comments: [],
-    });
+    };
 
     const updatedPost = await Post.findOneAndUpdate(
-      { slug },
+      { slug, user: req.user._id },
       {
         $set: postObject,
       },
@@ -102,9 +116,20 @@ controller.remove = async (req, res) => {
   try {
     const { slug } = req.params;
     const { _id } = req.user;
-    const post = await Post.findOneAndDelete({ slug, user: _id });
+    const post = await Post.findOne({ slug, user: _id });
+    await Post.findOneAndDelete({ slug, user: _id });
 
-    res.status(200).json(post);
+    await Profile.findOneAndUpdate(
+      { user: _id },
+      {
+        $pull: { posts: post._id },
+      }
+    );
+    await Category.findByIdAndUpdate(post.category, {
+      $pull: { posts: post._id },
+    });
+
+    res.status(200).json();
   } catch (error) {
     internalServerError(res, error);
   }

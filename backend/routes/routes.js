@@ -2,6 +2,7 @@ const userRoutes = require('./userRoutes');
 const authRoutes = require('./authRoutes');
 const profileRoutes = require('./author/profileRoutes');
 const categoryRoutes = require('./admin/categoryRoutes');
+const postRoutes = require('./author/postRoutes');
 
 const routeArrays = [
   {
@@ -13,11 +14,15 @@ const routeArrays = [
     handler: authRoutes,
   },
   {
-    path: '/profile',
+    path: '/author/profile',
     handler: profileRoutes,
   },
   {
-    path: '/category',
+    path: '/author/post',
+    handler: postRoutes,
+  },
+  {
+    path: '/admin/category',
     handler: categoryRoutes,
   },
   {

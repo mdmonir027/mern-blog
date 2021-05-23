@@ -39,9 +39,10 @@ validation.postStoreValidator = [
     .custom(async (categorySlug, { req }) => {
       const category = await Category.findOne({ slug: categorySlug });
       if (!category) {
-        throw new Error('Please select a valid category');
+        return Promise.reject('Please select a valid category');
       }
-      req.body.category = category._id;
+
+      req.body.categoryId = category._id;
     }),
 ];
 
@@ -50,13 +51,14 @@ validation.postUpdateValidator = [
     .not()
     .isEmpty()
     .withMessage('Please provide a title')
-    .custom(async (title) => {
-      const slug = slugify(title);
-      const post = await Post.findOne({ slug });
-      if (post && post.slug !== slug0) {
+    .custom(async (title, { req }) => {
+      const titleSlug = slugify(title).toLowerCase();
+      const { slug } = req.params;
+      const post = await Post.findOne({ slug: titleSlug });
+
+      if (post && post.slug !== slug) {
         throw new Error('Title already taken!');
       }
-      return true;
     }),
   body('body')
     .not()
@@ -78,9 +80,9 @@ validation.postUpdateValidator = [
     .custom(async (categorySlug, { req }) => {
       const category = await Category.findOne({ slug: categorySlug });
       if (!category) {
-        throw new Error('Please select a valid category');
+        return Promise.reject('Please select a valid category');
       }
-      req.body.category = category._id;
+      req.body.categoryId = category._id;
     }),
 ];
 
