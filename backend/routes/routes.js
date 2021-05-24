@@ -4,6 +4,7 @@ const profileRoutes = require('./author/profileRoutes');
 const categoryRoutes = require('./admin/categoryRoutes');
 const postRoutes = require('./author/postRoutes');
 const commentRoutes = require('./author/commentRoutes');
+const replyRoutes = require('./author/replyRoutes');
 
 const routeArrays = [
   {
@@ -25,6 +26,10 @@ const routeArrays = [
   {
     path: '/author/comment',
     handler: commentRoutes,
+  },
+  {
+    path: '/author/reply',
+    handler: replyRoutes,
   },
   {
     path: '/admin/category',
