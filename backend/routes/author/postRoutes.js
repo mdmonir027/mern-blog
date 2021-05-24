@@ -12,11 +12,24 @@ const {
   postStoreValidator,
   postUpdateValidator,
 } = require('../../validator/postValidator');
+const { validationResultResponse } = require('../../utils/errorResponses');
 
 router.get('/', authenticate, getAll);
-router.post('/', authenticate, postStoreValidator, store);
+router.post(
+  '/',
+  authenticate,
+  postStoreValidator,
+  validationResultResponse,
+  store
+);
 router.get('/:slug', authenticate, show);
-router.put('/:slug', authenticate, postUpdateValidator, update);
+router.put(
+  '/:slug',
+  authenticate,
+  postUpdateValidator,
+  validationResultResponse,
+  update
+);
 router.delete('/:slug', authenticate, remove);
 
 module.exports = router;

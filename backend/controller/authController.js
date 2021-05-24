@@ -1,6 +1,4 @@
-const { validationResult } = require('express-validator');
 const User = require('../models/User');
-const errorValidationFormatter = require('../utils/errorValidationFormatter');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -8,12 +6,6 @@ const jwt = require('jsonwebtoken');
 const controller = {};
 
 controller.login = async (req, res) => {
-  const errors = validationResult(req).formatWith(errorValidationFormatter);
-
-  if (!errors.isEmpty()) {
-    return res.status(400).json(errors.mapped());
-  }
-
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
@@ -52,12 +44,6 @@ controller.login = async (req, res) => {
 };
 
 controller.registration = async (req, res) => {
-  const errors = validationResult(req).formatWith(errorValidationFormatter);
-
-  if (!errors.isEmpty()) {
-    return res.status(400).json(errors.mapped());
-  }
-
   const { email, username, password } = req.body;
 
   const hashPassword = await bcrypt.hash(password, 11);

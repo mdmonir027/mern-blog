@@ -1,7 +1,5 @@
-const { validationResult } = require('express-validator');
 const { internalServerError } = require('../../utils/errorResponses');
 const Category = require('../../models/Category');
-const errorValidationFormatter = require('../../utils/errorValidationFormatter');
 const slugify = require('slugify');
 
 const controller = {};
@@ -16,10 +14,6 @@ controller.getAll = async (req, res) => {
 };
 
 controller.store = async (req, res) => {
-  const errors = validationResult(req).formatWith(errorValidationFormatter);
-  if (!errors.isEmpty()) {
-    return res.status(400).json(errors.mapped());
-  }
   try {
     const { name, slug } = req.body;
 
@@ -49,10 +43,6 @@ controller.show = async (req, res) => {
 };
 
 controller.update = async (req, res) => {
-  const errors = validationResult(req).formatWith(errorValidationFormatter);
-  if (!errors.isEmpty()) {
-    return res.status(400).json(errors.mapped());
-  }
   try {
     const { name } = req.body;
     const { slug } = req.params;

@@ -9,9 +9,22 @@ const {
 const authenticate = require('../../middleware/passport/authenticate');
 
 const profileValidator = require('../../validator/profileValidator');
+const { validationResultResponse } = require('../../utils/errorResponses');
 
 router.get('/', authenticate, getProfile);
-router.post('/', authenticate, profileValidator, createProfile);
-router.put('/', authenticate, profileValidator, updateProfile);
+router.post(
+  '/',
+  authenticate,
+  profileValidator,
+  validationResultResponse,
+  createProfile
+);
+router.put(
+  '/',
+  authenticate,
+  profileValidator,
+  validationResultResponse,
+  updateProfile
+);
 
 module.exports = router;

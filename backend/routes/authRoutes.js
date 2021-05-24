@@ -4,8 +4,14 @@ const {
   registrationValidator,
   loginValidation,
 } = require('../validator/authValidator');
+const { validationResultResponse } = require('../utils/errorResponses');
 
-router.post('/login', loginValidation, login);
-router.post('/registration', registrationValidator, registration);
+router.post('/login', loginValidation, validationResultResponse , login);
+router.post(
+  '/registration',
+  registrationValidator,
+  validationResultResponse,
+  registration
+);
 
 module.exports = router;

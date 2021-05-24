@@ -26,12 +26,6 @@ controller.getProfile = async (req, res) => {
 };
 
 controller.createProfile = async (req, res) => {
-  const errors = validationResult(req).formatWith(errorValidationFormatter);
-
-  if (!errors.isEmpty()) {
-    return res.status(400).json(errors.mapped());
-  }
-
   try {
     const { _id } = req.user;
     const { name, title, bio, website, facebook, twitter, github } = req.body;
@@ -73,12 +67,6 @@ controller.createProfile = async (req, res) => {
   }
 };
 controller.updateProfile = async (req, res) => {
-  const errors = validationResult(req).formatWith(errorValidationFormatter);
-
-  if (!errors.isEmpty()) {
-    return res.status(400).json(errors.mapped());
-  }
-
   try {
     const { _id } = req.user;
 

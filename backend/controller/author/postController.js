@@ -21,12 +21,6 @@ controller.getAll = async (req, res) => {
   }
 };
 controller.store = async (req, res) => {
-  const errors = validationResult(req).formatWith(errorValidationFormatter);
-
-  if (!errors.isEmpty()) {
-    return res.status(400).json(errors.mapped());
-  }
-
   try {
     const { title, body, categoryId } = req.body;
 
@@ -73,12 +67,6 @@ controller.show = async (req, res) => {
   }
 };
 controller.update = async (req, res) => {
-  const errors = validationResult(req).formatWith(errorValidationFormatter);
-
-  if (!errors.isEmpty()) {
-    return res.status(400).json(errors.mapped());
-  }
-
   try {
     const { slug } = req.params;
 
