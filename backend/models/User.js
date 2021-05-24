@@ -6,10 +6,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    profile: {
-      type: Schema.Types.ObjectId,
-      ref: 'Profile',
-    },
+
     email: {
       type: String,
       required: true,
@@ -18,7 +15,15 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
     profilePic: String,
+    profile: {
+      type: Schema.Types.ObjectId,
+      ref: 'Profile',
+    },
   },
   { timestamps: true }
 );
