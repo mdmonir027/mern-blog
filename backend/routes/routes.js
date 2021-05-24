@@ -1,4 +1,4 @@
-const userRoutes = require('./userRoutes');
+const userRoutes = require('./admin/userRoutes');
 const authRoutes = require('./authRoutes');
 const profileRoutes = require('./author/profileRoutes');
 const categoryRoutes = require('./admin/categoryRoutes');
@@ -9,7 +9,7 @@ const likeRoutes = require('./author/likeRoutes');
 
 const routeArrays = [
   {
-    path: '/user',
+    path: '/admin/user',
     handler: userRoutes,
   },
   {
