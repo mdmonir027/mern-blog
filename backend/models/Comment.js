@@ -2,6 +2,10 @@ const { Schema, model } = require('mongoose');
 
 const commentSchema = new Schema(
   {
+    body: {
+      type: String,
+      required: true,
+    },
     user: {
       type: Schema.Types.ObjectId,
       ref: 'User',
@@ -10,10 +14,6 @@ const commentSchema = new Schema(
     post: {
       type: Schema.Types.ObjectId,
       ref: 'Post',
-      required: true,
-    },
-    body: {
-      type: String,
       required: true,
     },
     likes: [
