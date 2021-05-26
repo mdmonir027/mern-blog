@@ -1,0 +1,62 @@
+import jwtDecode from 'jwt-decode';
+import axios from '../utils/axios';
+import * as types from './types';
+const setAuthLoading = (dispatch, loading) => {
+  dispatch({
+    type: types.SET_AUTH_LOADING,
+    payload: { loading: true },
+  });
+};
+
+export const loginAction = (data) => (dispatch) => {
+  setAuthLoading(dispatch, true);
+  axios
+    .post('/auth/login', data)
+    .then((response) => {
+      console.log(response);
+      setAuthLoading(dispatch, true);
+      const { token } = response.data;
+      const user = jwtDecode(token);
+      localStorage.setItem('auth_token', token);
+      dispatch({
+        type: types.SET_USER,
+        payload: { user },
+      });
+    })
+    .catch((e) => {
+      setAuthLoading(dispatch, false);
+      console.log(e.response);
+      dispatch({
+        type: types.SET_AUTH_ERROR,
+        payload: {
+          errors: e.response.data,
+        },
+      });
+    });
+};
+
+export const registrationAction = (data) => (dispatch) => {
+  setAuthLoading(dispatch, true);
+  axios
+    .post('/auth/registration', data)
+    .then((response) => {
+      console.log(response); // todo remove later
+      setAuthLoading(dispatch, true);
+      dispatch({
+        type: types.SET_AUTH_ERROR,
+        payload: {
+          errors: {},
+        },
+      });
+    })
+    .catch((e) => {
+      setAuthLoading(dispatch, false);
+      console.log(e.response);
+      dispatch({
+        type: types.SET_AUTH_ERROR,
+        payload: {
+          errors: e.response.data,
+        },
+      });
+    });
+};

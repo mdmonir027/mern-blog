@@ -1,7 +1,8 @@
 import { Button, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import React, { useState } from 'react';
-
+import React, { useMemo, useState } from 'react';
+import { connect, useSelector } from 'react-redux';
+import { loginAction } from '../../../store/actions/authActions';
 const useStyles = makeStyles((theme) => ({
   form: {
     marginTop: '20px',
@@ -13,17 +14,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LoginForm = () => {
+const LoginForm = (props) => {
+  // main store
+  const authState = useSelector((state) => state.auth);
+
   const classes = useStyles();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState('');
+  const errors = useMemo(() => {
+    return authState.errors;
+  }, [authState.errors]);
+  const loading = useMemo(() => {
+    return authState.loading;
+  }, [authState.loading]);
 
   const submitHandler = (event) => {
     event.preventDefault();
-    setErrors({
-      h: 'j',
-    });
+    props.loginAction({ email, password });
+    console.log(loading);
   };
 
   return (
@@ -68,4 +76,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default connect(null, { loginAction })(LoginForm);
