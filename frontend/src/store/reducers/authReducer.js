@@ -5,6 +5,7 @@ const init = {
   user: {},
   errors: {},
   loading: false,
+  errorPage: 'login',
 };
 
 const authReducer = (state = init, action) => {
@@ -26,11 +27,12 @@ const authReducer = (state = init, action) => {
       };
     }
     case types.SET_AUTH_ERROR: {
-      const { errors } = action.payload;
+      const { errors, errorPage } = action.payload;
       return {
         ...state,
         errors,
         loading: false,
+        errorPage: errorPage,
       };
     }
     default:

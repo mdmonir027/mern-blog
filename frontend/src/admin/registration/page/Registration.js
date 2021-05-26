@@ -3,23 +3,24 @@ import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ProgressBar from '../../../shared/components/progressBar';
-import LoginForm from '../components/LoginForm';
-import style from '../styles/Login.module.css';
-
-const Login = () => {
+import RegistrationForm from '../components/RegistrationForm';
+import style from '../styles/registration.module.css';
+const Registration = () => {
   const authState = useSelector((state) => state.auth);
   const loading = useMemo(() => authState.loading, [authState.loading]);
+
   return (
     <Grid container justify='center' alignItems='center'>
       <Grid item md={4}>
         <Card>
           {loading && <ProgressBar />}
+
           <div className={style.loginCard}>
-            <h2 className='text-center'>Login To Your Account</h2>
-            <LoginForm />
+            <h2 className='text-center'>Register Your Account</h2>
+            <RegistrationForm />
             <div className={style.linkWrapper}>
-              <Link to='/register' className={style.link}>
-                Haven't any account ? Create an account
+              <Link to='/login' className={style.link}>
+                Have an account ? Login here
               </Link>
             </div>
           </div>
@@ -29,4 +30,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Registration;

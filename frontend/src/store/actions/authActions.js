@@ -13,7 +13,7 @@ export const loginAction = (data) => (dispatch) => {
   axios
     .post('/auth/login', data)
     .then((response) => {
-      console.log(response);
+      console.log(response); // todo remove later
       setAuthLoading(dispatch, true);
       const { token } = response.data;
       const user = jwtDecode(token);
@@ -30,6 +30,35 @@ export const loginAction = (data) => (dispatch) => {
         type: types.SET_AUTH_ERROR,
         payload: {
           errors: e.response.data,
+          errorPage: 'login',
+        },
+      });
+    });
+};
+
+export const registrationAction = (data, history) => (dispatch) => {
+  setAuthLoading(dispatch, true);
+  axios
+    .post('/auth/registration', data)
+    .then((response) => {
+      console.log(response); // todo remove later
+      setAuthLoading(dispatch, true);
+      dispatch({
+        type: types.SET_AUTH_ERROR,
+        payload: {
+          errors: {},
+        },
+      });
+      history.push('/login');
+    })
+    .catch((e) => {
+      setAuthLoading(dispatch, false);
+      console.log(e.response);
+      dispatch({
+        type: types.SET_AUTH_ERROR,
+        payload: {
+          errors: e.response.data,
+          errorPage: 'registration',
         },
       });
     });
