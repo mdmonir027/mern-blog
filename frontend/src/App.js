@@ -13,8 +13,8 @@ function App() {
       <Container>
         <div style={{ padding: '10px 0' }}>
           <Switch>
-            <Admin />
             <Public />
+            <Admin />
           </Switch>
         </div>
       </Container>

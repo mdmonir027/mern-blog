@@ -1,9 +1,10 @@
 import React from 'react';
-
+import { Route } from 'react-router-dom';
+import Home from './pages/Home';
 const Public = () => {
   return (
     <div>
-      <h2>Public</h2>
+      <Route path='/' exact component={Home} />
     </div>
   );
 };
