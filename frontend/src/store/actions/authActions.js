@@ -34,29 +34,3 @@ export const loginAction = (data) => (dispatch) => {
       });
     });
 };
-
-export const registrationAction = (data) => (dispatch) => {
-  setAuthLoading(dispatch, true);
-  axios
-    .post('/auth/registration', data)
-    .then((response) => {
-      console.log(response); // todo remove later
-      setAuthLoading(dispatch, true);
-      dispatch({
-        type: types.SET_AUTH_ERROR,
-        payload: {
-          errors: {},
-        },
-      });
-    })
-    .catch((e) => {
-      setAuthLoading(dispatch, false);
-      console.log(e.response);
-      dispatch({
-        type: types.SET_AUTH_ERROR,
-        payload: {
-          errors: e.response.data,
-        },
-      });
-    });
-};
