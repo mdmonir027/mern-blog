@@ -8,6 +8,7 @@ const replyRoutes = require('./author/replyRoutes');
 const likeRoutes = require('./author/likeRoutes');
 // public routes
 const publicCategoryRoutes = require('./public/categoryRoutes');
+const publicPostRoutes = require('./public/postRoutes');
 
 const routeArrays = [
   {
@@ -41,6 +42,10 @@ const routeArrays = [
   {
     path: '/category',
     handler: publicCategoryRoutes,
+  },
+  {
+    path: '/post',
+    handler: publicPostRoutes,
   },
   {
     path: '/admin/category',
