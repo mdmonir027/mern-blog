@@ -15,17 +15,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Category = () => {
+const Category = ({ name, id }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
   return (
     <div className={classes.wrapper}>
       <Typography variant='h6' onClick={() => setExpanded(!expanded)}>
-        Web Design
+        {name}
       </Typography>
       <Collapse in={expanded} timeout='auto' unmountOnExit>
-        <CategoryPosts />
+        <CategoryPosts id={id} />
       </Collapse>
     </div>
   );

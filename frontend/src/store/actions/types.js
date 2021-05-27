@@ -1,3 +1,5 @@
 export const SET_USER = 'SET_USER';
 export const SET_AUTH_ERROR = 'SET_AUTH_ERROR';
 export const SET_AUTH_LOADING = 'SET_AUTH_LOADING';
+export const SET_CATEGORIES = 'SET_CATEGORIES';
+export const SET_CATEGORY_LOADING = 'SET_CATEGORY_LOADING';

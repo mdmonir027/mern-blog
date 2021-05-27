@@ -1,6 +1,7 @@
 import { CardContent, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import React from 'react';
+import React, { useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -13,15 +14,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CategoryPosts = ({ category }) => {
+const CategoryPosts = ({ id }) => {
   const classes = useStyles();
+  const category = useSelector((state) => state.category);
+  const posts = useMemo(
+    () => category.categories.find((category) => category._id === id).posts,
+    [category.categories, id]
+  );
+
   return (
     <CardContent className={classes.postsWrapper}>
-      <Link to='/post' className={classes.link}>
-        <Typography variant='p'>
-          Set aside off of the heat to let....
-        </Typography>
-      </Link>
+      {posts.length > 0 ? (
+        posts.map((post) => (
+          <Link to={`/post/${post.slug}`} className={classes.link}>
+            <Typography variant='p'>{post.title}</Typography>
+          </Link>
+        ))
+      ) : (
+        <Typography variant='p'>No Post Found</Typography>
+      )}
     </CardContent>
   );
 };
