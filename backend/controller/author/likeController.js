@@ -25,7 +25,7 @@ controller.postLikeUnlike = async (req, res) => {
       liked = true;
     }
 
-    res.status(200).json({ liked });
+    res.status(200).json({ liked, userId });
   } catch (error) {
     internalServerError(res, error);
   }

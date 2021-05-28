@@ -11,7 +11,7 @@ export const allPostsAction = () => (dispatch) => {
   axios
     .get('/post')
     .then((response) => {
-      console.log(response);
+      console.log(response); // todo remove later
       const posts = response.data;
       dispatch({
         type: types.SET_POSTS,

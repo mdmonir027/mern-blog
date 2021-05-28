@@ -18,28 +18,13 @@ const Posts = ({ allPostsAction }) => {
 
   useEffect(() => allPostsAction(), [allPostsAction]);
 
-  useEffect(() => {
-    console.log(posts);
-    console.log(loading);
-  }, [posts, loading]);
-
   return (
     <div>
       <h3>Posts</h3>
       {loading ? (
         <ProgressBar />
       ) : (
-        posts.map((post) => (
-          <Post
-            user={post.user}
-            title={post.title}
-            key={post._id}
-            createdAt={post.createdAt}
-            body={post.body}
-            likes={post.likes}
-            commentCount={1}
-          />
-        ))
+        posts.map((post) => <Post key={post._id} slug={post.slug} />)
       )}
     </div>
   );
