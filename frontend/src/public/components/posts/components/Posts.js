@@ -36,7 +36,7 @@ const Posts = ({ allPostsAction }) => {
             key={post._id}
             createdAt={post.createdAt}
             body={post.body}
-            likeCount={post.likes.length}
+            likes={post.likes}
             commentCount={1}
           />
         ))

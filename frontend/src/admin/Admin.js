@@ -6,7 +6,7 @@ import Registration from './registration/page/Registration';
 const Admin = () => {
   return (
     <div>
-      <Route path='/login' component={Login} />
+      <Route path='/login' exact component={Login} />
       <Route path='/register' component={Registration} />
     </div>
   );
