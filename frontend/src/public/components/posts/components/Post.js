@@ -15,6 +15,7 @@ import CommentIcon from '@material-ui/icons/Comment';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import React, { useMemo, useState } from 'react';
 import { connect, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { postLikeUnlike } from '../../../../store/actions/likeAction';
 
 const useStyles = makeStyles((theme) => ({
@@ -30,6 +31,10 @@ const useStyles = makeStyles((theme) => ({
   },
   iconWrapper: {
     // flexBasis: '50%',
+  },
+  postLink: {
+    textDecoration: 'none',
+    color: 'inherit',
   },
 }));
 
@@ -79,6 +84,9 @@ const Post = ({ slug, postLikeUnlike }) => {
         <Typography variant='body2' color='textSecondary' component='p'>
           {body}
         </Typography>
+        <Link className={classes.postLink} to={`/post/${slug}`}>
+          See more...
+        </Link>
       </CardContent>
       <Divider />
       <CardActions className={classes.footer}>

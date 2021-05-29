@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import Home from './pages/Home';
+import SinglePost from './pages/SinglePost';
 const Public = () => {
   return (
     <div>
-      <Route path='/' exact component={Home} />
+      <Route path='/post/:slug' component={SinglePost} />
     </div>
   );
 };
