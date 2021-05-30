@@ -28,32 +28,28 @@ const RecentPosts = () => {
   const loading = useMemo(() => postState.loading, [postState.loading]);
 
   return (
-    <div>
-      <Card>
-        {loading && <ProgressBar />}
+    <Card>
+      {loading && <ProgressBar />}
 
-        <Typography className={classes.title} variant='h5'>
-          Recent Posts
-        </Typography>
-        <CardContent>
-          {!loading &&
-            posts.map((post) => (
-              <Post key={post._id} title={post.title} slug={post.slug} />
-            ))}
-        </CardContent>
-      </Card>
-    </div>
+      <Typography className={classes.title} variant='h5'>
+        Recent Posts
+      </Typography>
+      <CardContent>
+        {!loading &&
+          posts.map((post) => (
+            <Post key={post._id} title={post.title} slug={post.slug} />
+          ))}
+      </CardContent>
+    </Card>
   );
 };
 
 const Post = ({ title, slug }) => {
   const classes = useStyles();
   return (
-    <div>
-      <Link to={`/post/${slug}`} className={classes.link}>
-        <Typography variant='p'>{title}</Typography>
-      </Link>
-    </div>
+    <Link to={`/post/${slug}`} className={classes.link}>
+      <Typography variant='p'>{title}</Typography>
+    </Link>
   );
 };
 

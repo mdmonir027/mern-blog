@@ -19,7 +19,10 @@ const userSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    profilePic: String,
+    profilePic: {
+      type: String,
+      default: 'profile.jpg',
+    },
     profile: {
       type: Schema.Types.ObjectId,
       ref: 'Profile',
