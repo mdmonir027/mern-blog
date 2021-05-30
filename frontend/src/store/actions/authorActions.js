@@ -2,7 +2,7 @@ import axios from '../utils/axios';
 import * as types from './types';
 
 const setAuthorLoading = (dispatch, loading) => {
-  dispatch({ type: types.SET_CATEGORY_LOADING, payload: { loading } });
+  dispatch({ type: types.SET_AUTHORS_LOADING, payload: { loading } });
 };
 
 export const setAllAuthor = () => (dispatch) => {

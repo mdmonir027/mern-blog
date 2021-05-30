@@ -24,6 +24,10 @@ const useStyles = makeStyles((theme) => ({
     color: '#000',
     cursor: 'Pointer',
   },
+  rootMargin: {
+    marginTop: '10px',
+    marginBottom: '10px',
+  },
 }));
 const TopAuthors = ({ setAllAuthor }) => {
   const classes = useStyles();
@@ -37,7 +41,7 @@ const TopAuthors = ({ setAllAuthor }) => {
   useEffect(() => setAllAuthor(), [setAllAuthor]);
 
   return (
-    <Card>
+    <Card className={classes.rootMargin}>
       {loading && <ProgressBar />}
 
       <Typography className={classes.title} variant='h5'>
