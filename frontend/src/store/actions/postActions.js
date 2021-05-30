@@ -11,7 +11,6 @@ export const allPostsAction = () => (dispatch) => {
   axios
     .get('/post')
     .then((response) => {
-      console.log(response); // todo remove later
       const posts = response.data;
       dispatch({
         type: types.SET_POSTS,
@@ -28,7 +27,7 @@ export const singlePostAction = (slug) => (dispatch) => {
   axios
     .get(`/post/${slug}`)
     .then((response) => {
-      console.log(response);
+      console.log(response); // todo remove later
       const post = response.data;
       dispatch({
         type: types.SET_SINGLE_POSTS,

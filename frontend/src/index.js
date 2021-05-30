@@ -10,11 +10,19 @@ import setAuthToken from './utils/setAuthToken';
 const token = localStorage.getItem('auth_token');
 if (token) {
   const user = jwtDecode(token);
-  setAuthToken(token);
-  store.dispatch({
-    type: SET_USER,
-    payload: { user },
-  });
+  localStorage.removeItem('auth_token');
+  if (new Date().getTime() > user.exp) {
+    store.dispatch({
+      type: SET_USER,
+      payload: { user: {} },
+    });
+  } else {
+    setAuthToken(token);
+    store.dispatch({
+      type: SET_USER,
+      payload: { user },
+    });
+  }
 }
 
 ReactDOM.render(
