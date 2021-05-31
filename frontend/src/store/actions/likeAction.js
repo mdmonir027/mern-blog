@@ -2,6 +2,7 @@ import axios from '../utils/axios';
 import * as types from './types';
 
 export const postLikeUnlike = (postSlug) => (dispatch) => {
+  console.log(postSlug);
   axios
     .get(`/author/like/${postSlug}`)
     .then((response) => {

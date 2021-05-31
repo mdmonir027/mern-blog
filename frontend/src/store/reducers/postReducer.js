@@ -2,7 +2,7 @@ import * as types from '../actions/types';
 
 const init = {
   posts: [],
-  post: [],
+  post: {},
   loading: false,
 };
 

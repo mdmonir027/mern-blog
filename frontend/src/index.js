@@ -8,16 +8,17 @@ import store from './store/store';
 import setAuthToken from './utils/setAuthToken';
 
 const token = localStorage.getItem('auth_token');
+setAuthToken(token);
 if (token) {
   const user = jwtDecode(token);
-  localStorage.removeItem('auth_token');
-  if (new Date().getTime() > user.exp) {
+
+  if (Date.now() > user.exp) {
+    localStorage.removeItem('auth_token');
     store.dispatch({
       type: SET_USER,
       payload: { user: {} },
     });
   } else {
-    setAuthToken(token);
     store.dispatch({
       type: SET_USER,
       payload: { user },

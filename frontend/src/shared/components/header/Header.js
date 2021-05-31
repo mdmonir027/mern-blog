@@ -12,9 +12,10 @@ import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import SearchIcon from '@material-ui/icons/Search';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { connect, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { allPostsAction } from '../../../store/actions/postActions';
 import LoggedInUserMenu from './LoggedInUserMenu';
 
 const useStyles = makeStyles((theme) => ({
@@ -87,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Header() {
+const Header = ({ allPostsAction }) => {
   const authState = useSelector((state) => state.auth);
 
   const classes = useStyles();
@@ -95,9 +96,7 @@ export default function Header() {
 
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
+  const handleMobileMenuClose = () => setMobileMoreAnchorEl(null);
 
   const isAuthenticated = authState.isAuthenticated;
 
@@ -106,6 +105,8 @@ export default function Header() {
   };
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
+
+  useEffect(() => allPostsAction(), [allPostsAction]);
 
   return (
     <div className={classes.grow}>
@@ -216,4 +217,11 @@ export default function Header() {
       </Menu>
     </div>
   );
-}
+};
+
+export default connect(null, { allPostsAction })(Header);
+/*
+
+
+
+*/
