@@ -17,21 +17,20 @@ controller.login = async (req, res) => {
 
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
-      return res
-        .status(400)
-        .json({
-          email: 'Invalid credentials',
-          password: 'Invalid credentials',
-        });
+      return res.status(400).json({
+        email: 'Invalid credentials',
+        password: 'Invalid credentials',
+      });
     }
 
     const token = jwt.sign(
       {
         _id: user._id,
         email: user.email,
+        iat: new Date().getTime(),
+        exp: Date.now() + 1000 * 60 * 60 * 2,
       },
-      'SECRET',
-      { expiresIn: '3h' }
+      'SECRET'
     );
 
     return res.status(200).json({

@@ -18,6 +18,16 @@ export const loginAction = (data) => (dispatch) => {
       const { token } = response.data;
       const user = jwtDecode(token);
       localStorage.setItem('auth_token', token);
+
+      const obj = {
+        tokenDate: user.exp,
+        nowDate: Date.now(),
+        isSame: user.exp === Date.now(),
+        typesToken: typeof user.exp,
+        typeDate: typeof Date.now(),
+      };
+      console.log(obj);
+
       dispatch({
         type: types.SET_USER,
         payload: { user },
