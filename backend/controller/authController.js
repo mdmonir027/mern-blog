@@ -11,7 +11,8 @@ controller.login = async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({
-        errors: { error: 'Invalid credentials' },
+        email: 'Invalid credentials',
+        password: 'Invalid credentials',
       });
     }
 
@@ -27,6 +28,7 @@ controller.login = async (req, res) => {
       {
         _id: user._id,
         email: user.email,
+        username: user.username,
         iat: new Date().getTime(),
         exp: Date.now() + 1000 * 60 * 60 * 2,
       },
