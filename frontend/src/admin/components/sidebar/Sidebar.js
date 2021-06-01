@@ -77,7 +77,7 @@ const Sidebar = () => {
         <Collapse in={categoryMenu} timeout='auto' unmountOnExit>
           <List component='div' disablePadding>
             <ListItem button className={classes.nested}>
-              <Link to={`${url}/dashboard`} className={classes.link}>
+              <Link to={`${url}/category/add`} className={classes.link}>
                 <ListItemIcon>
                   <AddCircleOutlineIcon />
                 </ListItemIcon>
@@ -85,7 +85,7 @@ const Sidebar = () => {
               </Link>
             </ListItem>
             <ListItem button className={classes.nested}>
-              <Link to={`${url}/dashboard`} className={classes.link}>
+              <Link to={`${url}/category`} className={classes.link}>
                 <ListItemIcon>
                   <ArrowRightAltIcon />
                 </ListItemIcon>
@@ -104,7 +104,7 @@ const Sidebar = () => {
         <Collapse in={postMenu} timeout='auto' unmountOnExit>
           <List component='div' disablePadding>
             <ListItem button className={classes.nested}>
-              <Link to={`${url}/dashboard`} className={classes.link}>
+              <Link to={`${url}/post/add`} className={classes.link}>
                 <ListItemIcon>
                   <AddCircleOutlineIcon />
                 </ListItemIcon>
@@ -112,7 +112,7 @@ const Sidebar = () => {
               </Link>
             </ListItem>
             <ListItem button className={classes.nested}>
-              <Link to={`${url}/dashboard`} className={classes.link}>
+              <Link to={`${url}/post`} className={classes.link}>
                 <ListItemIcon>
                   <ArrowRightAltIcon />
                 </ListItemIcon>
@@ -131,7 +131,7 @@ const Sidebar = () => {
         <Collapse in={commentMenu} timeout='auto' unmountOnExit>
           <List component='div' disablePadding>
             <ListItem button className={classes.nested}>
-              <Link to={`${url}/dashboard`} className={classes.link}>
+              <Link to={`${url}/comment/add`} className={classes.link}>
                 <ListItemIcon>
                   <MessageIcon />
                 </ListItemIcon>
@@ -139,7 +139,7 @@ const Sidebar = () => {
               </Link>
             </ListItem>
             <ListItem button className={classes.nested}>
-              <Link to={`${url}/dashboard`} className={classes.link}>
+              <Link to={`${url}/comment`} className={classes.link}>
                 <ListItemIcon>
                   <SmsIcon />
                 </ListItemIcon>
@@ -158,7 +158,10 @@ const Sidebar = () => {
         <Collapse in={repliesMenu} timeout='auto' unmountOnExit>
           <List component='div' disablePadding>
             <ListItem button className={classes.nested}>
-              <Link to={`${url}/dashboard`} className={classes.link}>
+              <Link
+                to={`${url}/replies/my-post-replies`}
+                className={classes.link}
+              >
                 <ListItemIcon>
                   <ArrowRightAltIcon />
                 </ListItemIcon>
@@ -166,7 +169,10 @@ const Sidebar = () => {
               </Link>
             </ListItem>
             <ListItem button className={classes.nested}>
-              <Link to={`${url}/dashboard`} className={classes.link}>
+              <Link
+                to={`${url}/replies/my-replies-on-other-posts`}
+                className={classes.link}
+              >
                 <ListItemIcon>
                   <ArrowRightAltIcon />
                 </ListItemIcon>
@@ -185,7 +191,7 @@ const Sidebar = () => {
         <Collapse in={likeMenu} timeout='auto' unmountOnExit>
           <List component='div' disablePadding>
             <ListItem button className={classes.nested}>
-              <Link to={`${url}/dashboard`} className={classes.link}>
+              <Link to={`${url}/like/my-post-likes`} className={classes.link}>
                 <ListItemIcon>
                   <ThumbsUpDownOutlinedIcon />
                 </ListItemIcon>
@@ -193,7 +199,7 @@ const Sidebar = () => {
               </Link>
             </ListItem>
             <ListItem button className={classes.nested}>
-              <Link to={`${url}/dashboard`} className={classes.link}>
+              <Link to={`${url}/like/my-liked-post`} className={classes.link}>
                 <ListItemIcon>
                   <ThumbUpAltOutlinedIcon />
                 </ListItemIcon>
@@ -212,7 +218,7 @@ const Sidebar = () => {
         <Collapse in={profileMenu} timeout='auto' unmountOnExit>
           <List component='div' disablePadding>
             <ListItem button className={classes.nested}>
-              <Link to={`${url}/dashboard`} className={classes.link}>
+              <Link to={`${url}/profile`} className={classes.link}>
                 <ListItemIcon>
                   <VisibilityOutlinedIcon />
                 </ListItemIcon>
@@ -220,7 +226,7 @@ const Sidebar = () => {
               </Link>
             </ListItem>
             <ListItem button className={classes.nested}>
-              <Link to={`${url}/dashboard`} className={classes.link}>
+              <Link to={`${url}/profile/edit`} className={classes.link}>
                 <ListItemIcon>
                   <EditOutlinedIcon />
                 </ListItemIcon>
@@ -228,7 +234,10 @@ const Sidebar = () => {
               </Link>
             </ListItem>
             <ListItem button className={classes.nested}>
-              <Link to={`${url}/dashboard`} className={classes.link}>
+              <Link
+                to={`${url}/profile/change-password`}
+                className={classes.link}
+              >
                 <ListItemIcon>
                   <VpnKeyOutlinedIcon />
                 </ListItemIcon>
