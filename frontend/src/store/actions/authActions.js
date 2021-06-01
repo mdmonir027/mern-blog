@@ -11,6 +11,7 @@ export const loginAction = (user) => (dispatch) => {
       console.log(response);
       const { token } = response.data;
       const tokenDecodedUser = jwtDecode(token);
+      localStorage.setItem('auth_token', token);
       dispatch({
         type: types.SET_USER,
         payload: {
