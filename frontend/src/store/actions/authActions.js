@@ -30,3 +30,27 @@ export const loginAction = (user) => (dispatch) => {
       dispatchLoading(dispatch, false, types.SET_USER_LOADING);
     });
 };
+
+export const registerAction = (data, history) => (dispatch) => {
+  dispatchLoading(dispatch, true, types.SET_USER_LOADING);
+  axios
+    .post('/auth/registration', data)
+    .then((response) => {
+      console.log(response);
+      history.push('/login');
+      dispatch({
+        type: types.SET_USER_NO_ERRORS,
+      });
+      dispatchLoading(dispatch, false, types.SET_USER_LOADING);
+    })
+    .catch((e) => {
+      dispatch({
+        type: types.SET_USER_ERRORS,
+        payload: {
+          page: 'register',
+          errors: e.response.data,
+        },
+      });
+      dispatchLoading(dispatch, false, types.SET_USER_LOADING);
+    });
+};

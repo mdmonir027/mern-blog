@@ -3,6 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Login from './auth/pages/Login';
+import Register from './auth/pages/Register';
 import Header from './shared/header/Header';
 
 const App = () => {
@@ -17,6 +18,9 @@ const App = () => {
             </Route>
             <Route path='/login' exact>
               <Login />
+            </Route>
+            <Route path='/register' exact>
+              <Register />
             </Route>
           </Switch>
         </div>

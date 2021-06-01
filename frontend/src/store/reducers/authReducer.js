@@ -38,6 +38,14 @@ const authReducer = (state = init, action) => {
           errors,
         },
       };
+    case types.SET_USER_NO_ERRORS:
+      return {
+        ...state,
+        error: {
+          page: null,
+          errors: {},
+        },
+      };
 
     default:
       return state;
