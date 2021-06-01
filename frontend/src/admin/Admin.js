@@ -1,10 +1,8 @@
 import { Grid } from '@material-ui/core';
 import React from 'react';
-import { useRouteMatch } from 'react-router-dom';
 import Sidebar from './components/sidebar/Sidebar';
 import Routes from './Routes';
 const Admin = () => {
-  const { url, path } = useRouteMatch();
   return (
     <div
       style={{

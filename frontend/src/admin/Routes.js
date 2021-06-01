@@ -1,15 +1,13 @@
 import React from 'react';
-import { Route } from 'react-router';
+import { Route, useRouteMatch } from 'react-router';
+import AddCategory from './pages/category/AddCategory';
 
 const Routes = () => {
+  const { path } = useRouteMatch();
   return (
-    <div>
-      <div>
-        <Route to='/'>
-          <h2>Admin</h2>
-        </Route>
-      </div>
-    </div>
+    <>
+      <Route to={`${path}/category/add`} component={AddCategory} />
+    </>
   );
 };
 
