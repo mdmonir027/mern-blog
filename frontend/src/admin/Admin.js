@@ -2,6 +2,7 @@ import { Grid } from '@material-ui/core';
 import React from 'react';
 import Sidebar from './components/sidebar/Sidebar';
 import Routes from './Routes';
+
 const Admin = () => {
   return (
     <div

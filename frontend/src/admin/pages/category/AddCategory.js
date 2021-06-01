@@ -1,5 +1,9 @@
 import { Button, Grid, makeStyles, TextField } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
+import { connect } from 'react-redux';
+import { useHistory, useRouteMatch } from 'react-router-dom';
+import SimpleBackdrop from '../../../shared/backdrop/Backdrop';
+import { addCategory } from '../../../store/actions/author/categoryActions';
 const useStyles = makeStyles((theme) => ({
   form: {
     marginTop: '20px',
@@ -21,24 +25,32 @@ const useStyles = makeStyles((theme) => ({
     color: '#3f51b5',
   },
 }));
-const AddCategory = () => {
+
+const AddCategory = ({ auth, category, addCategory }) => {
   const classes = useStyles();
+  const history = useHistory();
+  const { path } = useRouteMatch();
   const [name, setName] = useState('');
-  const errors = {};
+  const errors = useMemo(() => {
+    if (category.error.page === 'add') return category.error.errors;
+    return {};
+  }, [category.error]);
 
   const submitHandler = (event) => {
     event.preventDefault();
+    addCategory(name, history, `${path}/category`);
   };
 
   return (
     <div>
       <Grid container>
         <Grid item md={4}>
+          <SimpleBackdrop enabled={category.loading} />
           <form className={classes.form} onSubmit={submitHandler}>
             <TextField
               type='text'
               label='Category Name'
-              placeholder='Email address'
+              placeholder='Enter category name'
               helperText={errors.name ? errors.name : ''}
               fullWidth
               margin='normal'
@@ -67,4 +79,9 @@ const AddCategory = () => {
   );
 };
 
-export default AddCategory;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  category: state.author.category,
+});
+
+export default connect(mapStateToProps, { addCategory })(AddCategory);
