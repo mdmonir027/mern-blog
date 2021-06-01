@@ -55,3 +55,15 @@ export const registerAction = (data, history) => (dispatch) => {
       dispatchLoading(dispatch, false, types.SET_USER_LOADING);
     });
 };
+
+export const logoutAction = (history) => (dispatch) => {
+  dispatchLoading(dispatch, true, types.SET_USER_LOADING);
+  dispatch({
+    type: types.SET_USER,
+    payload: { user: {} },
+  });
+  setTimeout(
+    () => dispatchLoading(dispatch, true, types.SET_USER_LOADING),
+    500
+  );
+};

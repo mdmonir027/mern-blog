@@ -149,7 +149,7 @@ const Header = ({ auth }) => {
                 </IconButton>
               </Link>
             ) : (
-              <LoggedInUserMenu />
+              <LoggedInUserMenu loading={auth.loading} />
             )}
           </div>
           <div className={classes.sectionMobile}>

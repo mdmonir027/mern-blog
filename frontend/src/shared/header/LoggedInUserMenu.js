@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/Add';
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 const useStyles = makeStyles((theme) => ({
   sectionDesktop: {
     display: 'none',
@@ -17,8 +18,10 @@ const useStyles = makeStyles((theme) => ({
     color: 'inherit',
   },
 }));
+
 const LoggedInUserMenu = () => {
   const classes = useStyles();
+
   return (
     <div
       style={{
@@ -33,6 +36,7 @@ const LoggedInUserMenu = () => {
             <AddIcon />
           </IconButton>
         </Link>
+
         <Link to='/author' className={classes.menuItemLink}>
           <IconButton edge='end' color='inherit'>
             <Avatar
@@ -46,4 +50,5 @@ const LoggedInUserMenu = () => {
     </div>
   );
 };
+
 export default LoggedInUserMenu;
