@@ -3,7 +3,7 @@ import axios from '../../utils/axios';
 import dispatchLoading from '../../utils/dispatchLoading';
 import * as types from './types';
 
-export const loginAction = (user) => (dispatch) => {
+export const loginAction = (user, history) => (dispatch) => {
   dispatchLoading(dispatch, true, types.SET_USER_LOADING);
   axios
     .post('/auth/login', user)
@@ -18,6 +18,7 @@ export const loginAction = (user) => (dispatch) => {
           user: tokenDecodedUser,
         },
       });
+      history.push('/admin/dashboard');
     })
     .catch((e) => {
       dispatch({

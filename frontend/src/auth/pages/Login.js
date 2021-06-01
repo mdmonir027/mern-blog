@@ -2,7 +2,7 @@ import { Button, Card, Grid, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { useMemo, useState } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import SimpleBackdrop from '../../shared/backdrop/Backdrop';
 import { loginAction } from '../../store/actions/authActions';
 
@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = ({ auth, loginAction }) => {
+  const history = useHistory();
   const classes = useStyles();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -39,7 +40,7 @@ const Login = ({ auth, loginAction }) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    loginAction({ email, password });
+    loginAction({ email, password }, history);
   };
 
   return (
