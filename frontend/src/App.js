@@ -13,24 +13,24 @@ const App = () => {
       <Header />
       <div style={{ padding: '10px 0' }}>
         <Switch>
-          <Route path='/' exact>
-            <Container>
-              <h2>Hello world 1</h2>
-            </Container>
-          </Route>
           <Route path='/login'>
             <Container>
-              {' '}
               <Login />
             </Container>
           </Route>
           <Route path='/register'>
             <Container>
-              {' '}
               <Register />
             </Container>
           </Route>
-          <Route path='/admin' component={Admin} />
+          <Route path='/admin'>
+            <Admin />
+          </Route>
+          <Route path='/' exact>
+            <Container>
+              <h2>Hello world 1</h2>
+            </Container>
+          </Route>
         </Switch>
       </div>
     </Router>
