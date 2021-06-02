@@ -8,9 +8,11 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { deleteCategoryAction } from '../../../store/actions/author/categoryActions';
 import EditCategory from './EditCategory';
 
-const SingleCategory = ({ category, sl }) => {
+const SingleCategory = ({ category, sl, deleteCategoryAction }) => {
   const [editForm, setEditForm] = useState(false);
 
   const toggleForm = () => setEditForm(!editForm);
@@ -45,7 +47,7 @@ const SingleCategory = ({ category, sl }) => {
               <Button onClick={toggleForm}>
                 <EditIcon />
               </Button>
-              <Button>
+              <Button onClick={() => deleteCategoryAction(category.slug)}>
                 <DeleteIcon />
               </Button>
             </ButtonGroup>
@@ -56,4 +58,4 @@ const SingleCategory = ({ category, sl }) => {
   );
 };
 
-export default SingleCategory;
+export default connect(null, { deleteCategoryAction })(SingleCategory);

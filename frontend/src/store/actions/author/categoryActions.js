@@ -74,3 +74,27 @@ export const updateCategoryAction = (name, slug, callBack) => (dispatch) => {
       dispatchLoading(dispatch, false, types.SET_CATEGORIES_LOADING);
     });
 };
+
+export const deleteCategoryAction = (slug) => (dispatch) => {
+  dispatchLoading(dispatch, true, types.SET_CATEGORIES_LOADING);
+  axios
+    .delete(`/admin/category/${slug}`)
+    .then(() => {
+      dispatch({
+        type: types.DELETE_CATEGORY,
+        payload: { slug },
+      });
+    })
+    .catch((e) => {
+      console.log(e);
+      dispatch({
+        type: types.SET_CATEGORIES_ERRORS,
+        payload: {
+          page: 'other',
+          errors: e.response.data,
+        },
+      });
+
+      dispatchLoading(dispatch, false, types.SET_CATEGORIES_LOADING);
+    });
+};

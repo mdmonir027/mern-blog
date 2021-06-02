@@ -66,6 +66,19 @@ const categoryReducer = (state = init, action) => {
         loading: false,
       };
     }
+    case types.DELETE_CATEGORY: {
+      const { slug } = action.payload;
+      const oldCategories = [...state.categories];
+      const newCategories = oldCategories.filter((cat) => cat.slug !== slug);
+      return {
+        categories: newCategories,
+        error: {
+          page: null,
+          errors: {},
+        },
+        loading: false,
+      };
+    }
     default:
       return state;
   }
