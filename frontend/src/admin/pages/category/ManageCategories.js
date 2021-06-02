@@ -7,8 +7,11 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { connect } from 'react-redux';
+import SimpleBackdrop from '../../../shared/backdrop/Backdrop';
+import { getAllCategories } from '../../../store/actions/author/categoryActions';
+import SingleCategory from '../../components/category/SingleCategory';
 
 const useStyles = makeStyles({
   table: {
@@ -23,18 +26,11 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(name, posts) {
-  return { name, posts };
-}
-
-const rows = [
-  createData('Frozen yoghurt', []),
-  createData('Ice cream sandwich', []),
-  createData('Eclair', []),
-];
-
-const ManageCategory = () => {
+const ManageCategory = ({ getAllCategories, category }) => {
   const classes = useStyles();
+  const categories = useMemo(() => category.categories, [category.categories]);
+
+  useEffect(() => getAllCategories(), [getAllCategories]);
 
   return (
     <Card>
@@ -55,24 +51,23 @@ const ManageCategory = () => {
             <TableRow>
               <TableCell>No.</TableCell>
               <TableCell align='center'>Name</TableCell>
+              <TableCell align='center'>Status</TableCell>
               <TableCell align='center'>Total Posts</TableCell>
               <TableCell align='center'>Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row, index) => (
-              <TableRow key={row._id}>
-                <TableCell component='th' scope='row'>
-                  {index}
-                </TableCell>
-                <TableCell align='center'>{row.name}</TableCell>
-                <TableCell align='center'>{row.posts.length}</TableCell>
-                <TableCell align='center'>Action</TableCell>
-              </TableRow>
+            {categories.map((category, index) => (
+              <SingleCategory
+                category={category}
+                sl={index + 1}
+                key={category._id}
+              />
             ))}
           </TableBody>
         </Table>
       </TableContainer>
+      <SimpleBackdrop enabled={category.loading} />
     </Card>
   );
 };
@@ -82,4 +77,4 @@ const mapStateToProps = (state) => ({
   category: state.author.category,
 });
 
-export default connect(mapStateToProps)(ManageCategory);
+export default connect(mapStateToProps, { getAllCategories })(ManageCategory);

@@ -25,7 +25,7 @@ validation.categoryUpdateValidation = [
     .custom(async (name, { req }) => {
       const slug = slugify(name).toLowerCase();
       const category = await Category.findOne({ slug: req.params.slug });
-      if (category && category.slug !== slug) {
+      if (category && category.slug === slug) {
         return Promise.reject('Category name is already taken!');
       }
     }),

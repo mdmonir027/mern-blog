@@ -3,10 +3,16 @@ import dispatchLoading from '../../../utils/dispatchLoading';
 import * as types from '../types';
 
 export const getAllCategories = () => (dispatch) => {
+  dispatchLoading(dispatch, true, types.SET_CATEGORIES_LOADING);
   axios
-    .get('/author/category')
+    .get('/admin/category')
     .then((response) => {
-      console.log(response);
+      const categories = response.data;
+      dispatch({
+        type: types.SET_CATEGORIES,
+        payload: { categories },
+      });
+      dispatchLoading(dispatch, false, types.SET_CATEGORIES_LOADING);
     })
     .catch((e) => {
       dispatch({
@@ -16,6 +22,7 @@ export const getAllCategories = () => (dispatch) => {
           errors: e.response.data,
         },
       });
+      dispatchLoading(dispatch, false, types.SET_CATEGORIES_LOADING);
     });
 };
 
@@ -38,6 +45,32 @@ export const addCategory = (name, history, path) => (dispatch) => {
           errors: e.response.data,
         },
       });
+      dispatchLoading(dispatch, false, types.SET_CATEGORIES_LOADING);
+    });
+};
+
+export const updateCategoryAction = (name, slug, callBack) => (dispatch) => {
+  dispatchLoading(dispatch, true, types.SET_CATEGORIES_LOADING);
+  axios
+    .put(`/admin/category/${slug}`, { name })
+    .then((response) => {
+      dispatch({
+        type: types.UPDATE_CATEGORY,
+        payload: { category: response.data },
+      });
+      callBack(true);
+    })
+    .catch((e) => {
+      callBack(false);
+      console.log(e);
+      dispatch({
+        type: types.SET_CATEGORIES_ERRORS,
+        payload: {
+          page: 'edit',
+          errors: e.response.data,
+        },
+      });
+
       dispatchLoading(dispatch, false, types.SET_CATEGORIES_LOADING);
     });
 };
