@@ -25,6 +25,13 @@ const useStyles = makeStyles({
     paddingLeft: 10,
     paddingRight: 10,
   },
+  link: {
+    textDecoration: 'none',
+    display: 'inline-block',
+    textAlign: 'center',
+    color: '#3f51b5',
+    float: 'right',
+  },
 });
 
 const ManageCategory = ({ getAllCategories, category }) => {
@@ -43,8 +50,8 @@ const ManageCategory = ({ getAllCategories, category }) => {
           </Typography>
         </Grid>
         <Grid item md={6}>
-          <Link to={`${url}/add`}>
-            <Button varient='outlined' color='primary'>
+          <Link to={`${url}/add`} className={classes.link}>
+            <Button variant='contained' color='primary'>
               Add Category
             </Button>
           </Link>

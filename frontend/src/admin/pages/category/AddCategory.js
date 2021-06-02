@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
   input: {
     marginTop: theme.spacing(2),
+    marginBottom: '20px',
   },
   loginCard: {
     padding: 15,
@@ -30,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'inline-block',
     textAlign: 'center',
     color: '#3f51b5',
+    float: 'right',
   },
   Header: {
     background: '#F0F0F7',
@@ -69,15 +71,15 @@ const AddCategory = ({ auth, category, addCategory }) => {
           </Typography>
         </Grid>
         <Grid item md={6}>
-          <Link to={`/admin/category`}>
-            <Button varient='outlined' color='primary'>
+          <Link to={`/admin/category`} className={classes.link}>
+            <Button variant='contained' color='primary'>
               Manage Category
             </Button>
           </Link>
         </Grid>
       </Grid>
       <Grid container className={classes.content}>
-        <Grid item md={4}>
+        <Grid item md={12}>
           <SimpleBackdrop enabled={category.loading} />
           <form className={classes.form} onSubmit={submitHandler}>
             <TextField
