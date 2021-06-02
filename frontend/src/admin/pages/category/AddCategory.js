@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 const AddCategory = ({ auth, category, addCategory }) => {
   const classes = useStyles();
   const history = useHistory();
-  const { path } = useRouteMatch();
+  const { url } = useRouteMatch();
   const [name, setName] = useState('');
   const errors = useMemo(() => {
     if (category.error.page === 'add') return category.error.errors;
@@ -59,7 +59,7 @@ const AddCategory = ({ auth, category, addCategory }) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    addCategory(name, history, `${path}/category`);
+    addCategory(name, history, `/admin/category`);
   };
 
   return (
