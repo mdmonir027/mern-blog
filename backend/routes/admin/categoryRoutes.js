@@ -5,6 +5,7 @@ const {
   store,
   update,
   remove,
+  statusChange,
 } = require('../../controller/admin/categoryController');
 
 const authenticate = require('../../middleware/passport/authenticate');
@@ -34,5 +35,6 @@ router.put(
   update
 );
 router.delete('/:slug', authenticate, isAdminMiddleware, remove);
+router.get('/status/:slug', authenticate, isAdminMiddleware, statusChange);
 
 module.exports = router;

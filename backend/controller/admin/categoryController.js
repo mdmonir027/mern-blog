@@ -73,4 +73,22 @@ controller.remove = async (req, res) => {
   }
 };
 
+controller.statusChange = async (req, res) => {
+  try {
+    const { slug } = req.params;
+
+    const category = await Category.findOne({ slug });
+    const { status } = category;
+    category.status = !status;
+
+    await Category.findByIdAndUpdate(category._id, { $set: category });
+
+    return res.status(200).json({
+      status: !status,
+    });
+  } catch (error) {
+    internalServerError(res, error);
+  }
+};
+
 module.exports = controller;

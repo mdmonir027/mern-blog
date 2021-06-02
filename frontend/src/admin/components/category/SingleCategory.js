@@ -17,6 +17,10 @@ const SingleCategory = ({ category, sl, deleteCategoryAction }) => {
 
   const toggleForm = () => setEditForm(!editForm);
 
+  const statusChangeHandler = (event) => {
+    console.log(event.target.checked);
+  };
+
   return (
     <TableRow>
       {editForm ? (
@@ -34,7 +38,7 @@ const SingleCategory = ({ category, sl, deleteCategoryAction }) => {
           <TableCell align='center'>
             <Switch
               checked={category.status === 1}
-              onChange={() => console.log('cat')}
+              onChange={statusChangeHandler}
               color='primary'
               name='checkedB'
               inputProps={{ 'aria-label': 'primary checkbox' }}

@@ -11,7 +11,6 @@ validation.categoryStoreValidation = [
     .custom(async (name, { req }) => {
       const slug = slugify(name).toLowerCase();
       const category = await Category.findOne({ slug });
-      console.log(category);
       if (category) {
         return Promise.reject('Category name is already taken!');
       }
