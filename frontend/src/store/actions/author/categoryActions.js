@@ -98,3 +98,29 @@ export const deleteCategoryAction = (slug) => (dispatch) => {
       dispatchLoading(dispatch, false, types.SET_CATEGORIES_LOADING);
     });
 };
+
+export const statusChangeAction = (slug) => (dispatch) => {
+  dispatchLoading(dispatch, true, types.SET_CATEGORIES_LOADING);
+  axios
+    .get(`/admin/category/status/${slug}`)
+    .then((response) => {
+      const { status } = response.data;
+      console.log('status', status);
+
+      dispatch({
+        type: types.CATEGORY_STATUS,
+        payload: { status, slug },
+      });
+      dispatchLoading(dispatch, false, types.SET_CATEGORIES_LOADING);
+    })
+    .catch((e) => {
+      dispatch({
+        type: types.SET_CATEGORIES_ERRORS,
+        payload: {
+          page: 'status',
+          errors: e.response.data,
+        },
+      });
+      dispatchLoading(dispatch, false, types.SET_CATEGORIES_LOADING);
+    });
+};

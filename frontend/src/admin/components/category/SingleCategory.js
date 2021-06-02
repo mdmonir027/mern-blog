@@ -9,16 +9,26 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { deleteCategoryAction } from '../../../store/actions/author/categoryActions';
+import {
+  deleteCategoryAction,
+  statusChangeAction,
+} from '../../../store/actions/author/categoryActions';
 import EditCategory from './EditCategory';
 
-const SingleCategory = ({ category, sl, deleteCategoryAction }) => {
+const SingleCategory = ({
+  category,
+  sl,
+  deleteCategoryAction,
+  statusChangeAction,
+}) => {
   const [editForm, setEditForm] = useState(false);
+  const [status, setStatus] = useState(category.status === 1 ? true : false);
 
   const toggleForm = () => setEditForm(!editForm);
 
-  const statusChangeHandler = (event) => {
-    console.log(event.target.checked);
+  const statusChangeHandler = () => {
+    statusChangeAction(category.slug);
+    setStatus(!status);
   };
 
   return (
@@ -37,7 +47,7 @@ const SingleCategory = ({ category, sl, deleteCategoryAction }) => {
           <TableCell align='center'>{category.name}</TableCell>
           <TableCell align='center'>
             <Switch
-              checked={category.status === 1}
+              checked={status}
               onChange={statusChangeHandler}
               color='primary'
               name='checkedB'
@@ -62,4 +72,6 @@ const SingleCategory = ({ category, sl, deleteCategoryAction }) => {
   );
 };
 
-export default connect(null, { deleteCategoryAction })(SingleCategory);
+export default connect(null, { deleteCategoryAction, statusChangeAction })(
+  SingleCategory
+);

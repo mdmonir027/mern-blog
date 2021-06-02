@@ -79,12 +79,12 @@ controller.statusChange = async (req, res) => {
 
     const category = await Category.findOne({ slug });
     const { status } = category;
-    category.status = !status;
+    category.status = status === 1 ? 0 : 1;
 
     await Category.findByIdAndUpdate(category._id, { $set: category });
 
     return res.status(200).json({
-      status: !status,
+      status: category.status,
     });
   } catch (error) {
     internalServerError(res, error);

@@ -79,6 +79,25 @@ const categoryReducer = (state = init, action) => {
         loading: false,
       };
     }
+    case types.CATEGORY_STATUS: {
+      const { slug, status } = action.payload;
+      const oldCategories = [...state.categories];
+      const newCategories = oldCategories.map((cat) => {
+        if (cat.slug === slug) {
+          cat.status = status;
+          return cat;
+        }
+        return cat;
+      });
+      return {
+        categories: newCategories,
+        error: {
+          page: null,
+          errors: {},
+        },
+        loading: false,
+      };
+    }
     default:
       return state;
   }
