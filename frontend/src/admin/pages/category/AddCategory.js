@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 import React, { useMemo, useState } from 'react';
 import { connect } from 'react-redux';
-import { Link, useHistory, useRouteMatch } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import SimpleBackdrop from '../../../shared/backdrop/Backdrop';
 import { addCategory } from '../../../store/actions/author/categoryActions';
 const useStyles = makeStyles((theme) => ({
@@ -50,7 +50,6 @@ const useStyles = makeStyles((theme) => ({
 const AddCategory = ({ auth, category, addCategory }) => {
   const classes = useStyles();
   const history = useHistory();
-  const { url } = useRouteMatch();
   const [name, setName] = useState('');
   const errors = useMemo(() => {
     if (category.error.page === 'add') return category.error.errors;
