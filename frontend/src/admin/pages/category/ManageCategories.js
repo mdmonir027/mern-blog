@@ -1,4 +1,4 @@
-import { Card, Grid, Typography } from '@material-ui/core';
+import { Button, Card, Grid, Typography } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -9,6 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import React, { useEffect, useMemo } from 'react';
 import { connect } from 'react-redux';
+import { Link, useRouteMatch } from 'react-router-dom';
 import SimpleBackdrop from '../../../shared/backdrop/Backdrop';
 import { getAllCategories } from '../../../store/actions/author/categoryActions';
 import SingleCategory from '../../components/category/SingleCategory';
@@ -28,6 +29,7 @@ const useStyles = makeStyles({
 
 const ManageCategory = ({ getAllCategories, category }) => {
   const classes = useStyles();
+  const { url } = useRouteMatch();
   const categories = useMemo(() => category.categories, [category.categories]);
 
   useEffect(() => getAllCategories(), [getAllCategories]);
@@ -41,7 +43,11 @@ const ManageCategory = ({ getAllCategories, category }) => {
           </Typography>
         </Grid>
         <Grid item md={6}>
-          button
+          <Link to={`${url}/add`}>
+            <Button varient='outlined' color='primary'>
+              Add Category
+            </Button>
+          </Link>
         </Grid>
       </Grid>
       <TableContainer component={Paper}>
