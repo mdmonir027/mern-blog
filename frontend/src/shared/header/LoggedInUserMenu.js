@@ -37,7 +37,7 @@ const LoggedInUserMenu = () => {
           </IconButton>
         </Link>
 
-        <Link to='/author' className={classes.menuItemLink}>
+        <Link to='/admin/dashboard' className={classes.menuItemLink}>
           <IconButton edge='end' color='inherit'>
             <Avatar
               alt='Remy Sharp'

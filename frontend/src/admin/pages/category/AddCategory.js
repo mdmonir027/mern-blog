@@ -58,8 +58,16 @@ const AddCategory = ({ auth, category, addCategory }) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    addCategory(name, history, `/admin/category`);
+    addCategory(name, history, '/admin/category');
   };
+
+  if (!auth.isAuthenticated) {
+    history.push('/login');
+  }
+
+  if (auth.isAuthenticated && !auth.user.isAdmin) {
+    history.push('/admin/dashboard');
+  }
 
   return (
     <Card>

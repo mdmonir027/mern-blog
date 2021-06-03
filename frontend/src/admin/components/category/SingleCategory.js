@@ -20,6 +20,7 @@ const SingleCategory = ({
   sl,
   deleteCategoryAction,
   statusChangeAction,
+  setCategoryRowCount,
 }) => {
   const [editForm, setEditForm] = useState(false);
   const [status, setStatus] = useState(category.status === 1 ? true : false);
@@ -32,7 +33,7 @@ const SingleCategory = ({
   };
 
   return (
-    <TableRow>
+    <TableRow hover>
       {editForm ? (
         <EditCategory
           name={category.name}

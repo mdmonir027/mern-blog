@@ -1,9 +1,17 @@
 import { Grid } from '@material-ui/core';
 import React from 'react';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router';
 import Sidebar from './components/sidebar/Sidebar';
 import Routes from './Routes';
 
-const Admin = () => {
+const Admin = ({ auth }) => {
+  const history = useHistory();
+
+  if(!auth.isAuthenticated){
+    history.push('/login')
+  }
+
   return (
     <div
       style={{
@@ -24,4 +32,8 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps)(Admin);

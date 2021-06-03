@@ -1,4 +1,10 @@
-import { Button, Card, Grid, Typography } from '@material-ui/core';
+import {
+  Button,
+  Card,
+  Grid,
+  TablePagination,
+  Typography,
+} from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -9,7 +15,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import React, { useEffect, useMemo } from 'react';
 import { connect } from 'react-redux';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import SimpleBackdrop from '../../../shared/backdrop/Backdrop';
 import { getAllCategories } from '../../../store/actions/author/categoryActions';
 import SingleCategory from '../../components/category/SingleCategory';
@@ -34,12 +40,32 @@ const useStyles = makeStyles({
   },
 });
 
-const ManageCategory = ({ getAllCategories, category }) => {
+const ManageCategory = ({ auth, getAllCategories, category }) => {
   const classes = useStyles();
   const { url } = useRouteMatch();
+  const history = useHistory();
   const categories = useMemo(() => category.categories, [category.categories]);
 
-  useEffect(() => getAllCategories(), [getAllCategories]);
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  useEffect(() => {
+    if (auth.isAuthenticated && auth.user.isAdmin) {
+      getAllCategories();
+    }
+  }, [getAllCategories, auth]);
+
+  if (auth.isAuthenticated && !auth.user.isAdmin) {
+    history.push('/admin/dashboard');
+  }
 
   return (
     <Card>
@@ -59,7 +85,17 @@ const ManageCategory = ({ getAllCategories, category }) => {
       </Grid>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label='caption table'>
-          <caption>A basic table example with a caption</caption>
+          <caption>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component='div'
+              count={categories.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onChangePage={handleChangePage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
+          </caption>
           <TableHead>
             <TableRow>
               <TableCell>No.</TableCell>
@@ -70,16 +106,19 @@ const ManageCategory = ({ getAllCategories, category }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {categories.map((category, index) => (
-              <SingleCategory
-                category={category}
-                sl={index + 1}
-                key={category._id}
-              />
-            ))}
+            {categories
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((category, index) => (
+                <SingleCategory
+                  category={category}
+                  sl={index + 1}
+                  key={category._id}
+                />
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
+
       <SimpleBackdrop enabled={category.loading} />
     </Card>
   );

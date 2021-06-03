@@ -31,6 +31,7 @@ controller.login = async (req, res) => {
         username: user.username,
         iat: new Date().getTime(),
         exp: Date.now() + 1000 * 60 * 60 * 2,
+        isAdmin: user.isAdmin,
       },
       'SECRET'
     );
