@@ -10,9 +10,10 @@ import {
   TextField,
   Typography,
 } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { addPostAction } from '../../../store/actions/author/postActions';
 const useStyles = makeStyles((theme) => ({
   form: {
     marginTop: '20px',
@@ -49,19 +50,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AddPost = ({ categories }) => {
+const AddPost = ({ categories, postState, addPostAction }) => {
   const classes = useStyles();
+  const history = useHistory();
   const [post, setPost] = useState({
     title: '',
     body: '',
     category: '',
   });
 
+  const errors = useMemo(() => {
+    if (postState.error.page === 'add') return postState.error.errors;
+    return {};
+  }, [postState.error]);
+
   const changeHandler = (event) => {
     setPost({
       ...post,
       [event.target.name]: event.target.value,
     });
+  };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    addPostAction(post, history);
   };
 
   return (
@@ -82,17 +94,17 @@ const AddPost = ({ categories }) => {
       </Grid>
       <Grid container className={classes.content}>
         <Grid item md={12}>
-          <form className={classes.form}>
+          <form className={classes.form} onSubmit={submitHandler}>
             <TextField
               type='text'
               placeholder='Enter category name'
-              helperText={''}
+              error={!!errors?.title}
+              helperText={errors?.title ? errors.title : ''}
               fullWidth
               margin='normal'
               InputLabelProps={{
                 shrink: true,
               }}
-              error={false}
               name='title'
               value={post.title}
               className={classes.input}
@@ -107,6 +119,8 @@ const AddPost = ({ categories }) => {
               displayEmpty
               className={classes.input}
               inputProps={{ 'aria-label': 'Without label' }}
+              error={!!errors?.category}
+              helperText={errors?.category ? errors.category : ''}
             >
               <MenuItem value='' disabled>
                 Select A Category
@@ -128,6 +142,9 @@ const AddPost = ({ categories }) => {
                   });
                 }}
               />
+              {errors?.body && (
+                <p style={{ color: 'red', marginTop: '5px' }}>{errors.body}</p>
+              )}
             </div>
 
             <Button
@@ -135,6 +152,7 @@ const AddPost = ({ categories }) => {
               color='primary'
               type='submit'
               size='small'
+              onClick={submitHandler}
             >
               Add Category
             </Button>
@@ -147,6 +165,7 @@ const AddPost = ({ categories }) => {
 
 const mapStateToProps = (state) => ({
   categories: state.author.category.categories,
+  postState: state.author.post,
 });
 
-export default connect(mapStateToProps)(AddPost);
+export default connect(mapStateToProps, { addPostAction })(AddPost);
