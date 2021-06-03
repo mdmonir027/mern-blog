@@ -2,6 +2,8 @@ import React from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router';
 import AddCategory from './pages/category/AddCategory';
 import ManageCategory from './pages/category/ManageCategories';
+import AddPost from './pages/post/AddPost';
+import ManagePost from './pages/post/ManagePost';
 
 const Routes = () => {
   const { path } = useRouteMatch();
@@ -11,6 +13,8 @@ const Routes = () => {
         <Route exact path={`/`} component={AdminPage} />
         <Route path={`${path}/category/add`} component={AddCategory} />
         <Route path={`${path}/category`} component={ManageCategory} />
+        <Route path={`${path}/post/add`} component={AddPost} />
+        <Route path={`${path}/post`} component={ManagePost} />
       </Switch>
     </>
   );
