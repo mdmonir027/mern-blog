@@ -13,7 +13,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import SimpleBackdrop from '../../../shared/backdrop/Backdrop';
@@ -46,8 +46,8 @@ const ManageCategory = ({ auth, getAllCategories, category }) => {
   const history = useHistory();
   const categories = useMemo(() => category.categories, [category.categories]);
 
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -111,7 +111,7 @@ const ManageCategory = ({ auth, getAllCategories, category }) => {
               .map((category, index) => (
                 <SingleCategory
                   category={category}
-                  sl={index + 1}
+                  sl={rowsPerPage * page + index + 1}
                   key={category._id}
                 />
               ))}
