@@ -13,7 +13,15 @@ controller.getAll = async (req, res) => {
   try {
     const { _id } = req.user;
 
-    const posts = await Post.find({ user: _id });
+    const posts = await Post.find({ user: _id })
+      .populate({
+        path: 'user',
+        select: 'username',
+      })
+      .populate({
+        path: 'category',
+        select: 'name',
+      });
 
     return res.status(200).json(posts);
   } catch (error) {
@@ -48,7 +56,17 @@ controller.store = async (req, res) => {
       }
     );
 
-    return res.status(201).json(postCreated);
+    const postRes = await Post.findById(postCreated._id)
+      .populate({
+        path: 'user',
+        select: 'username',
+      })
+      .populate({
+        path: 'category',
+        select: 'name',
+      });
+
+    return res.status(201).json(postRes);
   } catch (error) {
     internalServerError(res, error);
   }

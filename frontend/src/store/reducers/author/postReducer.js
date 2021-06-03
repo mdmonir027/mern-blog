@@ -17,7 +17,7 @@ const postReducer = (state = init, action) => {
         posts,
         post: {},
         error: {
-          page: 'null',
+          page: null,
           errors: {},
         },
         loading: false,

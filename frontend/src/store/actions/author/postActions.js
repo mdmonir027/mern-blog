@@ -26,3 +26,29 @@ export const addPostAction = (post, history) => (dispatch) => {
       dispatchLoading(dispatch, true, types.SET_POSTS_LOADING);
     });
 };
+
+export const getAllPostAction = () => (dispatch) => {
+  dispatchLoading(dispatch, true, types.SET_POSTS_LOADING);
+  axios
+    .get('/author/post')
+    .then((response) => {
+      console.log(response);
+      const posts = response.data;
+      dispatch({
+        type: types.SET_POSTS,
+        payload: { posts },
+      });
+      dispatchLoading(dispatch, false, types.SET_POSTS_LOADING);
+    })
+    .catch((e) => {
+      console.log(e);
+      //   dispatch({
+      //     type: types.SET_POSTS_ERRORS,
+      //     payload: {
+      //       page: 'fetch',
+      //       errors: e.response.data,
+      //     },
+      //   });
+      dispatchLoading(dispatch, false, types.SET_POSTS_LOADING);
+    });
+};
