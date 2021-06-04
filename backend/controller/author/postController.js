@@ -113,6 +113,8 @@ controller.update = async (req, res) => {
       readTime: readingTime(body).text,
     };
 
+    const postFind = await Post.findOne({ slug, user: req.user._id });
+
     const updatedPost = await Post.findOneAndUpdate(
       { slug, user: req.user._id },
       {
@@ -120,6 +122,15 @@ controller.update = async (req, res) => {
       },
       { new: true }
     );
+
+    if (postFind.category !== categoryId) {
+      await Category.findByIdAndUpdate(postFind.category, {
+        $pull: { post: postFind._id },
+      });
+      await Category.findByIdAndUpdate(categoryId, {
+        $push: { post: updatedPost._id },
+      });
+    }
 
     return res.status(202).json(updatedPost);
   } catch (error) {
