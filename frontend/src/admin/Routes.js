@@ -5,6 +5,7 @@ import ManageCategory from './pages/category/ManageCategories';
 import AddPost from './pages/post/AddPost';
 import EditPost from './pages/post/EditPost';
 import ManagePost from './pages/post/ManagePost';
+import CreateProfile from './pages/profile/CreateProfile';
 
 const Routes = () => {
   const { path } = useRouteMatch();
@@ -17,6 +18,7 @@ const Routes = () => {
         <Route path={`${path}/post/add`} component={AddPost} />
         <Route path={`${path}/post/edit/:slug`} component={EditPost} />
         <Route path={`${path}/post`} component={ManagePost} />
+        <Route path={`${path}/profile/create`} component={CreateProfile} />
       </Switch>
     </>
   );
