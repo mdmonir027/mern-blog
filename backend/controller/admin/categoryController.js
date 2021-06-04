@@ -1,5 +1,6 @@
 const { internalServerError } = require('../../utils/errorResponses');
 const Category = require('../../models/Category');
+const Post = require('../../models/Post');
 const slugify = require('slugify');
 
 const controller = {};
@@ -64,7 +65,9 @@ controller.update = async (req, res) => {
 controller.remove = async (req, res) => {
   try {
     const { slug } = req.params;
+    const category = await Category.findOne({ slug });
     await Category.findOneAndDelete({ slug });
+    await Post.deleteMany({ category: category._id });
     return res.status(204).json({
       message: 'Category Deleted Successfully',
     });
