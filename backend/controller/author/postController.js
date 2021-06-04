@@ -125,10 +125,10 @@ controller.update = async (req, res) => {
 
     if (postFind.category !== categoryId) {
       await Category.findByIdAndUpdate(postFind.category, {
-        $pull: { post: postFind._id },
+        $pull: { posts: postFind._id },
       });
       await Category.findByIdAndUpdate(categoryId, {
-        $push: { post: updatedPost._id },
+        $push: { posts: updatedPost._id },
       });
     }
 
