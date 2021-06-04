@@ -58,9 +58,9 @@ controller.show = async (req, res) => {
   try {
     const { commentId } = req.params;
 
-    const foundedPost = await Comment.findById(commentId);
+    const foundedComment = await Comment.findById(commentId);
 
-    res.status(200).json(foundedPost);
+    res.status(200).json(foundedComment);
   } catch (error) {
     internalServerError(res, error);
   }
