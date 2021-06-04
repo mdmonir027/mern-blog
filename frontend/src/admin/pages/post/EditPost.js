@@ -10,10 +10,13 @@ import {
   TextField,
   Typography,
 } from '@material-ui/core';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { connect } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
-import { addPostAction } from '../../../store/actions/author/postActions';
+import { Link, useHistory, useParams } from 'react-router-dom';
+import {
+  getSinglePost,
+  updatePostAction,
+} from '../../../store/actions/author/postActions';
 const useStyles = makeStyles((theme) => ({
   form: {
     marginTop: '20px',
@@ -50,30 +53,38 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AddPost = ({ categories, postState, addPostAction }) => {
+const EditPost = ({
+  categories,
+  postState,
+  updatePostAction,
+  getSinglePost,
+}) => {
   const classes = useStyles();
   const history = useHistory();
-  const [post, setPost] = useState({
-    title: '',
-    body: '',
-    category: '',
-  });
+  const { slug } = useParams();
+
+  const [title, setTitle] = useState('');
+  const [category, setCategory] = useState('');
+  const [body, setBody] = useState('');
+
+  useEffect(() => {
+    if (Object.keys(postState.post).length !== 0) {
+      setTitle(postState.post.title);
+      setBody(postState.post.body);
+      setCategory(postState?.post?.category?.slug);
+    }
+  }, [postState.post]);
+
+  useEffect(() => getSinglePost(slug), [slug, getSinglePost]);
 
   const errors = useMemo(() => {
-    if (postState.error.page === 'add') return postState.error.errors;
+    if (postState.error.page === 'edit') return postState.error.errors;
     return {};
   }, [postState.error]);
 
-  const changeHandler = (event) => {
-    setPost({
-      ...post,
-      [event.target.name]: event.target.value,
-    });
-  };
-
   const submitHandler = (event) => {
     event.preventDefault();
-    addPostAction(post, history);
+    updatePostAction({ title, category, body }, slug, history);
   };
 
   return (
@@ -81,7 +92,7 @@ const AddPost = ({ categories, postState, addPostAction }) => {
       <Grid container justify='space-between' className={classes.Header}>
         <Grid item md={6}>
           <Typography variant='h5' component='h5'>
-            Add New Post
+            Edit Post
           </Typography>
         </Grid>
         <Grid item md={6}>
@@ -106,15 +117,15 @@ const AddPost = ({ categories, postState, addPostAction }) => {
                 shrink: true,
               }}
               name='title'
-              value={post.title}
+              value={title}
               className={classes.input}
-              onChange={changeHandler}
+              onChange={(event) => setTitle(event.target.value)}
             />
 
             <Select
-              value={post.category}
+              value={category}
               fullWidth
-              onChange={changeHandler}
+              onChange={(event) => setCategory(event.target.value)}
               name='category'
               displayEmpty
               className={classes.input}
@@ -133,13 +144,10 @@ const AddPost = ({ categories, postState, addPostAction }) => {
             <div className={classes.input}>
               <CKEditor
                 editor={ClassicEditor}
-                data={post.body}
+                data={body}
                 onChange={(event, editor) => {
                   const data = editor.getData();
-                  setPost({
-                    ...post,
-                    body: data,
-                  });
+                  setBody(data);
                 }}
               />
               {errors?.body && (
@@ -154,7 +162,7 @@ const AddPost = ({ categories, postState, addPostAction }) => {
               size='small'
               onClick={submitHandler}
             >
-              Add Post
+              Update Post
             </Button>
           </form>
         </Grid>
@@ -168,4 +176,6 @@ const mapStateToProps = (state) => ({
   postState: state.author.post,
 });
 
-export default connect(mapStateToProps, { addPostAction })(AddPost);
+export default connect(mapStateToProps, { updatePostAction, getSinglePost })(
+  EditPost
+);

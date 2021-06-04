@@ -77,7 +77,15 @@ controller.show = async (req, res) => {
     const { slug } = req.params;
     const { _id } = req.user;
 
-    const post = await Post.findOne({ slug, user: _id });
+    const post = await Post.findOne({ slug, user: _id })
+      .populate({
+        path: 'user',
+        select: 'username',
+      })
+      .populate({
+        path: 'category',
+        select: 'name slug',
+      });
 
     return res.status(200).json(post);
   } catch (error) {

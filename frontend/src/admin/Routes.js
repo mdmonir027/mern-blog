@@ -3,6 +3,7 @@ import { Route, Switch, useRouteMatch } from 'react-router';
 import AddCategory from './pages/category/AddCategory';
 import ManageCategory from './pages/category/ManageCategories';
 import AddPost from './pages/post/AddPost';
+import EditPost from './pages/post/EditPost';
 import ManagePost from './pages/post/ManagePost';
 
 const Routes = () => {
@@ -14,6 +15,7 @@ const Routes = () => {
         <Route path={`${path}/category/add`} component={AddCategory} />
         <Route path={`${path}/category`} component={ManageCategory} />
         <Route path={`${path}/post/add`} component={AddPost} />
+        <Route path={`${path}/post/edit/:slug`} component={EditPost} />
         <Route path={`${path}/post`} component={ManagePost} />
       </Switch>
     </>

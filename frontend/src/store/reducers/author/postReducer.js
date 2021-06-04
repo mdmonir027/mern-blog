@@ -46,6 +46,24 @@ const postReducer = (state = init, action) => {
         loading,
       };
     }
+    case types.SET_SINGLE_POST: {
+      const { post } = action.payload;
+      return {
+        ...state,
+        post,
+      };
+    }
+    case types.UPDATE_POST: {
+      const { post, slug } = action.payload;
+      const posts = state.posts.map((p) => {
+        if (p.slug === slug) return post;
+        return p;
+      });
+      return {
+        ...state,
+        posts,
+      };
+    }
     case types.SET_POSTS_ERRORS: {
       const { errors, page } = action.payload;
       return {

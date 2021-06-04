@@ -3,9 +3,11 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link, useRouteMatch } from 'react-router-dom';
 import { deletePostAction } from '../../../store/actions/author/postActions';
 
 const PostTableItem = ({ post, sl, deletePostAction }) => {
+  const { path } = useRouteMatch();
   return (
     <TableRow hover>
       <TableCell component='th' scope='row'>
@@ -22,7 +24,9 @@ const PostTableItem = ({ post, sl, deletePostAction }) => {
       <TableCell align='center'>
         <ButtonGroup size='small' aria-label=' outlined button group'>
           <Button>
-            <VisibilityIcon />
+            <Link to={`${path}/edit/${post.slug}`}>
+              <VisibilityIcon />
+            </Link>
           </Button>
           <Button onClick={() => deletePostAction(post.slug)}>
             <DeleteIcon />
