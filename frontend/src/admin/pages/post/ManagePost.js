@@ -15,7 +15,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import React, { useEffect, useMemo, useState } from 'react';
 import { connect } from 'react-redux';
-import { Link, useHistory, useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import SimpleBackdrop from '../../../shared/backdrop/Backdrop';
 import { getAllPostAction } from '../../../store/actions/author/postActions';
 import PostTableItem from '../../components/post/PostTableItem';
@@ -43,7 +43,6 @@ const useStyles = makeStyles({
 const ManagePost = ({ getAllPostAction, post }) => {
   const classes = useStyles();
   const { url } = useRouteMatch();
-  const history = useHistory();
   const posts = useMemo(() => post.posts, [post.posts]);
 
   const [page, setPage] = useState(0);
@@ -53,7 +52,6 @@ const ManagePost = ({ getAllPostAction, post }) => {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
-    console.log(history); // todo remove later
   };
 
   useEffect(() => getAllPostAction(), [getAllPostAction]);
@@ -101,7 +99,6 @@ const ManagePost = ({ getAllPostAction, post }) => {
           <TableBody>
             {posts
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .reverse()
               .map((post, index) => (
                 <PostTableItem
                   post={post}

@@ -31,6 +31,14 @@ const postReducer = (state = init, action) => {
         posts,
       };
     }
+    case types.DELETE_POST: {
+      const { slug } = action.payload;
+      const posts = state.posts.filter((post) => post.slug !== slug);
+      return {
+        ...state,
+        posts,
+      };
+    }
     case types.SET_POSTS_LOADING: {
       const { loading } = action.payload;
       return {

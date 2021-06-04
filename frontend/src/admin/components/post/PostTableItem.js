@@ -3,8 +3,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import React from 'react';
 import { connect } from 'react-redux';
+import { deletePostAction } from '../../../store/actions/author/postActions';
 
-const PostTableItem = ({ post, sl }) => {
+const PostTableItem = ({ post, sl, deletePostAction }) => {
   return (
     <TableRow hover>
       <TableCell component='th' scope='row'>
@@ -23,7 +24,7 @@ const PostTableItem = ({ post, sl }) => {
           <Button>
             <VisibilityIcon />
           </Button>
-          <Button>
+          <Button onClick={() => deletePostAction(post.slug)}>
             <DeleteIcon />
           </Button>
         </ButtonGroup>
@@ -32,4 +33,4 @@ const PostTableItem = ({ post, sl }) => {
   );
 };
 
-export default connect(null)(PostTableItem);
+export default connect(null, { deletePostAction })(PostTableItem);

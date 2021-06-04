@@ -7,7 +7,6 @@ export const addPostAction = (post, history) => (dispatch) => {
   axios
     .post('/author/post', post)
     .then((response) => {
-      console.log(response);
       dispatch({
         type: types.ADD_POST,
         payload: { post: response.data },
@@ -32,7 +31,6 @@ export const getAllPostAction = () => (dispatch) => {
   axios
     .get('/author/post')
     .then((response) => {
-      console.log(response);
       const posts = response.data;
       dispatch({
         type: types.SET_POSTS,
@@ -41,14 +39,39 @@ export const getAllPostAction = () => (dispatch) => {
       dispatchLoading(dispatch, false, types.SET_POSTS_LOADING);
     })
     .catch((e) => {
-      console.log(e);
-      //   dispatch({
-      //     type: types.SET_POSTS_ERRORS,
-      //     payload: {
-      //       page: 'fetch',
-      //       errors: e.response.data,
-      //     },
-      //   });
+      console.log(e); // todo remove later
+      dispatch({
+        type: types.SET_POSTS_ERRORS,
+        payload: {
+          page: 'fetch',
+          errors: e.response.data,
+        },
+      });
+      dispatchLoading(dispatch, false, types.SET_POSTS_LOADING);
+    });
+};
+
+export const deletePostAction = (slug) => (dispatch) => {
+  dispatchLoading(dispatch, true, types.SET_POSTS_LOADING);
+  axios
+    .delete(`/author/post/${slug}`)
+    .then((response) => {
+      console.log(response);
+      dispatch({
+        type: types.DELETE_POST,
+        payload: { slug },
+      });
+      dispatchLoading(dispatch, false, types.SET_POSTS_LOADING);
+    })
+    .catch((e) => {
+      console.log(e); // todo remove later
+      dispatch({
+        type: types.SET_POSTS_ERRORS,
+        payload: {
+          page: 'fetch',
+          errors: e.response.data,
+        },
+      });
       dispatchLoading(dispatch, false, types.SET_POSTS_LOADING);
     });
 };
