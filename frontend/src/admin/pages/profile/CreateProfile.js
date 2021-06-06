@@ -32,6 +32,10 @@ const CreateProfile = ({ auth, createProfile, profile }) => {
   const [instagram, setInstagram] = useState();
   const [github, setGithub] = useState();
 
+  if (profile.hasProfile) {
+    history.push('/admin/profile');
+  }
+
   const submitHandler = (event) => {
     event.preventDefault();
     const profileData = {

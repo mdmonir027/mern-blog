@@ -54,9 +54,15 @@ controller.createProfile = async (req, res) => {
     });
 
     const profileCreated = await profileInstance.save();
-    await User.findByIdAndUpdate(_id, {
-      $set: { profile: profileCreated._id },
-    });
+    const user = await User.findByIdAndUpdate(
+      _id,
+      {
+        $set: { profile: profileCreated._id },
+      },
+      { new: true }
+    );
+
+    console.log(user);
 
     return res.status(201).json(profileCreated);
   } catch (error) {

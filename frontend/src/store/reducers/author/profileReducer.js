@@ -15,7 +15,7 @@ const profileReducer = (state = init, action) => {
       const { profile } = action.payload;
       return {
         profile,
-        hasProfile: Object.keys(profile).length === 0,
+        hasProfile: Object.keys(profile).length !== 0,
         error: {
           page: null,
           errors: {},

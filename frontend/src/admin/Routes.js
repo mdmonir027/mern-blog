@@ -6,6 +6,7 @@ import AddPost from './pages/post/AddPost';
 import EditPost from './pages/post/EditPost';
 import ManagePost from './pages/post/ManagePost';
 import CreateProfile from './pages/profile/CreateProfile';
+import EditProfile from './pages/profile/EditProfile';
 
 const Routes = () => {
   const { path } = useRouteMatch();
@@ -19,6 +20,7 @@ const Routes = () => {
         <Route path={`${path}/post/edit/:slug`} component={EditPost} />
         <Route path={`${path}/post`} component={ManagePost} />
         <Route path={`${path}/profile/create`} component={CreateProfile} />
+        <Route path={`${path}/profile`} component={EditProfile} />
       </Switch>
     </>
   );

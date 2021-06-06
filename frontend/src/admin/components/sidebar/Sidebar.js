@@ -11,7 +11,6 @@ import BookIcon from '@material-ui/icons/Book';
 import CategoryIcon from '@material-ui/icons/Category';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubbleOutline';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import MessageIcon from '@material-ui/icons/Message';
@@ -225,14 +224,7 @@ const Sidebar = () => {
                 <ListItemText primary='View' />
               </Link>
             </ListItem>
-            <ListItem button className={classes.nested}>
-              <Link to={`${url}/profile/edit`} className={classes.link}>
-                <ListItemIcon>
-                  <EditOutlinedIcon />
-                </ListItemIcon>
-                <ListItemText primary='Edit' />
-              </Link>
-            </ListItem>
+            
             <ListItem button className={classes.nested}>
               <Link
                 to={`${url}/profile/change-password`}
