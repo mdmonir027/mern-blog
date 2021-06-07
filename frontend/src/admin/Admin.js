@@ -29,11 +29,11 @@ const Admin = ({ auth, getAllCategories, getProfile, profile }) => {
 
   useEffect(() => setHasProfile(profile.hasProfile), [profile.hasProfile]);
 
-  useEffect(() => {
-    if (hasProfile) {
-      history.push('/admin/profile/create');
-    }
-  }, [hasProfile, history]);
+  // useEffect(() => {
+  //   if (hasProfile) {
+  //     history.push('/admin/profile/create');
+  //   }
+  // }, [hasProfile, history]);
 
   return (
     <div

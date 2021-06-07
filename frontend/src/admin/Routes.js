@@ -5,6 +5,7 @@ import ManageCategory from './pages/category/ManageCategories';
 import AddPost from './pages/post/AddPost';
 import EditPost from './pages/post/EditPost';
 import ManagePost from './pages/post/ManagePost';
+import ChangePassword from './pages/profile/ChangePassword';
 import CreateProfile from './pages/profile/CreateProfile';
 import EditProfile from './pages/profile/EditProfile';
 
@@ -20,6 +21,10 @@ const Routes = () => {
         <Route path={`${path}/post/edit/:slug`} component={EditPost} />
         <Route path={`${path}/post`} component={ManagePost} />
         <Route path={`${path}/profile/create`} component={CreateProfile} />
+        <Route
+          path={`${path}/profile/change-password`}
+          component={ChangePassword}
+        />
         <Route path={`${path}/profile`} component={EditProfile} />
       </Switch>
     </>

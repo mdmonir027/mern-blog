@@ -7,7 +7,6 @@ export const getProfile = () => (dispatch) => {
   axios
     .get('/author/profile')
     .then((response) => {
-      console.log(response);
       dispatch({
         type: types.SET_PROFILE,
         payload: { profile: response.data },
@@ -68,6 +67,33 @@ export const updateProfile = (profileData) => (dispatch) => {
         type: types.SET_PROFILE_ERRORS,
         payload: {
           page: 'edit',
+          errors: e.response.data,
+        },
+      });
+      dispatchLoading(dispatch, false, types.SET_PROFILE_LOADING);
+    });
+};
+
+export const changePassword = (data, history) => (dispatch) => {
+  dispatchLoading(dispatch, true, types.SET_PROFILE_LOADING);
+
+  axios
+    .put('/author/profile/changePassword', data)
+    .then(() => {
+      history.push('/admin/profile');
+      dispatch({
+        type: types.SET_PROFILE_ERRORS,
+        payload: {
+          page: null,
+          errors: {},
+        },
+      });
+    })
+    .catch((e) => {
+      dispatch({
+        type: types.SET_PROFILE_ERRORS,
+        payload: {
+          page: 'password',
           errors: e.response.data,
         },
       });

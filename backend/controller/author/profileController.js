@@ -1,7 +1,6 @@
 const Profile = require('../../models/Profile');
-const { validationResult } = require('express-validator');
-const errorValidationFormatter = require('../../utils/errorValidationFormatter');
 const User = require('../../models/User');
+const bcrypt = require('bcrypt');
 
 const controller = {};
 
@@ -106,6 +105,36 @@ controller.updateProfile = async (req, res) => {
     );
 
     return res.status(200).json(profileUpdated);
+  } catch (error) {
+    console.log(error); // todo remove on production
+    res.status(500).json({
+      error: 'Internal Server Error',
+    });
+  }
+};
+
+controller.changePassword = async (req, res) => {
+  try {
+    const { oldPassword, newPassword } = req.body;
+
+    const userPassword = req.user.password;
+
+    const matched = await bcrypt.compare(oldPassword, userPassword);
+    if (!matched) {
+      return res.status(400).json({
+        oldPassword: 'Password is incorrect!',
+      });
+    }
+
+    const newHash = await bcrypt.hash(newPassword, 11);
+
+    await User.findByIdAndUpdate(req.user._id, {
+      $set: { password: newHash },
+    });
+
+    return res.status(200).json({
+      message: 'Password updated successfully!',
+    });
   } catch (error) {
     console.log(error); // todo remove on production
     res.status(500).json({
