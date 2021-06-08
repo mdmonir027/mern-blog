@@ -36,7 +36,7 @@ const App = ({ loading }) => {
         </Switch>
       </div>
 
-      {loading && <SimpleBackdrop />}
+      <SimpleBackdrop enabled={loading} />
     </Router>
   );
 };

@@ -16,7 +16,6 @@ import TableRow from '@material-ui/core/TableRow';
 import React, { useEffect, useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, useRouteMatch } from 'react-router-dom';
-import SimpleBackdrop from '../../../shared/backdrop/Backdrop';
 import { getAllPostAction } from '../../../store/actions/author/postActions';
 import PostTableItem from '../../components/post/PostTableItem';
 
@@ -109,8 +108,6 @@ const ManagePost = ({ getAllPostAction, post }) => {
           </TableBody>
         </Table>
       </TableContainer>
-
-      <SimpleBackdrop enabled={post.loading} />
     </Card>
   );
 };

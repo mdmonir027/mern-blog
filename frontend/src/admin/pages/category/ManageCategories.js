@@ -16,7 +16,6 @@ import TableRow from '@material-ui/core/TableRow';
 import React, { useEffect, useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, useHistory, useRouteMatch } from 'react-router-dom';
-import SimpleBackdrop from '../../../shared/backdrop/Backdrop';
 import { getAllCategories } from '../../../store/actions/author/categoryActions';
 import SingleCategory from '../../components/category/SingleCategory';
 
@@ -118,8 +117,6 @@ const ManageCategory = ({ auth, getAllCategories, category }) => {
           </TableBody>
         </Table>
       </TableContainer>
-
-      <SimpleBackdrop enabled={category.loading} />
     </Card>
   );
 };

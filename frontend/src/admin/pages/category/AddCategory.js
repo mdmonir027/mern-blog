@@ -9,7 +9,6 @@ import {
 import React, { useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import SimpleBackdrop from '../../../shared/backdrop/Backdrop';
 import { addCategory } from '../../../store/actions/author/categoryActions';
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -87,7 +86,6 @@ const AddCategory = ({ auth, category, addCategory }) => {
       </Grid>
       <Grid container className={classes.content}>
         <Grid item md={12}>
-          <SimpleBackdrop enabled={category.loading} />
           <form className={classes.form} onSubmit={submitHandler}>
             <TextField
               type='text'
