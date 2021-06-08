@@ -6,7 +6,6 @@ const init = {
     page: null,
     errors: {},
   },
-  loading: false,
 };
 
 const postReducer = (state = init, action) => {
@@ -20,7 +19,6 @@ const postReducer = (state = init, action) => {
           page: null,
           errors: {},
         },
-        loading: false,
       };
     }
     case types.ADD_POST: {
@@ -39,13 +37,7 @@ const postReducer = (state = init, action) => {
         posts,
       };
     }
-    case types.SET_POSTS_LOADING: {
-      const { loading } = action.payload;
-      return {
-        ...state,
-        loading,
-      };
-    }
+
     case types.SET_SINGLE_POST: {
       const { post } = action.payload;
       return {

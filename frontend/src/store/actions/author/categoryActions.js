@@ -3,7 +3,7 @@ import dispatchLoading from '../../../utils/dispatchLoading';
 import * as types from '../types';
 
 export const getAllCategories = () => (dispatch) => {
-  dispatchLoading(dispatch, true, types.SET_CATEGORIES_LOADING);
+  dispatchLoading(dispatch, true);
   axios
     .get('/admin/category')
     .then((response) => {
@@ -12,7 +12,7 @@ export const getAllCategories = () => (dispatch) => {
         type: types.SET_CATEGORIES,
         payload: { categories },
       });
-      dispatchLoading(dispatch, false, types.SET_CATEGORIES_LOADING);
+      dispatchLoading(dispatch, false);
     })
     .catch((e) => {
       dispatch({
@@ -22,12 +22,12 @@ export const getAllCategories = () => (dispatch) => {
           errors: e.response.data,
         },
       });
-      dispatchLoading(dispatch, false, types.SET_CATEGORIES_LOADING);
+      dispatchLoading(dispatch, false);
     });
 };
 
 export const addCategory = (name, history, path) => (dispatch) => {
-  dispatchLoading(dispatch, true, types.SET_CATEGORIES_LOADING);
+  dispatchLoading(dispatch, true);
   axios
     .post('/admin/category', { name })
     .then((response) => {
@@ -45,12 +45,12 @@ export const addCategory = (name, history, path) => (dispatch) => {
           errors: e.response.data,
         },
       });
-      dispatchLoading(dispatch, false, types.SET_CATEGORIES_LOADING);
+      dispatchLoading(dispatch, false);
     });
 };
 
 export const updateCategoryAction = (name, slug, callBack) => (dispatch) => {
-  dispatchLoading(dispatch, true, types.SET_CATEGORIES_LOADING);
+  dispatchLoading(dispatch, true);
   axios
     .put(`/admin/category/${slug}`, { name })
     .then((response) => {
@@ -71,12 +71,12 @@ export const updateCategoryAction = (name, slug, callBack) => (dispatch) => {
         },
       });
 
-      dispatchLoading(dispatch, false, types.SET_CATEGORIES_LOADING);
+      dispatchLoading(dispatch, false);
     });
 };
 
 export const deleteCategoryAction = (slug) => (dispatch) => {
-  dispatchLoading(dispatch, true, types.SET_CATEGORIES_LOADING);
+  dispatchLoading(dispatch, true);
   axios
     .delete(`/admin/category/${slug}`)
     .then(() => {
@@ -95,12 +95,12 @@ export const deleteCategoryAction = (slug) => (dispatch) => {
         },
       });
 
-      dispatchLoading(dispatch, false, types.SET_CATEGORIES_LOADING);
+      dispatchLoading(dispatch, false);
     });
 };
 
 export const statusChangeAction = (slug) => (dispatch) => {
-  dispatchLoading(dispatch, true, types.SET_CATEGORIES_LOADING);
+  dispatchLoading(dispatch, true);
   axios
     .get(`/admin/category/status/${slug}`)
     .then((response) => {
@@ -111,7 +111,7 @@ export const statusChangeAction = (slug) => (dispatch) => {
         type: types.CATEGORY_STATUS,
         payload: { status, slug },
       });
-      dispatchLoading(dispatch, false, types.SET_CATEGORIES_LOADING);
+      dispatchLoading(dispatch, false);
     })
     .catch((e) => {
       dispatch({
@@ -121,6 +121,6 @@ export const statusChangeAction = (slug) => (dispatch) => {
           errors: e.response.data,
         },
       });
-      dispatchLoading(dispatch, false, types.SET_CATEGORIES_LOADING);
+      dispatchLoading(dispatch, false);
     });
 };

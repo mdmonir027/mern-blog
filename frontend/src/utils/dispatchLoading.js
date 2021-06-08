@@ -1,6 +1,8 @@
-const dispatchLoading = (dispatch, loading, type) => {
+import { SET_LOADING } from '../store/actions/types';
+
+const dispatchLoading = (dispatch, loading) => {
   dispatch({
-    type: type,
+    type: SET_LOADING,
     payload: { loading },
   });
 };

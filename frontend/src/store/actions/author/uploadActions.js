@@ -3,7 +3,7 @@ import dispatchLoading from '../../../utils/dispatchLoading';
 import * as types from '../types';
 
 export const uploadProfilePicture = (data) => (dispatch) => {
-  dispatchLoading(dispatch, true, types.SET_PROFILE_LOADING);
+  dispatchLoading(dispatch, true);
   axios
     .post('/upload/profilePicture', data)
     .then((response) => {
@@ -12,7 +12,7 @@ export const uploadProfilePicture = (data) => (dispatch) => {
         type: types.UPLOAD_PROFILE_PICTURE,
         payload: { profilePic },
       });
-      dispatchLoading(dispatch, false, types.SET_PROFILE_LOADING);
+      dispatchLoading(dispatch, false);
     })
     .catch((e) => {
       console.log(e); // todo remove later
@@ -23,6 +23,6 @@ export const uploadProfilePicture = (data) => (dispatch) => {
           errors: e.response.data,
         },
       });
-      dispatchLoading(dispatch, false, types.SET_PROFILE_LOADING);
+      dispatchLoading(dispatch, false);
     });
 };

@@ -3,7 +3,7 @@ import dispatchLoading from '../../../utils/dispatchLoading';
 import * as types from '../types';
 
 export const getProfile = () => (dispatch) => {
-  dispatchLoading(dispatch, true, types.SET_PROFILE_LOADING);
+  dispatchLoading(dispatch, true);
   axios
     .get('/author/profile')
     .then((response) => {
@@ -11,7 +11,7 @@ export const getProfile = () => (dispatch) => {
         type: types.SET_PROFILE,
         payload: { profile: response.data },
       });
-      dispatchLoading(dispatch, false, types.SET_PROFILE_LOADING);
+      dispatchLoading(dispatch, false);
     })
     .catch((e) => {
       console.log(e); // todo remove later
@@ -22,13 +22,13 @@ export const getProfile = () => (dispatch) => {
           errors: e.response.data,
         },
       });
-      dispatchLoading(dispatch, false, types.SET_PROFILE_LOADING);
+      dispatchLoading(dispatch, false);
     });
 };
 
 export const createProfile =
   (profileData, history, redirectPath) => (dispatch) => {
-    dispatchLoading(dispatch, true, types.SET_PROFILE_LOADING);
+    dispatchLoading(dispatch, true);
     axios
       .post('/author/profile', profileData)
       .then((response) => {
@@ -47,12 +47,12 @@ export const createProfile =
             errors: e.response.data,
           },
         });
-        dispatchLoading(dispatch, false, types.SET_PROFILE_LOADING);
+        dispatchLoading(dispatch, false);
       });
   };
 
 export const updateProfile = (profileData) => (dispatch) => {
-  dispatchLoading(dispatch, true, types.SET_PROFILE_LOADING);
+  dispatchLoading(dispatch, true);
   axios
     .put('/author/profile', profileData)
     .then((response) => {
@@ -70,12 +70,12 @@ export const updateProfile = (profileData) => (dispatch) => {
           errors: e.response.data,
         },
       });
-      dispatchLoading(dispatch, false, types.SET_PROFILE_LOADING);
+      dispatchLoading(dispatch, false);
     });
 };
 
 export const changePassword = (data, history) => (dispatch) => {
-  dispatchLoading(dispatch, true, types.SET_PROFILE_LOADING);
+  dispatchLoading(dispatch, true);
 
   axios
     .put('/author/profile/changePassword', data)
@@ -97,6 +97,6 @@ export const changePassword = (data, history) => (dispatch) => {
           errors: e.response.data,
         },
       });
-      dispatchLoading(dispatch, false, types.SET_PROFILE_LOADING);
+      dispatchLoading(dispatch, false);
     });
 };

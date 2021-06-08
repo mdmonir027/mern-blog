@@ -3,7 +3,6 @@ import * as types from '../actions/types';
 const init = {
   user: {},
   isAuthenticated: false,
-  loading: false,
   error: {
     page: null,
     errors: {},
@@ -12,18 +11,11 @@ const init = {
 
 const authReducer = (state = init, action) => {
   switch (action.type) {
-    case types.SET_USER_LOADING:
-      const { loading } = action.payload;
-      return {
-        ...state,
-        loading,
-      };
     case types.SET_USER:
       const { user } = action.payload;
       return {
         user,
         isAuthenticated: Object.keys(user).length !== 0,
-        loading: false,
         error: {
           page: null,
           errors: {},

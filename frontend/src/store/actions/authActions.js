@@ -4,7 +4,7 @@ import dispatchLoading from '../../utils/dispatchLoading';
 import * as types from './types';
 
 export const loginAction = (user, history) => (dispatch) => {
-  dispatchLoading(dispatch, true, types.SET_USER_LOADING);
+  dispatchLoading(dispatch, true);
   axios
     .post('/auth/login', user)
     .then((response) => {
@@ -28,12 +28,12 @@ export const loginAction = (user, history) => (dispatch) => {
           page: 'login',
         },
       });
-      dispatchLoading(dispatch, false, types.SET_USER_LOADING);
+      dispatchLoading(dispatch, false);
     });
 };
 
 export const registerAction = (data, history) => (dispatch) => {
-  dispatchLoading(dispatch, true, types.SET_USER_LOADING);
+  dispatchLoading(dispatch, true);
   axios
     .post('/auth/registration', data)
     .then((response) => {
@@ -42,7 +42,7 @@ export const registerAction = (data, history) => (dispatch) => {
       dispatch({
         type: types.SET_USER_NO_ERRORS,
       });
-      dispatchLoading(dispatch, false, types.SET_USER_LOADING);
+      dispatchLoading(dispatch, false);
     })
     .catch((e) => {
       dispatch({
@@ -52,18 +52,15 @@ export const registerAction = (data, history) => (dispatch) => {
           errors: e.response.data,
         },
       });
-      dispatchLoading(dispatch, false, types.SET_USER_LOADING);
+      dispatchLoading(dispatch, false);
     });
 };
 
 export const logoutAction = (history) => (dispatch) => {
-  dispatchLoading(dispatch, true, types.SET_USER_LOADING);
+  dispatchLoading(dispatch, true);
   dispatch({
     type: types.SET_USER,
     payload: { user: {} },
   });
-  setTimeout(
-    () => dispatchLoading(dispatch, true, types.SET_USER_LOADING),
-    500
-  );
+  setTimeout(() => dispatchLoading(dispatch, true), 500);
 };

@@ -6,7 +6,6 @@ const init = {
     page: null,
     errors: {},
   },
-  loading: false,
 };
 
 const categoryReducer = (state = init, action) => {
@@ -20,13 +19,6 @@ const categoryReducer = (state = init, action) => {
           page: null,
           errors: {},
         },
-      };
-    }
-    case types.SET_CATEGORIES_LOADING: {
-      const { loading } = action.payload;
-      return {
-        ...state,
-        loading,
       };
     }
     case types.SET_CATEGORIES_ERRORS: {
@@ -47,7 +39,6 @@ const categoryReducer = (state = init, action) => {
           page: null,
           errors: {},
         },
-        loading: false,
       };
     }
     case types.UPDATE_CATEGORY: {
@@ -63,7 +54,6 @@ const categoryReducer = (state = init, action) => {
           page: null,
           errors: {},
         },
-        loading: false,
       };
     }
     case types.DELETE_CATEGORY: {
@@ -76,7 +66,6 @@ const categoryReducer = (state = init, action) => {
           page: null,
           errors: {},
         },
-        loading: false,
       };
     }
     case types.CATEGORY_STATUS: {
@@ -95,7 +84,6 @@ const categoryReducer = (state = init, action) => {
           page: null,
           errors: {},
         },
-        loading: false,
       };
     }
     default:

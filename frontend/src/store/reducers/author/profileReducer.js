@@ -6,7 +6,6 @@ const init = {
     page: null,
     errors: {},
   },
-  loading: false,
 };
 
 const profileReducer = (state = init, action) => {
@@ -20,7 +19,6 @@ const profileReducer = (state = init, action) => {
           page: null,
           errors: {},
         },
-        loading: false,
       };
     }
 
@@ -33,14 +31,6 @@ const profileReducer = (state = init, action) => {
           page,
           errors,
         },
-      };
-    }
-    case types.SET_PROFILE_LOADING: {
-      const { loading } = action.payload;
-
-      return {
-        ...state,
-        loading,
       };
     }
 

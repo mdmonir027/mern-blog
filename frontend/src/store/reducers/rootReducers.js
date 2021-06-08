@@ -3,6 +3,7 @@ import categoryReducer from './author/categoryReducer';
 import postReducer from './author/postReducer';
 import profileReducer from './author/profileReducer';
 import authReducer from './authReducer';
+import loadingReducer from './loadingReducer';
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     profile: profileReducer,
   }),
   public: {},
+  loading: loadingReducer,
 });
 
 export default rootReducer;
