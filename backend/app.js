@@ -7,7 +7,6 @@ const setMiddleware = require('./middleware/middleware');
 
 // app scaffolding
 const app = express();
-
 // middleware
 setMiddleware(app);
 // routes

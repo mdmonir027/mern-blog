@@ -4,6 +4,7 @@ import React, { useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { createProfile } from '../../../store/actions/author/profileAction';
+import UploadProfilePicture from '../../components/proifle/UploadProfilePicture';
 
 const useStyles = makeStyles((theme) => ({
   input: {
@@ -129,23 +130,7 @@ const CreateProfile = ({ auth, createProfile, profile }) => {
               </div>
             </Grid>
             <Grid item md={4}>
-              <div className={classes.imagArea}>
-                <div className={classes.imageWrapper}>
-                  <img
-                    src='https://images.pexels.com/photos/7137554/pexels-photo-7137554.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-                    alt='profile'
-                    className={classes.profileImage}
-                  />
-                </div>
-                <Button
-                  variant='contained'
-                  color='primary'
-                  className={`text-center ${classes.uploadImageButton}`}
-                  style={{ width: '100%' }}
-                >
-                  Upload Image
-                </Button>
-              </div>
+              <UploadProfilePicture />
             </Grid>
           </Grid>
           <div>
