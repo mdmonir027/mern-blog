@@ -2,6 +2,9 @@ const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 const bcrypt = require('bcrypt');
 
+const defaultProfilePicUrl = (req) =>
+  `http://${req.get('host')}/images/default.png`;
+
 const controller = {};
 
 controller.getProfile = async (req, res) => {
@@ -27,7 +30,8 @@ controller.getProfile = async (req, res) => {
 controller.createProfile = async (req, res) => {
   try {
     const { _id } = req.user;
-    const { name, title, bio, website, facebook, twitter, github } = req.body;
+    const { name, title, bio, website, facebook, twitter, github, profilePic } =
+      req.body;
 
     const profile = await Profile.findOne({ user: _id });
     if (profile) {
@@ -47,6 +51,7 @@ controller.createProfile = async (req, res) => {
         github: github ? github : '',
       },
       user: _id,
+      profilePic: profilePic ? profilePic : defaultProfilePicUrl,
       posts: [],
       comments: [],
       likedPost: [],

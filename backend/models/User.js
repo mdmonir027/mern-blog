@@ -21,7 +21,7 @@ const userSchema = new Schema(
     },
     profilePic: {
       type: String,
-      default: 'profile.jpg',
+      required: true,
     },
     profile: {
       type: Schema.Types.ObjectId,

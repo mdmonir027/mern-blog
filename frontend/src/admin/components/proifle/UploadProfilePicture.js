@@ -22,28 +22,40 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UploadProfilePicture = ({ auth, uploadProfilePicture }) => {
+const UploadProfilePicture = ({ uploadProfilePicture, setProfilePic }) => {
   const classes = useStyles();
 
   const [uploadImage, setUploadImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
 
   const uploadImageHandler = (event) => {
     console.log('image upload change handler');
     setUploadImage(event.target.files[0]);
     const formData = new FormData();
     formData.append('profilePicture', uploadImage);
-    uploadProfilePicture(formData);
+    uploadProfilePicture(formData, (url) => {
+      setImageUrl(url);
+      setProfilePic(url);
+    });
   };
 
   return (
     <div>
       <div className={classes.imagArea}>
         <div className={classes.imageWrapper}>
-          <img
-            src={`http://${auth?.user?.profilePic}`}
-            alt='profile'
-            className={classes.profileImage}
-          />
+          {imageUrl ? (
+            <img
+              src={'http://' + imageUrl}
+              alt='profile'
+              className={classes.profileImage}
+            />
+          ) : (
+            <img
+              src='http://localhost:9000/images/default.png'
+              alt='profile'
+              className={classes.profileImage}
+            />
+          )}
         </div>
 
         <Button

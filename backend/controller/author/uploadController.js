@@ -20,7 +20,7 @@ controller.uploadProfilePicture = async (req, res) => {
       profilePic,
     });
   } else {
-    res.status(500).json({ profilePic: req.user.profilePic });
+    res.status(200).json({ profilePic: req.user.profilePic });
   }
 };
 

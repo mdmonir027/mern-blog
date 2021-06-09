@@ -32,7 +32,6 @@ controller.login = async (req, res) => {
         iat: new Date().getTime(),
         exp: Date.now() + 1000 * 60 * 60 * 2,
         isAdmin: user.isAdmin,
-        profilePic: user.profilePic,
       },
       'SECRET'
     );
@@ -59,7 +58,7 @@ controller.registration = async (req, res) => {
       email,
       username,
       password: hashPassword,
-      profilePic: `${req.get('host')}/uploads/images/default.png`,
+      profilePic: `${req.get('host')}/images/default.png`,
     });
 
     await userInstance.save();

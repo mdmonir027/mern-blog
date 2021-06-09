@@ -2,17 +2,19 @@ import axios from '../../../utils/axios';
 import dispatchLoading from '../../../utils/dispatchLoading';
 import * as types from '../types';
 
-export const uploadProfilePicture = (data) => (dispatch) => {
+export const uploadProfilePicture = (data, callBack) => (dispatch) => {
   dispatchLoading(dispatch, true);
+  const config = {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  };
   axios
-    .post('/upload/profilePicture', data)
+    .post('/upload/profilePicture', data, config)
     .then((response) => {
       const { profilePic } = response.data;
-      dispatch({
-        type: types.UPLOAD_PROFILE_PICTURE,
-        payload: { profilePic },
-      });
       dispatchLoading(dispatch, false);
+      callBack(profilePic);
     })
     .catch((e) => {
       console.log(e); // todo remove later
@@ -26,3 +28,12 @@ export const uploadProfilePicture = (data) => (dispatch) => {
       dispatchLoading(dispatch, false);
     });
 };
+
+/**
+ *  headers: {
+      'x-device-id': 'stuff',
+      'Content-Type': 'multipart/form-data'
+    }
+ * 
+ * 
+ */

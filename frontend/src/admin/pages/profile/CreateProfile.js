@@ -32,6 +32,7 @@ const CreateProfile = ({ auth, createProfile, profile }) => {
   const [twitter, setTwitter] = useState();
   const [instagram, setInstagram] = useState();
   const [github, setGithub] = useState();
+  const [profilePic, setProfilePic] = useState({});
 
   // if (profile.hasProfile) {
   //   history.push('/admin/profile');
@@ -47,6 +48,7 @@ const CreateProfile = ({ auth, createProfile, profile }) => {
       twitter,
       instagram,
       github,
+      profilePic,
     };
     createProfile(profileData, history, '/admin/profile');
   };
@@ -130,7 +132,7 @@ const CreateProfile = ({ auth, createProfile, profile }) => {
               </div>
             </Grid>
             <Grid item md={4}>
-              <UploadProfilePicture />
+              <UploadProfilePicture setProfilePic={setProfilePic} />
             </Grid>
           </Grid>
           <div>

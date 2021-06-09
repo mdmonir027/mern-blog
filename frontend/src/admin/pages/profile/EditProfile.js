@@ -2,6 +2,7 @@ import { Button, Card, Grid, TextField, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { useEffect, useMemo, useState } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { updateProfile } from '../../../store/actions/author/profileAction';
 
 const useStyles = makeStyles((theme) => ({
@@ -22,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
 
 const EditProfile = ({ auth, profile, updateProfile }) => {
   const classes = useStyles();
-
   const [name, setName] = useState('');
   const [title, setTitle] = useState('');
   const [bio, setBio] = useState('');
@@ -66,7 +66,11 @@ const EditProfile = ({ auth, profile, updateProfile }) => {
   }, [profile.error]);
 
   if (!profile.hasProfile) {
-    return <h2>First Create a profile</h2>;
+    return (
+      <Link to='/admin/profile/create'>
+        <h2>First Create a profile</h2>
+      </Link>
+    );
   }
 
   return (
