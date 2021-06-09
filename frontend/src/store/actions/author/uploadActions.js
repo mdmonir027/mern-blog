@@ -29,11 +29,32 @@ export const uploadProfilePicture = (data, callBack) => (dispatch) => {
     });
 };
 
-/**
- *  headers: {
-      'x-device-id': 'stuff',
-      'Content-Type': 'multipart/form-data'
-    }
- * 
- * 
- */
+export const updateProfilePicture = (data) => (dispatch) => {
+  dispatchLoading(dispatch, true);
+  const config = {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  };
+  axios
+    .put('/upload/profilePicture', data, config)
+    .then((response) => {
+      const { profilePic } = response.data;
+      dispatch({
+        type: types.SET_PROFILE_PICTURE,
+        payload: { profilePic },
+      });
+      dispatchLoading(dispatch, false);
+    })
+    .catch((e) => {
+      console.log(e); // todo remove later
+      dispatch({
+        type: types.SET_PROFILE_ERRORS,
+        payload: {
+          page: 'update',
+          errors: e.response.data,
+        },
+      });
+      dispatchLoading(dispatch, false);
+    });
+};

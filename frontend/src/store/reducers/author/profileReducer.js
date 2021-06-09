@@ -21,6 +21,18 @@ const profileReducer = (state = init, action) => {
         },
       };
     }
+    case types.SET_PROFILE_PICTURE: {
+      const { profilePic } = action.payload;
+      console.log(action);
+
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          profilePic,
+        },
+      };
+    }
 
     case types.SET_PROFILE_ERRORS: {
       const { errors, page } = action.payload;

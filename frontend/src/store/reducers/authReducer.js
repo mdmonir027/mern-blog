@@ -38,15 +38,6 @@ const authReducer = (state = init, action) => {
           errors: {},
         },
       };
-    case types.UPLOAD_PROFILE_PICTURE:
-      const { profilePic } = action.payload;
-      return {
-        ...state,
-        user: {
-          ...state.user,
-          profilePic,
-        },
-      };
 
     default:
       return state;
