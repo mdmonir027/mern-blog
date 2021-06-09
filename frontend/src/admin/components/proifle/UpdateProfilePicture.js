@@ -50,7 +50,7 @@ const UpdatedProfilePicture = ({ updateProfilePicture, profilePic }) => {
           color='primary'
           className={`text-center ${classes.uploadImageButton}`}
         >
-          <label className={classes.inputLabel} for='profilePictureInput'>
+          <label className={classes.inputLabel} htmlFor='profilePictureInput'>
             Upload Image
           </label>
           <input

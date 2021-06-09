@@ -56,10 +56,12 @@ export const updateProfile = (profileData) => (dispatch) => {
   axios
     .put('/author/profile', profileData)
     .then((response) => {
+      console.log(profileData);
       dispatch({
         type: types.SET_PROFILE,
         payload: { profile: response.data },
       });
+      dispatchLoading(dispatch, false);
     })
     .catch((e) => {
       console.log(e); // todo remove later

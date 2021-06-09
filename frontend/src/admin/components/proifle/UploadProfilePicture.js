@@ -63,7 +63,7 @@ const UploadProfilePicture = ({ uploadProfilePicture, setProfilePic }) => {
           color='primary'
           className={`text-center ${classes.uploadImageButton}`}
         >
-          <label className={classes.inputLabel} for='profilePictureInput'>
+          <label className={classes.inputLabel} htmlFor='profilePictureInput'>
             Upload Image
           </label>
           <input
@@ -72,6 +72,7 @@ const UploadProfilePicture = ({ uploadProfilePicture, setProfilePic }) => {
             id='profilePictureInput'
             className={classes.inputProfile}
             onChange={uploadImageHandler}
+            value={uploadImage}
           />
         </Button>
       </div>
