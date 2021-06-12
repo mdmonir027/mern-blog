@@ -72,7 +72,7 @@ const UploadProfilePicture = ({ uploadProfilePicture, setProfilePic }) => {
             id='profilePictureInput'
             className={classes.inputProfile}
             onChange={uploadImageHandler}
-            value={uploadImage}
+            // value={uploadImage}
           />
         </Button>
       </div>

@@ -27,8 +27,10 @@ controller.uploadProfilePicture = async (req, res) => {
 
 controller.updateProfilePicture = async (req, res) => {
   if (req.file) {
+    console.log('there is file');
     const oldProfilePic = req.user.profilePic;
     const profilePic = `${req.get('host')}/images/${req.file.filename}`;
+    console.log(req.file);
 
     await User.findByIdAndUpdate(req.user._id, { $set: { profilePic } });
 
@@ -45,7 +47,9 @@ controller.updateProfilePicture = async (req, res) => {
       profilePic,
     });
   } else {
-    res.status(200).json({ profilePic: req.user.profilePic });
+    console.log('there is no file');
+
+    res.status(500).json({ profilePic: req.user.profilePic });
   }
 };
 
