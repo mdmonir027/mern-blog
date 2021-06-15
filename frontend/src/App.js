@@ -6,6 +6,7 @@ import Admin from './admin/Admin';
 import './App.css';
 import Login from './auth/pages/Login';
 import Register from './auth/pages/Register';
+import Public from './public/Public';
 import SimpleBackdrop from './shared/backdrop/Backdrop';
 import Header from './shared/header/Header';
 
@@ -28,11 +29,8 @@ const App = ({ loading }) => {
           <Route path='/admin'>
             <Admin />
           </Route>
-          <Route path='/' exact>
-            <Container>
-              <h2>Hello world 1</h2>
-            </Container>
-          </Route>
+
+          <Public />
         </Switch>
       </div>
 
