@@ -11,7 +11,7 @@ export const addPostAction = (post, history) => (dispatch) => {
         type: types.ADD_POST,
         payload: { post: response.data },
       });
-      dispatchLoading(dispatch, true);
+      dispatchLoading(dispatch, false);
       history.push('/admin/post');
     })
     .catch((e) => {
@@ -22,7 +22,7 @@ export const addPostAction = (post, history) => (dispatch) => {
           errors: e.response.data,
         },
       });
-      dispatchLoading(dispatch, true);
+      dispatchLoading(dispatch, false);
     });
 };
 
