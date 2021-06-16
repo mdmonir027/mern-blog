@@ -11,6 +11,8 @@ import Typography from '@material-ui/core/Typography';
 import CommentIcon from '@material-ui/icons/Comment';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import React from 'react';
+import { connect } from 'react-redux';
+import { postLikeUnlike } from '../../../store/actions/public/LikeUnlikeAction';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,6 +39,10 @@ const HomePageSinglePost = ({
   body,
   likeCount,
   commentCount,
+  isAuthenticated,
+  postLikeUnlike,
+  slug,
+  liked,
 }) => {
   const classes = useStyles();
 
@@ -66,9 +72,19 @@ const HomePageSinglePost = ({
       <Divider />
       <CardActions className={classes.footer}>
         <div className={classes.iconWrapper}>
-          <IconButton aria-label='add to favorites'>
-            <FavoriteIcon style={{ color: 'red' }} />
-          </IconButton>
+          {isAuthenticated ? (
+            <IconButton
+              aria-label='add to favorites'
+              onClick={() => postLikeUnlike(slug)}
+            >
+              <FavoriteIcon style={{ color: liked ? 'red' : '' }} />
+            </IconButton>
+          ) : (
+            <IconButton disabled>
+              <FavoriteIcon />
+            </IconButton>
+          )}
+
           {likeCount}
         </div>
         <div className={classes.iconWrapper}>
@@ -82,4 +98,8 @@ const HomePageSinglePost = ({
   );
 };
 
-export default HomePageSinglePost;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { postLikeUnlike })(HomePageSinglePost);

@@ -3,8 +3,14 @@ import { connect } from 'react-redux';
 import { fetchPosts } from '../../../store/actions/public/postActions';
 import HomePageSinglePost from './HomePageSinglePost';
 
-const HomePagePosts = ({ posts, fetchPosts }) => {
+const HomePagePosts = ({ posts, fetchPosts, userId }) => {
   useEffect(() => fetchPosts(), [fetchPosts]);
+
+  const isLiked = (likesArray, userId) => {
+    if (!userId) return false;
+    if (likesArray.includes(userId)) return true;
+    return false;
+  };
 
   return (
     <div>
@@ -18,6 +24,8 @@ const HomePagePosts = ({ posts, fetchPosts }) => {
           body={post.body}
           likeCount={post.likes.length}
           commentCount={1}
+          slug={post.slug}
+          liked={isLiked(post.likes, userId)}
         />
       ))}
     </div>
@@ -26,6 +34,7 @@ const HomePagePosts = ({ posts, fetchPosts }) => {
 
 const mapStateToProps = (state) => ({
   posts: state.public.posts,
+  userId: state.auth.user._id,
 });
 
 export default connect(mapStateToProps, { fetchPosts })(HomePagePosts);
