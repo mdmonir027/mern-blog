@@ -1,6 +1,7 @@
 import { Grid } from '@material-ui/core';
 import React from 'react';
 import HomePageCategories from '../components/category/HomePageCategories';
+import HomePagePosts from '../components/posts/HomePagePosts';
 
 const HomePage = () => {
   return (
@@ -10,7 +11,7 @@ const HomePage = () => {
           <HomePageCategories />
         </Grid>
         <Grid md={8} item>
-          Posts
+          <HomePagePosts />
         </Grid>
       </Grid>
     </div>

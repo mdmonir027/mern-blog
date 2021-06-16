@@ -1,11 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { fetchPosts } from '../../../store/actions/public/postActions';
+import HomePageSinglePost from './HomePageSinglePost';
 
-const HomePagePosts = () => {
+const HomePagePosts = ({ posts, fetchPosts }) => {
+  useEffect(() => fetchPosts(), [fetchPosts]);
+
   return (
     <div>
-      <p>home Posts</p>
+      {posts.map((post) => (
+        <HomePageSinglePost
+          username={post.user.username}
+          profilePic={post.user.profilePic}
+          title={post.title}
+          key={post._id}
+          createdAt={post.createdAt}
+          body={post.body}
+          likeCount={post.likes.length}
+          commentCount={1}
+        />
+      ))}
     </div>
   );
 };
 
-export default HomePagePosts;
+const mapStateToProps = (state) => ({
+  posts: state.public.posts,
+});
+
+export default connect(mapStateToProps, { fetchPosts })(HomePagePosts);
