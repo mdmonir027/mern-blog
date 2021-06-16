@@ -42,20 +42,20 @@ const routeArrays = [
     handler: likeRoutes,
   },
   {
-    path: '/category',
-    handler: publicCategoryRoutes,
-  },
-  {
-    path: '/post',
-    handler: publicPostRoutes,
-  },
-  {
     path: '/admin/category',
     handler: categoryRoutes,
   },
   {
     path: '/upload',
     handler: uploadRoutes,
+  },
+  {
+    path: '/category',
+    handler: publicCategoryRoutes,
+  },
+  {
+    path: '/post',
+    handler: publicPostRoutes,
   },
   {
     path: '/u',

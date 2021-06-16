@@ -28,3 +28,7 @@ export const SET_PROFILE_PICTURE = 'SET_PROFILE_PICTURE';
 // ? loading
 
 export const SET_LOADING = 'SET_LOADING';
+
+// ? public types
+export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
+export const FETCH_SINGLE_CATEGORY = 'FETCH_SINGLE_CATEGORY';

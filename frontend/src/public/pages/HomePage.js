@@ -5,7 +5,7 @@ import HomePageCategories from '../components/category/HomePageCategories';
 const HomePage = () => {
   return (
     <div>
-      <Grid container>
+      <Grid container spacing={2}>
         <Grid md={4} item>
           <HomePageCategories />
         </Grid>

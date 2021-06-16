@@ -4,6 +4,9 @@ import postReducer from './author/postReducer';
 import profileReducer from './author/profileReducer';
 import authReducer from './authReducer';
 import loadingReducer from './loadingReducer';
+import publicRootReducer from './public/publicRootReducer';
+
+// public category Reducer.
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -12,7 +15,7 @@ const rootReducer = combineReducers({
     category: categoryReducer,
     profile: profileReducer,
   }),
-  public: {},
+  public: publicRootReducer,
   loading: loadingReducer,
 });
 
