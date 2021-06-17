@@ -1,5 +1,6 @@
 import { Grid } from '@material-ui/core';
 import React from 'react';
+import Sidebar from './components/sidebar/Sidebar';
 import Routes from './Routes';
 
 const Public = () => {
@@ -16,7 +17,7 @@ const Public = () => {
           <Routes />
         </Grid>
         <Grid md={3} item>
-          Sidebar
+          <Sidebar />
         </Grid>
       </Grid>
     </div>
