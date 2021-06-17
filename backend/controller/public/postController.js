@@ -5,6 +5,8 @@ const controller = {};
 
 controller.getAllPosts = async (req, res) => {
   try {
+    const currentPage = parseInt(req.query.page) || 1;
+    const itemPerPage = parseInt(req.query.item) || 10;
     const posts = await Post.find()
       .populate({
         path: 'user',
@@ -13,13 +15,25 @@ controller.getAllPosts = async (req, res) => {
       .populate({
         path: 'category',
         select: 'name slug',
-      });
+      })
+      .skip(itemPerPage * currentPage - itemPerPage)
+      .limit(itemPerPage);
 
-    return res.status(200).json(posts);
+    const totalPost = await Post.countDocuments();
+    const totalPage = Math.floor(totalPost / itemPerPage);
+
+    return res.status(200).json({
+      data: posts,
+      currentPage,
+      itemPerPage,
+      totalPage,
+      totalPost,
+    });
   } catch (error) {
     internalServerError(res, error);
   }
 };
+
 controller.getSinglePost = async (req, res) => {
   try {
     const { slug } = req.params;

@@ -1,10 +1,10 @@
 import React from 'react';
-import RecentPosts from './RecentPosts';
 
 const Sidebar = () => {
   return (
     <div>
-      <RecentPosts />
+      {/* <RecentPosts /> */}
+      <h3>Sidebar</h3>
     </div>
   );
 };

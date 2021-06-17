@@ -6,7 +6,7 @@ import postReducer from './postReducer';
 
 const publicRootReducer = combineReducers({
   category: categoryReducer,
-  posts: postReducer,
+  post: postReducer,
 });
 
 export default publicRootReducer;

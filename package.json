@@ -17,6 +17,7 @@
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^27.1.0",
     "@ckeditor/ckeditor5-react": "^3.0.2",
-    "@material-ui/data-grid": "^4.0.0-alpha.30"
+    "@material-ui/data-grid": "^4.0.0-alpha.30",
+    "@material-ui/lab": "^4.0.0-alpha.58"
   }
 }
