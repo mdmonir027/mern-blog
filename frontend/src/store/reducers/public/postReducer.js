@@ -23,6 +23,13 @@ const postReducer = (state = init, action) => {
         posts,
       };
     }
+    case types.FETCH_RECENT_POSTS: {
+      const { recent } = action.payload;
+      return {
+        ...state,
+        recent,
+      };
+    }
     case types.POST_LIKE_UNLIKE: {
       const { liked, userId, postSlug } = action.payload;
 

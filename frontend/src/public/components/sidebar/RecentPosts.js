@@ -1,7 +1,8 @@
 import { Card, CardContent, makeStyles, Typography } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { fetchRecentPosts } from '../../../store/actions/public/postActions';
 const useStyles = makeStyles((theme) => ({
   title: {
     background: '#0e33fd',
@@ -18,8 +19,10 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '5px',
   },
 }));
-const RecentPosts = ({ posts }) => {
+const RecentPosts = ({ posts, fetchRecentPosts }) => {
   const classes = useStyles();
+
+  useEffect(() => fetchRecentPosts(), [fetchRecentPosts]);
 
   return (
     <div>
@@ -49,7 +52,7 @@ const Post = ({ title, slug }) => {
 };
 
 const mapStateToProps = (state) => ({
-  posts: state.public.posts,
+  posts: state.public.post.recent,
 });
 
-export default connect(mapStateToProps)(RecentPosts);
+export default connect(mapStateToProps, { fetchRecentPosts })(RecentPosts);

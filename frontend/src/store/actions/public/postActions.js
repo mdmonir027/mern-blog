@@ -26,3 +26,21 @@ export const fetchPosts = (itemPerPage, currentPage) => (dispatch) => {
       dispatchLoading(dispatch, false);
     });
 };
+
+export const fetchRecentPosts = () => (dispatch) => {
+  dispatchLoading(dispatch, true);
+  axios
+    .get(`/post?recent=true`)
+    .then((response) => {
+      const recent = response.data;
+      dispatch({
+        type: types.FETCH_RECENT_POSTS,
+        payload: { recent },
+      });
+      dispatchLoading(dispatch, false);
+    })
+    .catch((e) => {
+      console.log(e);
+      dispatchLoading(dispatch, false);
+    });
+};

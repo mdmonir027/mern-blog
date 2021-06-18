@@ -5,7 +5,7 @@ import { fetchPosts } from '../../../store/actions/public/postActions';
 import HomePageSinglePost from './HomePageSinglePost';
 
 const HomePagePosts = ({ posts, fetchPosts, userId, totalPage }) => {
-  const itemPerPage = 1;
+  const itemPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(

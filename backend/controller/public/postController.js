@@ -5,6 +5,13 @@ const controller = {};
 
 controller.getAllPosts = async (req, res) => {
   try {
+    const recent = req.query.recent ? true : false;
+
+    if (recent) {
+      const posts = await Post.find().limit(10);
+      return res.status(200).json(posts);
+    }
+
     const currentPage = parseInt(req.query.page) || 1;
     const itemPerPage = parseInt(req.query.item) || 10;
     const posts = await Post.find()
