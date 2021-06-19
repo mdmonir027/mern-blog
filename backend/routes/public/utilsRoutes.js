@@ -1,6 +1,10 @@
 const router = require('express').Router();
-const { getAllUser } = require('../../controller/public/utilsController');
+const {
+  getAllUser,
+  getAllComments,
+} = require('../../controller/public/utilsController');
 
 router.get('/users', getAllUser);
+router.get('/comment/:postSlug', getAllComments);
 
 module.exports = router;

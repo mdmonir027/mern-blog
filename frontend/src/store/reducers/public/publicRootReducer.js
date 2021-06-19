@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import categoryReducer from './CategoryReducer';
+import commentReducer from './CommentReducer';
 import postReducer from './postReducer';
 
 // public category Reducer.
@@ -7,6 +8,7 @@ import postReducer from './postReducer';
 const publicRootReducer = combineReducers({
   category: categoryReducer,
   post: postReducer,
+  comments: commentReducer,
 });
 
 export default publicRootReducer;

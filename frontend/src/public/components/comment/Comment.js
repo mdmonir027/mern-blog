@@ -11,7 +11,7 @@ const useStyles = makeStyles({
     paddingBottom: ' 5px',
     borderRadius: '5px',
   },
-  title: {
+  username: {
     fontWeight: 'bold',
   },
   commentFooter: {
@@ -27,20 +27,20 @@ const useStyles = makeStyles({
   },
 });
 
-const Comment = () => {
+const Comment = ({ username, body, profilePic }) => {
   const classes = useStyles();
   return (
     <Grid container spacing={2}>
       <Grid item>
-        <Avatar src='hello' alt='User' />
+        <Avatar src={`http://${profilePic}`} alt={username} />
       </Grid>
-      <Grid item>
+      <Grid item style={{ minWidth: '210px' }}>
         <div className={classes.commentDetails}>
-          <Typography component='h2' className={classes.title}>
-            Md Monirul Islam
+          <Typography component='h2' className={classes.username}>
+            {username}
           </Typography>
           <Typography component='p' className={classes.body}>
-            Thank you so much
+            {body}
           </Typography>
         </div>
         <div className={classes.commentFooter}>

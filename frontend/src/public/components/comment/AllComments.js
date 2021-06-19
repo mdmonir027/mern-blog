@@ -1,6 +1,9 @@
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { fetchComments } from '../../../store/actions/public/commentActions';
 import Comment from './Comment';
 
 const useStyles = makeStyles({
@@ -9,8 +12,12 @@ const useStyles = makeStyles({
     fontWeight: '600',
   },
 });
-const AllComments = () => {
+const AllComments = ({ fetchComments, comments }) => {
   const classes = useStyles();
+
+  const { slug } = useParams();
+
+  useEffect(() => fetchComments(slug), [fetchComments, slug]);
   return (
     <div>
       <Typography
@@ -22,10 +29,24 @@ const AllComments = () => {
       </Typography>
 
       <div className={classes.allComments}>
-        <Comment />
+        {comments.length > 0 ? (
+          comments.map((comment) => (
+            <Comment
+              username={comment?.user?.username}
+              profilePic={comment?.user?.profilePic}
+              body={comment?.body}
+            />
+          ))
+        ) : (
+          <h3>No Comments Added!</h3>
+        )}
       </div>
     </div>
   );
 };
 
-export default AllComments;
+const mapStateToProps = (state) => ({
+  comments: state.public.comments,
+});
+
+export default connect(mapStateToProps, { fetchComments })(AllComments);
