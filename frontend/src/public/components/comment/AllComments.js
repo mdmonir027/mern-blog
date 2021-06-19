@@ -46,7 +46,7 @@ const AllComments = ({ fetchComments, comments }) => {
 };
 
 const mapStateToProps = (state) => ({
-  comments: state.public.comments,
+  comments: state.public.comments.comments,
 });
 
 export default connect(mapStateToProps, { fetchComments })(AllComments);

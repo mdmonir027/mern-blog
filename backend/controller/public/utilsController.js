@@ -20,10 +20,12 @@ controller.getAllComments = async (req, res) => {
 
     const post = await Post.findOne({ slug: postSlug });
 
-    const comments = await Comment.find({ post: post._id }).populate({
-      path: 'user',
-      select: 'username profilePic',
-    });
+    const comments = await Comment.find({ post: post._id })
+      .populate({
+        path: 'user',
+        select: 'username profilePic',
+      })
+      .sort({ field: 'asc', _id: -1 });
 
     return res.status(200).json(comments);
   } catch (error) {

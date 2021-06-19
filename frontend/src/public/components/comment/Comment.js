@@ -30,7 +30,7 @@ const useStyles = makeStyles({
 const Comment = ({ username, body, profilePic }) => {
   const classes = useStyles();
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} wrap='nowrap'>
       <Grid item>
         <Avatar src={`http://${profilePic}`} alt={username} />
       </Grid>

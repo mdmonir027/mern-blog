@@ -22,8 +22,6 @@ controller.store = async (req, res) => {
     const userId = req.user._id;
     const { body, post } = req.body;
 
-    console.log(req.body);
-
     const commentInstance = new Comment({
       body,
       user: userId,
@@ -48,7 +46,12 @@ controller.store = async (req, res) => {
       }
     );
 
-    res.status(201).json(createdComment);
+    const comment = await Comment.findById(createdComment._id).populate({
+      path: 'user',
+      select: 'username profilePic',
+    });
+
+    res.status(201).json(comment);
   } catch (error) {
     internalServerError(res, error);
   }
