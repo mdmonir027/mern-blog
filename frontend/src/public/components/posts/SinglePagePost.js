@@ -4,7 +4,6 @@ import {
   Divider,
   Grid,
   IconButton,
-  TextField,
   Typography,
 } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
@@ -14,6 +13,8 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import React from 'react';
 import { connect } from 'react-redux';
 import { postLikeUnlike } from '../../../store/actions/public/LikeUnlikeAction';
+import AllComments from '../comment/AllComments';
+import CommentAdd from '../comment/CommentAdd';
 
 const useStyles = makeStyles({
   cardBody: {
@@ -121,40 +122,9 @@ const SinglePagePost = (props) => {
         </div>
         <Divider />
 
-        <form className={classes.commentForm}>
-          <TextField
-            id='standard-basic'
-            fullWidth
-            className={classes.commentInput}
-          />
-        </form>
+        <CommentAdd />
 
-        <Typography
-          variant='h5'
-          component='h6'
-          className={classes.allCommentsTitle}
-        >
-          All Comments
-        </Typography>
-
-        <div className={classes.allComments}>
-          <Grid container spacing={2}>
-            <Grid item>
-              <Avatar src='hello' alt='User' />
-            </Grid>
-            <Grid item>
-              <div className={classes.commentDetails}>
-                <Typography component='h2'>Md Monirul Islam</Typography>
-                <Typography component='p'>12 hours ago</Typography>
-              </div>
-              <div className={classes.commentFooter}>
-                <p>Like</p>
-                <p>Reply</p>
-                <p>1m</p>
-              </div>
-            </Grid>
-          </Grid>
-        </div>
+        <AllComments />
       </Card>
     </Container>
   );
