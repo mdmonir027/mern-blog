@@ -17,7 +17,7 @@ controller.getAllPosts = async (req, res) => {
     const posts = await Post.find()
       .populate({
         path: 'user',
-        select: 'username',
+        select: 'username profilePic',
       })
       .populate({
         path: 'category',

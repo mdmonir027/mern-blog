@@ -12,6 +12,7 @@ import CommentIcon from '@material-ui/icons/Comment';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { postLikeUnlike } from '../../../store/actions/public/LikeUnlikeAction';
 
 const useStyles = makeStyles((theme) => ({
@@ -28,6 +29,11 @@ const useStyles = makeStyles((theme) => ({
   },
   iconWrapper: {
     // flexBasis: '50%',
+  },
+  link: {
+    color: 'black',
+    display: 'inline-block',
+    textDecoration: 'none',
   },
 }));
 
@@ -54,7 +60,7 @@ const HomePageSinglePost = ({
             aria-label='recipe'
             className={classes.avatar}
             alt={username}
-            src={profilePic}
+            src={`http://${profilePic}`}
           />
         }
         title={username}
@@ -68,6 +74,11 @@ const HomePageSinglePost = ({
         <Typography variant='body2' color='textSecondary' component='p'>
           {body}
         </Typography>
+        <p>
+          <Link className={classes.link} to={`/post/${slug}`}>
+            Read more
+          </Link>
+        </p>
       </CardContent>
       <Divider />
       <CardActions className={classes.footer}>
