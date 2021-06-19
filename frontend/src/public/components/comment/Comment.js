@@ -3,10 +3,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 
 const useStyles = makeStyles({
+  commentBody: {
+    marginTop: '12px',
+  },
   commentDetails: {
     background: '#F3F3F3',
     paddingLeft: ' 10px',
-    paddingRight: ' 40px',
     paddingTop: ' 5px',
     paddingBottom: ' 5px',
     borderRadius: '5px',
@@ -16,7 +18,6 @@ const useStyles = makeStyles({
   },
   commentFooter: {
     display: 'flex',
-    justifyContent: 'space-evenly',
     paddingRight: '30px',
     paddingLeft: '10px',
     fontSize: '13px',
@@ -24,13 +25,14 @@ const useStyles = makeStyles({
   },
   footerButton: {
     cursor: 'pointer',
+    marginRight: '15px',
   },
 });
 
 const Comment = ({ username, body, profilePic }) => {
   const classes = useStyles();
   return (
-    <Grid container spacing={2} wrap='nowrap'>
+    <Grid container spacing={2} wrap='nowrap' className={classes.commentBody}>
       <Grid item>
         <Avatar src={`http://${profilePic}`} alt={username} />
       </Grid>
