@@ -44,3 +44,21 @@ export const fetchRecentPosts = () => (dispatch) => {
       dispatchLoading(dispatch, false);
     });
 };
+
+export const fetchSinglePost = (slug) => (dispatch) => {
+  dispatchLoading(dispatch, true);
+  axios
+    .get(`/post/${slug}`)
+    .then((response) => {
+      const post = response.data;
+      dispatch({
+        type: types.FETCH_SINGLE_POST,
+        payload: { post },
+      });
+      dispatchLoading(dispatch, false);
+    })
+    .catch((e) => {
+      console.log(e);
+      dispatchLoading(dispatch, false);
+    });
+};

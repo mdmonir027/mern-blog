@@ -1,0 +1,167 @@
+import {
+  Avatar,
+  Container,
+  Divider,
+  Grid,
+  IconButton,
+  TextField,
+  Typography,
+} from '@material-ui/core';
+import Card from '@material-ui/core/Card';
+import { makeStyles } from '@material-ui/core/styles';
+import CommentIcon from '@material-ui/icons/Comment';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import React from 'react';
+import { connect } from 'react-redux';
+import { postLikeUnlike } from '../../../store/actions/public/LikeUnlikeAction';
+
+const useStyles = makeStyles({
+  cardBody: {
+    padding: '20px',
+    marginTop: ' 20px',
+  },
+  iconBox: {
+    display: 'flex',
+    justifyContent: 'space-around',
+  },
+  header: {
+    marginBottom: '5px',
+  },
+  imageWrapper: {
+    width: '100%',
+    height: '350px',
+    background: 'red',
+    marginBottom: '10px',
+    borderRadius: '10px',
+    overflow: 'hidden',
+  },
+  postImage: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+  },
+  title: {
+    marginTop: '15px',
+    marginBottom: '15px',
+  },
+  content: {
+    paddingTop: '30px',
+    paddingBottom: '30px',
+    fontSize: '16px',
+  },
+});
+
+const SinglePagePost = (props) => {
+  const {
+    username,
+    profilePic,
+    createdAt,
+    title,
+    body,
+    likeCount,
+    commentCount,
+    isAuthenticated,
+    postLikeUnlike,
+    slug,
+    liked,
+    image,
+  } = props;
+
+  const classes = useStyles();
+
+  return (
+    <Container>
+      <Card className={classes.cardBody}>
+        <Grid container spacing={3} className={classes.header}>
+          <Grid item>
+            <Avatar src={profilePic} alt={username} />
+          </Grid>
+          <Grid item>
+            <Typography component='h2'>{username}</Typography>
+            <Typography component='p'>{createdAt}</Typography>
+          </Grid>
+        </Grid>
+        <div className={classes.imageWrapper}>
+          <img src={image} alt='' className={classes.postImage} />
+        </div>
+        <div className={classes.postContent}>
+          <Typography variant='h4' component='h1' className={classes.title}>
+            {title}
+          </Typography>
+          <Divider />
+          <div
+            dangerouslySetInnerHTML={{ __html: body }}
+            className={classes.content}
+          />
+        </div>
+        <Divider />
+        <div className={classes.iconBox}>
+          <div className={classes.iconWrapper}>
+            {isAuthenticated ? (
+              <IconButton
+                aria-label='add to favorites'
+                onClick={() => postLikeUnlike(slug)}
+              >
+                <FavoriteIcon style={{ color: liked ? 'red' : '' }} />
+              </IconButton>
+            ) : (
+              <IconButton disabled>
+                <FavoriteIcon />
+              </IconButton>
+            )}
+
+            {likeCount}
+          </div>
+          <div className={classes.iconWrapper}>
+            <IconButton aria-label='share'>
+              <CommentIcon />
+            </IconButton>
+            {commentCount}
+          </div>
+        </div>
+        <Divider />
+
+        <form className={classes.commentForm}>
+          <TextField
+            id='standard-basic'
+            fullWidth
+            className={classes.commentInput}
+          />
+        </form>
+
+        <Typography
+          variant='h5'
+          component='h6'
+          className={classes.allCommentsTitle}
+        >
+          All Comments
+        </Typography>
+
+        <div className={classes.allComments}>
+          <Grid container spacing={2}>
+            <Grid item>
+              <Avatar src='hello' alt='User' />
+            </Grid>
+            <Grid item>
+              <div className={classes.commentDetails}>
+                <Typography component='h2'>Md Monirul Islam</Typography>
+                <Typography component='p'>12 hours ago</Typography>
+              </div>
+              <div className={classes.commentFooter}>
+                <p>Like</p>
+                <p>Reply</p>
+                <p>1m</p>
+              </div>
+            </Grid>
+          </Grid>
+        </div>
+      </Card>
+    </Container>
+  );
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { postLikeUnlike })(SinglePagePost);

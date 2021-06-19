@@ -7,6 +7,7 @@ const init = {
   totalPage: 0,
   totalPost: 0,
   recent: [],
+  single: undefined,
 };
 
 const postReducer = (state = init, action) => {
@@ -33,6 +34,17 @@ const postReducer = (state = init, action) => {
     case types.POST_LIKE_UNLIKE: {
       const { liked, userId, postSlug } = action.payload;
 
+      const post = state.single;
+
+      if (post.slug === postSlug) {
+        if (liked) {
+          post.likes.push(userId);
+        } else {
+          const index = post.likes.indexOf(userId);
+          if (index > -1) post.likes.splice(index, 1);
+        }
+      }
+
       const updatedPosts = state.posts.map((post) => {
         if (post.slug === postSlug) {
           if (liked) {
@@ -48,6 +60,15 @@ const postReducer = (state = init, action) => {
       return {
         ...state,
         posts: updatedPosts,
+        single: post,
+      };
+    }
+    case types.FETCH_SINGLE_POST: {
+      const { post } = action.payload;
+
+      return {
+        ...state,
+        single: post,
       };
     }
 

@@ -47,7 +47,7 @@ controller.getSinglePost = async (req, res) => {
     const post = await Post.findOne({ slug })
       .populate({
         path: 'user',
-        select: 'username',
+        select: 'username profilePic',
       })
       .populate({
         path: 'category',
