@@ -31,11 +31,15 @@ const AllComments = ({ fetchComments, comments }) => {
       <div className={classes.allComments}>
         {comments.length > 0 ? (
           comments.map((comment) => (
-            <Comment
-              username={comment?.user?.username}
-              profilePic={comment?.user?.profilePic}
-              body={comment?.body}
-            />
+            <>
+              <Comment
+                username={comment?.user?.username}
+                profilePic={comment?.user?.profilePic}
+                body={comment?.body}
+                likes={comment.likes}
+                replies={comment.replies}
+              />
+            </>
           ))
         ) : (
           <h3>No Comments Added!</h3>

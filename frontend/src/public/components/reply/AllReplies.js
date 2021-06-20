@@ -1,0 +1,16 @@
+import React from 'react';
+import Reply from './Reply';
+
+const AllReplies = ({ replies }) => {
+  return (
+    <div>
+      {replies.length > 0 &&
+        replies.map((reply) => (
+          <Reply username='r' body='Ok' profilePic='l' likes={[]} />
+        ))}
+      <Reply username='r' body='Ok' profilePic='l' likes={[]} />
+    </div>
+  );
+};
+
+export default AllReplies;

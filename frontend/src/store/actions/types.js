@@ -39,3 +39,4 @@ export const FETCH_SINGLE_POST = 'FETCH_SINGLE_POST';
 export const FETCH_COMMENTS = 'FETCH_COMMENTS';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const SET_COMMENT_ERRORS = 'SET_COMMENT_ERRORS';
+export const ADD_REPLY = 'ADD_REPLY';

@@ -1,6 +1,8 @@
 import { Avatar, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import React from 'react';
+import React, { useState } from 'react';
+import AllReplies from '../reply/AllReplies';
+import ReplyAdd from '../reply/ReplyAdd';
 
 const useStyles = makeStyles({
   commentBody: {
@@ -27,31 +29,50 @@ const useStyles = makeStyles({
     cursor: 'pointer',
     marginRight: '15px',
   },
+  allReplies: {
+    marginLeft: '70px',
+  },
 });
 
-const Comment = ({ username, body, profilePic }) => {
+const Comment = ({ username, body, profilePic, likes, replies }) => {
   const classes = useStyles();
+  const [allReplies, setAllReplies] = useState(false);
   return (
-    <Grid container spacing={2} wrap='nowrap' className={classes.commentBody}>
-      <Grid item>
-        <Avatar src={`http://${profilePic}`} alt={username} />
+    <>
+      <Grid container spacing={2} wrap='nowrap' className={classes.commentBody}>
+        <Grid item>
+          <Avatar src={`http://${profilePic}`} alt={username} />
+        </Grid>
+        <Grid item style={{ minWidth: '210px' }}>
+          <div className={classes.commentDetails}>
+            <Typography component='h2' className={classes.username}>
+              {username}
+            </Typography>
+            <Typography component='p' className={classes.body}>
+              {body}
+            </Typography>
+          </div>
+          <div className={classes.commentFooter}>
+            <p className={classes.footerButton}>{likes.length} Like </p>
+            <p
+              className={classes.footerButton}
+              onClick={() => setAllReplies(!allReplies)}
+              style={{ fontWeight: allReplies ? 'bold' : 'normal' }}
+            >
+              Reply
+            </p>
+            <p className={classes.footerButton}>1m</p>
+          </div>
+        </Grid>
       </Grid>
-      <Grid item style={{ minWidth: '210px' }}>
-        <div className={classes.commentDetails}>
-          <Typography component='h2' className={classes.username}>
-            {username}
-          </Typography>
-          <Typography component='p' className={classes.body}>
-            {body}
-          </Typography>
+
+      {allReplies && (
+        <div className={classes.allReplies}>
+          <AllReplies replies={replies} />
+          <ReplyAdd />
         </div>
-        <div className={classes.commentFooter}>
-          <p className={classes.footerButton}>Like</p>
-          <p className={classes.footerButton}>Reply</p>
-          <p className={classes.footerButton}>1m</p>
-        </div>
-      </Grid>
-    </Grid>
+      )}
+    </>
   );
 };
 
