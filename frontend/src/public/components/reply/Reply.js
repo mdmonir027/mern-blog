@@ -1,6 +1,7 @@
 import { Avatar, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
+import { creationTime } from '../../utils/timeUtils';
 
 const useStyles = makeStyles({
   commentBody: {
@@ -29,7 +30,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Reply = ({ username, body, profilePic, likes }) => {
+const Reply = ({ username, body, profilePic, likes, createdAt }) => {
   const classes = useStyles();
   return (
     <Grid container spacing={2} wrap='nowrap' className={classes.commentBody}>
@@ -47,7 +48,7 @@ const Reply = ({ username, body, profilePic, likes }) => {
         </div>
         <div className={classes.commentFooter}>
           <p className={classes.footerButton}>{likes.length} Like </p>
-          <p className={classes.footerButton}>1m</p>
+          <p className={classes.footerButton}>{creationTime(createdAt)}</p>
         </div>
       </Grid>
     </Grid>

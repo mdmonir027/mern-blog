@@ -10,12 +10,12 @@ import Card from '@material-ui/core/Card';
 import { makeStyles } from '@material-ui/core/styles';
 import CommentIcon from '@material-ui/icons/Comment';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import moment from 'moment';
 import React from 'react';
 import { connect } from 'react-redux';
 import { postLikeUnlike } from '../../../store/actions/public/LikeUnlikeAction';
 import AllComments from '../comment/AllComments';
 import CommentAdd from '../comment/CommentAdd';
-
 const useStyles = makeStyles({
   cardBody: {
     padding: '20px',
@@ -79,7 +79,9 @@ const SinglePagePost = (props) => {
           </Grid>
           <Grid item>
             <Typography component='h2'>{username}</Typography>
-            <Typography component='p'>{createdAt}</Typography>
+            <Typography component='p'>
+              {moment(createdAt).format('MMMM Do YYYY, h:mm:ss a')}
+            </Typography>
           </Grid>
         </Grid>
         <div className={classes.imageWrapper}>

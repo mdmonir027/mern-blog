@@ -39,6 +39,7 @@ const AllComments = ({ fetchComments, comments }) => {
                 likes={comment.likes}
                 replies={comment.replies}
                 commentId={comment._id}
+                createdAt={comment.createdAt}
               />
             </>
           ))

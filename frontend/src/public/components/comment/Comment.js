@@ -1,9 +1,9 @@
 import { Avatar, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { useState } from 'react';
+import { creationTime } from '../../utils/timeUtils';
 import AllReplies from '../reply/AllReplies';
 import ReplyAdd from '../reply/ReplyAdd';
-
 const useStyles = makeStyles({
   commentBody: {
     marginTop: '12px',
@@ -34,7 +34,15 @@ const useStyles = makeStyles({
   },
 });
 
-const Comment = ({ username, body, profilePic, likes, replies, commentId }) => {
+const Comment = ({
+  username,
+  body,
+  profilePic,
+  likes,
+  replies,
+  commentId,
+  createdAt,
+}) => {
   const classes = useStyles();
   const [allReplies, setAllReplies] = useState(false);
   return (
@@ -61,7 +69,7 @@ const Comment = ({ username, body, profilePic, likes, replies, commentId }) => {
             >
               Reply
             </p>
-            <p className={classes.footerButton}>1m</p>
+            <p className={classes.footerButton}>{creationTime(createdAt)}</p>
           </div>
         </Grid>
       </Grid>

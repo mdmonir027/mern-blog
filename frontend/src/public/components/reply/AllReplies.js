@@ -11,6 +11,7 @@ const AllReplies = ({ replies }) => {
             body={reply.body}
             profilePic={reply.user.profilePic}
             likes={reply?.likes || []}
+            createdAt={reply.createdAt}
           />
         ))}
     </div>
