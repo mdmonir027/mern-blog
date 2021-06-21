@@ -1,4 +1,4 @@
-import { Divider, TextField } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { useMemo, useState } from 'react';
 import { connect } from 'react-redux';
@@ -36,12 +36,7 @@ const CommentAdd = ({ addComment, isAuthenticated, comment }) => {
   }, [comment.error]);
 
   if (!isAuthenticated) {
-    return (
-      <>
-        <h2 className={classes.loginTitle}>Please log in to comment</h2>
-        <Divider />
-      </>
-    );
+    return null;
   }
 
   return (

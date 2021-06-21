@@ -9,6 +9,7 @@ import Comment from './Comment';
 const useStyles = makeStyles({
   allCommentsTitle: {
     marginBottom: '10px',
+    marginTop: '20px',
     fontWeight: '600',
   },
 });
@@ -18,6 +19,11 @@ const AllComments = ({ fetchComments, comments }) => {
   const { slug } = useParams();
 
   useEffect(() => fetchComments(slug), [fetchComments, slug]);
+
+  if (!comments.length > 0) {
+    return null;
+  }
+
   return (
     <div>
       <Typography
@@ -29,23 +35,19 @@ const AllComments = ({ fetchComments, comments }) => {
       </Typography>
 
       <div className={classes.allComments}>
-        {comments.length > 0 ? (
-          comments.map((comment) => (
-            <>
-              <Comment
-                username={comment?.user?.username}
-                profilePic={comment?.user?.profilePic}
-                body={comment?.body}
-                likes={comment.likes}
-                replies={comment.replies}
-                commentId={comment._id}
-                createdAt={comment.createdAt}
-              />
-            </>
-          ))
-        ) : (
-          <h3>No Comments Added!</h3>
-        )}
+        {comments.map((comment) => (
+          <>
+            <Comment
+              username={comment?.user?.username}
+              profilePic={comment?.user?.profilePic}
+              body={comment?.body}
+              likes={comment.likes}
+              replies={comment.replies}
+              commentId={comment._id}
+              createdAt={comment.createdAt}
+            />
+          </>
+        ))}
       </div>
     </div>
   );
