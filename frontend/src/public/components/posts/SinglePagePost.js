@@ -75,7 +75,7 @@ const SinglePagePost = (props) => {
       <Card className={classes.cardBody}>
         <Grid container spacing={3} className={classes.header}>
           <Grid item>
-            <Avatar src={profilePic} alt={username} />
+            <Avatar src={`http://${profilePic}`} alt={username} />
           </Grid>
           <Grid item>
             <Typography component='h2'>{username}</Typography>
