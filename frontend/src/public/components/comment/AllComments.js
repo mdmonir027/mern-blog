@@ -38,6 +38,7 @@ const AllComments = ({ fetchComments, comments }) => {
                 body={comment?.body}
                 likes={comment.likes}
                 replies={comment.replies}
+                commentId={comment._id}
               />
             </>
           ))

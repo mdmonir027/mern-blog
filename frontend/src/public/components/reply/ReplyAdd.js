@@ -2,7 +2,7 @@ import { Divider, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { useMemo, useState } from 'react';
 import { connect } from 'react-redux';
-import { addComment } from '../../../store/actions/author/commentAction';
+import { commentReplyAdd } from '../../../store/actions/author/commentAction';
 const useStyles = makeStyles({
   replyForm: {
     marginTop: '20px',
@@ -15,12 +15,17 @@ const useStyles = makeStyles({
   },
 });
 
-const ReplyAdd = ({ isAuthenticated, comment }) => {
+const ReplyAdd = ({ isAuthenticated, comment, commentReplyAdd, commentId }) => {
   const classes = useStyles();
   const [text, setText] = useState('');
 
   const submitHandler = (event) => {
     event.preventDefault();
+    commentReplyAdd(commentId, text, (result) => {
+      if (result) {
+        setText('');
+      }
+    });
   };
 
   const error = useMemo(() => {
@@ -57,4 +62,4 @@ const mapStateToProps = (state) => ({
   comment: state.public.comments,
 });
 
-export default connect(mapStateToProps, { addComment })(ReplyAdd);
+export default connect(mapStateToProps, { commentReplyAdd })(ReplyAdd);

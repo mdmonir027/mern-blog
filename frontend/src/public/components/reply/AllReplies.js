@@ -6,9 +6,13 @@ const AllReplies = ({ replies }) => {
     <div>
       {replies.length > 0 &&
         replies.map((reply) => (
-          <Reply username='r' body='Ok' profilePic='l' likes={[]} />
+          <Reply
+            username={reply.user.username}
+            body={reply.body}
+            profilePic={reply.user.profilePic}
+            likes={reply?.likes || []}
+          />
         ))}
-      <Reply username='r' body='Ok' profilePic='l' likes={[]} />
     </div>
   );
 };

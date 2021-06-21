@@ -34,9 +34,10 @@ export const commentReplyAdd = (commentId, body, callBack) => (dispatch) => {
     .post(`/author/reply/${commentId}`, { body })
     .then((response) => {
       const reply = response.data;
+
       dispatch({
         type: types.ADD_REPLY,
-        payload: { reply },
+        payload: { reply, commentId },
       });
       dispatchLoading(dispatch, false);
       callBack(true);

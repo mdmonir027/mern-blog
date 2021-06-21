@@ -19,6 +19,7 @@ controller.getAll = async (req, res) => {
     internalServerError(res, error);
   }
 };
+
 controller.store = async (req, res) => {
   try {
     const { body } = req.body;
@@ -38,11 +39,17 @@ controller.store = async (req, res) => {
       $push: { replies: replyCreated._id },
     });
 
-    res.status(201).json(replyCreated);
+    const replyToResponse = await Reply.findById(replyCreated._id).populate({
+      path: 'user',
+      select: 'username profilePic',
+    });
+
+    res.status(201).json(replyToResponse);
   } catch (error) {
     internalServerError(res, error);
   }
 };
+
 controller.update = async (req, res) => {
   try {
     const { body } = req.body;
@@ -63,6 +70,7 @@ controller.update = async (req, res) => {
     internalServerError(res, error);
   }
 };
+
 controller.remove = async (req, res) => {
   try {
     const userId = req.user._id;

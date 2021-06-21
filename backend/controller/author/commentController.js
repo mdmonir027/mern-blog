@@ -46,10 +46,12 @@ controller.store = async (req, res) => {
       }
     );
 
-    const comment = await Comment.findById(createdComment._id).populate({
-      path: 'user',
-      select: 'username profilePic',
-    });
+    const comment = await Comment.findById(createdComment._id)
+      .populate({
+        path: 'user',
+        select: 'username profilePic',
+      })
+      .select('body createdAt');
 
     res.status(201).json(comment);
   } catch (error) {

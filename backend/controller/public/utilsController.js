@@ -25,6 +25,15 @@ controller.getAllComments = async (req, res) => {
         path: 'user',
         select: 'username profilePic',
       })
+      .populate({
+        path: 'replies',
+        select: 'body createdAt likes',
+        populate: {
+          path: 'user',
+          model: 'User',
+          select: 'username profilePic',
+        },
+      })
       .sort({ field: 'asc', _id: -1 });
 
     return res.status(200).json(comments);

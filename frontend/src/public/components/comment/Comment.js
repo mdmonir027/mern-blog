@@ -34,7 +34,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Comment = ({ username, body, profilePic, likes, replies }) => {
+const Comment = ({ username, body, profilePic, likes, replies, commentId }) => {
   const classes = useStyles();
   const [allReplies, setAllReplies] = useState(false);
   return (
@@ -69,7 +69,7 @@ const Comment = ({ username, body, profilePic, likes, replies }) => {
       {allReplies && (
         <div className={classes.allReplies}>
           <AllReplies replies={replies} />
-          <ReplyAdd />
+          <ReplyAdd commentId={commentId} />
         </div>
       )}
     </>

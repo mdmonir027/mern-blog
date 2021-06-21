@@ -40,6 +40,22 @@ const commentReducer = (state = init, action) => {
         },
       };
     }
+    case types.ADD_REPLY: {
+      const { reply, commentId } = action.payload;
+
+      const comments = state.comments.map((comment) => {
+        if (comment._id === commentId) {
+          comment.replies.push(reply);
+          return comment;
+        }
+        return comment;
+      });
+
+      return {
+        ...state,
+        comments,
+      };
+    }
 
     default:
       return state;
