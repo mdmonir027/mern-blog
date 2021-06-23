@@ -11,7 +11,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import CommentIcon from '@material-ui/icons/Comment';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import moment from 'moment';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { postLikeUnlike } from '../../../store/actions/public/LikeUnlikeAction';
 import AllComments from '../comment/AllComments';
@@ -64,11 +64,18 @@ const SinglePagePost = (props) => {
     isAuthenticated,
     postLikeUnlike,
     slug,
-    liked,
+    likes,
     image,
+    userId,
   } = props;
 
   const classes = useStyles();
+
+  const [isLiked, setIsLiked] = useState(false);
+  useEffect(() => setIsLiked(likes.includes(userId)), [likes, userId]);
+  const postLikeUnlikeHandler = () => {
+    postLikeUnlike(slug, (result) => setIsLiked(result));
+  };
 
   return (
     <Container>
@@ -103,9 +110,9 @@ const SinglePagePost = (props) => {
             {isAuthenticated ? (
               <IconButton
                 aria-label='add to favorites'
-                onClick={() => postLikeUnlike(slug)}
+                onClick={postLikeUnlikeHandler}
               >
-                <FavoriteIcon style={{ color: liked ? 'red' : '' }} />
+                <FavoriteIcon style={{ color: isLiked ? 'red' : '' }} />
               </IconButton>
             ) : (
               <IconButton disabled>
@@ -134,6 +141,7 @@ const SinglePagePost = (props) => {
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
+  userId: state.auth.user._id,
 });
 
 export default connect(mapStateToProps, { postLikeUnlike })(SinglePagePost);

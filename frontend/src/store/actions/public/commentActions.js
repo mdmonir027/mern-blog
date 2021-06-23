@@ -7,7 +7,6 @@ export const fetchComments = (postSlug) => (dispatch) => {
   axios
     .get(`/u/comment/${postSlug}`)
     .then((response) => {
-      console.log(response);
       dispatch({
         type: types.FETCH_COMMENTS,
         payload: { comments: response.data },

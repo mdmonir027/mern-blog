@@ -7,8 +7,6 @@ import SinglePagePost from '../components/posts/SinglePagePost';
 const SinglePostPage = ({ post, userId, fetchSinglePost }) => {
   const { slug } = useParams();
 
-  const isLiked = false;
-
   useEffect(() => fetchSinglePost(slug), [slug, fetchSinglePost]);
 
   return (
@@ -24,7 +22,7 @@ const SinglePostPage = ({ post, userId, fetchSinglePost }) => {
           likeCount={post?.likes?.length}
           commentCount={1}
           slug={post.slug}
-          liked={isLiked}
+          likes={post.likes}
           image='https://images.pexels.com/photos/7903158/pexels-photo-7903158.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
         />
       ) : (
