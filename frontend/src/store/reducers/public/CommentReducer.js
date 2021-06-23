@@ -57,6 +57,27 @@ const commentReducer = (state = init, action) => {
       };
     }
 
+    case types.COMMENT_LIKE_UNLIKE: {
+      const { liked, commentId, userId } = action.payload;
+
+      const comments = state.comments.map((comment) => {
+        if (comment._id === commentId) {
+          if (!liked) {
+            const index = comment.likes.indexOf(userId);
+            comment.likes.splice(index, 1);
+          } else {
+            comment.likes.push(userId);
+          }
+          return comment;
+        }
+        return comment;
+      });
+      return {
+        ...state,
+        comments,
+      };
+    }
+
     default:
       return state;
   }
