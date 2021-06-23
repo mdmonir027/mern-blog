@@ -1,8 +1,9 @@
 import { Avatar, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import React from 'react';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { replyLikeUnlike } from '../../../store/actions/author/likeUnlikeAction';
 import { creationTime } from '../../utils/timeUtils';
-
 const useStyles = makeStyles({
   commentBody: {
     marginTop: '12px',
@@ -30,8 +31,24 @@ const useStyles = makeStyles({
   },
 });
 
-const Reply = ({ username, body, profilePic, likes, createdAt }) => {
+const Reply = ({
+  username,
+  body,
+  profilePic,
+  likes,
+  createdAt,
+  commentId,
+  userId,
+  isAuthenticated,
+  replyLikeUnlike,
+  replyId,
+}) => {
   const classes = useStyles();
+  const [isLiked, setIsLiked] = useState(false);
+  React.useEffect(() => setIsLiked(likes.includes(userId)), [likes, userId]);
+  const replyLikeUnlikeHandle = () => {
+    replyLikeUnlike(commentId, replyId, userId, (r) => setIsLiked(r));
+  };
   return (
     <Grid container spacing={2} wrap='nowrap' className={classes.commentBody}>
       <Grid item>
@@ -47,12 +64,28 @@ const Reply = ({ username, body, profilePic, likes, createdAt }) => {
           </Typography>
         </div>
         <div className={classes.commentFooter}>
-          <p className={classes.footerButton}>{likes.length} Like </p>
+          <p className={classes.footerButton}>
+            {likes.length}
+            {isAuthenticated ? (
+              <span
+                style={{ fontWeight: isLiked ? 'bold' : 'normal' }}
+                onClick={replyLikeUnlikeHandle}
+              >
+                {isLiked ? ' Liked' : ' Like'}
+              </span>
+            ) : (
+              <span> Like</span>
+            )}
+          </p>
           <p className={classes.footerButton}>{creationTime(createdAt)}</p>
         </div>
       </Grid>
     </Grid>
   );
 };
+const mapStateToProps = (state) => ({
+  userId: state.auth.user._id,
+  isAuthenticated: state.auth.isAuthenticated,
+});
 
-export default Reply;
+export default connect(mapStateToProps, { replyLikeUnlike })(Reply);

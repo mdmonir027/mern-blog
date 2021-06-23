@@ -78,6 +78,33 @@ const commentReducer = (state = init, action) => {
       };
     }
 
+    case types.REPLY_LIKE_UNLIKE: {
+      const { liked, commentId, userId, replyId } = action.payload;
+
+      const comments = state.comments.map((comment) => {
+        if (comment._id === commentId) {
+          const replies = comment.replies.map((reply) => {
+            if (reply._id === replyId) {
+              if (!liked) {
+                const index = reply.likes.indexOf(userId);
+                reply.likes.splice(index, 1);
+              } else {
+                reply.likes.push(userId);
+              }
+              return reply;
+            }
+            return reply;
+          });
+          return { ...comment, replies };
+        }
+        return comment;
+      });
+      return {
+        ...state,
+        comments,
+      };
+    }
+
     default:
       return state;
   }

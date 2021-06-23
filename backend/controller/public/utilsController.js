@@ -27,7 +27,7 @@ controller.getAllComments = async (req, res) => {
       })
       .populate({
         path: 'replies',
-        select: 'body createdAt likes',
+        select: 'body createdAt likes comment',
         populate: {
           path: 'user',
           model: 'User',

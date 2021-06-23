@@ -63,14 +63,14 @@ controller.replyLikeUnlike = async (req, res) => {
 
     let liked = null;
 
-    const comment = await Reply.findById(replyId);
-    if (comment.likes.includes(userId)) {
-      await Comment.findByIdAndUpdate(commentId, {
+    const reply = await Reply.findById(replyId);
+    if (reply.likes.includes(userId)) {
+      await Reply.findByIdAndUpdate(replyId, {
         $pull: { likes: userId },
       });
       liked = false;
     } else {
-      await Comment.findByIdAndUpdate(commentId, {
+      await Reply.findByIdAndUpdate(replyId, {
         $push: { likes: userId },
       });
       liked = true;

@@ -23,3 +23,24 @@ export const commentLikeUnlike =
         callBack(false);
       });
   };
+
+export const replyLikeUnlike =
+  (commentId, replyId, userId, callBack) => (dispatch) => {
+    dispatchLoading(dispatch, true);
+    axios
+      .get(`author/like/reply/${replyId}`)
+      .then((response) => {
+        const { liked } = response.data;
+        dispatch({
+          type: types.REPLY_LIKE_UNLIKE,
+          payload: { liked, commentId, userId, replyId },
+        });
+        callBack(liked);
+        dispatchLoading(dispatch, false);
+      })
+      .catch((e) => {
+        console.log(e);
+        dispatchLoading(dispatch, false);
+        callBack(false);
+      });
+  };
