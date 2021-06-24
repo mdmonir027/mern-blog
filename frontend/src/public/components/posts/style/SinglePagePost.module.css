@@ -1,0 +1,17 @@
+.editPanel {
+  display: none;
+}
+
+.postRoot:hover .editPanel {
+  display: flex;
+}
+.panelIcon {
+  color: #0e33fdc4;
+  margin-right: 10px;
+}
+.panelIcon a {
+  color: inherit;
+}
+.panelIcon:hover {
+  cursor: pointer;
+}

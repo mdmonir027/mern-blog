@@ -9,13 +9,19 @@ import {
 import Card from '@material-ui/core/Card';
 import { makeStyles } from '@material-ui/core/styles';
 import CommentIcon from '@material-ui/icons/Comment';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
 import { postLikeUnlike } from '../../../store/actions/public/LikeUnlikeAction';
+import { deletePost } from '../../../store/actions/public/postActions';
 import AllComments from '../comment/AllComments';
 import CommentAdd from '../comment/CommentAdd';
+import style from './style/SinglePagePost.module.css';
+
 const useStyles = makeStyles({
   cardBody: {
     padding: '20px',
@@ -67,30 +73,59 @@ const SinglePagePost = (props) => {
     likes,
     image,
     userId,
+    deletePost,
   } = props;
 
   const classes = useStyles();
-
+  const history = useHistory();
   const [isLiked, setIsLiked] = useState(false);
   useEffect(() => setIsLiked(likes.includes(userId)), [likes, userId]);
   const postLikeUnlikeHandler = () => {
     postLikeUnlike(slug, (result) => setIsLiked(result));
   };
 
+  const deletePostHandle = () => {
+    console.log('delete post');
+    deletePost(slug, (result) => {
+      if (result) {
+        history.push('/');
+      }
+    });
+  };
+
   return (
     <Container>
-      <Card className={classes.cardBody}>
-        <Grid container spacing={3} className={classes.header}>
+      <Card className={classes.cardBody + ' ' + style.postRoot}>
+        <Grid container justify='space-between'>
           <Grid item>
-            <Avatar src={`http://${profilePic}`} alt={username} />
+            <Grid container spacing={3} className={classes.header}>
+              <Grid item>
+                <Avatar src={`http://${profilePic}`} alt={username} />
+              </Grid>
+              <Grid item>
+                <Typography component='h2'>{username}</Typography>
+                <Typography component='p'>
+                  {moment(createdAt).format('MMMM Do YYYY, h:mm:ss a')}
+                </Typography>
+              </Grid>
+            </Grid>
           </Grid>
-          <Grid item>
-            <Typography component='h2'>{username}</Typography>
-            <Typography component='p'>
-              {moment(createdAt).format('MMMM Do YYYY, h:mm:ss a')}
-            </Typography>
-          </Grid>
+          {isAuthenticated && (
+            <Grid item>
+              <div className={style.editPanel}>
+                <div className={style.panelIcon}>
+                  <Link to={`/admin/post/edit/${slug}`}>
+                    <EditIcon />
+                  </Link>
+                </div>
+                <div onClick={deletePostHandle} className={style.panelIcon}>
+                  <DeleteIcon />
+                </div>
+              </div>
+            </Grid>
+          )}
         </Grid>
+
         <div className={classes.imageWrapper}>
           <img src={image} alt='' className={classes.postImage} />
         </div>
@@ -144,4 +179,6 @@ const mapStateToProps = (state) => ({
   userId: state.auth.user._id,
 });
 
-export default connect(mapStateToProps, { postLikeUnlike })(SinglePagePost);
+export default connect(mapStateToProps, { postLikeUnlike, deletePost })(
+  SinglePagePost
+);

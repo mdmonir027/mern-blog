@@ -71,6 +71,12 @@ const postReducer = (state = init, action) => {
         single: post,
       };
     }
+    case types.DELETE_POST_PUBLIC: {
+      return {
+        ...state,
+        single: undefined,
+      };
+    }
 
     default:
       return state;

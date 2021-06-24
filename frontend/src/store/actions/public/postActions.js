@@ -62,3 +62,20 @@ export const fetchSinglePost = (slug) => (dispatch) => {
       dispatchLoading(dispatch, false);
     });
 };
+
+export const deletePost = (slug , callBack) => (dispatch) => {
+  dispatchLoading(dispatch, true);
+  axios
+    .delete(`/author/post/${slug}`)
+    .then(() => {
+      dispatch({
+        type: types.DELETE_POST_PUBLIC,
+      });
+      callBack(true)
+    })
+    .catch((e) => {
+      console.log(e);
+      dispatchLoading(dispatch, false);
+      callBack(true)
+    });
+};

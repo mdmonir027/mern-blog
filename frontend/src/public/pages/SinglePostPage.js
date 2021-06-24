@@ -26,7 +26,7 @@ const SinglePostPage = ({ post, userId, fetchSinglePost }) => {
           image='https://images.pexels.com/photos/7903158/pexels-photo-7903158.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
         />
       ) : (
-        <h3>Hello</h3>
+        <h3>Loading....</h3>
       )}
     </div>
   );
