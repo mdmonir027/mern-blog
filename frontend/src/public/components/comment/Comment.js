@@ -45,7 +45,6 @@ const Comment = ({
   body,
   profilePic,
   likes,
-  replies,
   commentId,
   createdAt,
   userId,
@@ -53,7 +52,7 @@ const Comment = ({
   commentLikeUnlike,
 }) => {
   const classes = useStyles();
-  const [allReplies, setAllReplies] = useState(false);
+  const [allRepliesShow, setAllRepliesShow] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [commentEdit, setCommentEdit] = useState(false);
 
@@ -95,7 +94,11 @@ const Comment = ({
             </Grid>
 
             {commentEdit ? (
-              <CommentEdit body={body} commentId={commentId} setCommentEdit={setCommentEdit} />
+              <CommentEdit
+                body={body}
+                commentId={commentId}
+                setCommentEdit={setCommentEdit}
+              />
             ) : (
               <Typography component='p' className={classes.body}>
                 {body}
@@ -118,8 +121,8 @@ const Comment = ({
             </p>
             <p
               className={classes.footerButton}
-              onClick={() => setAllReplies(!allReplies)}
-              style={{ fontWeight: allReplies ? 'bold' : 'normal' }}
+              onClick={() => setAllRepliesShow(!allRepliesShow)}
+              style={{ fontWeight: allRepliesShow ? 'bold' : 'normal' }}
             >
               Reply
             </p>
@@ -128,9 +131,9 @@ const Comment = ({
         </Grid>
       </Grid>
 
-      {allReplies && (
+      {allRepliesShow && (
         <div className={classes.allReplies}>
-          <AllReplies replies={replies} />
+          <AllReplies commentId={commentId} />
           <ReplyAdd commentId={commentId} />
         </div>
       )}

@@ -20,7 +20,7 @@ const AllComments = ({ fetchComments, comments }) => {
 
   useEffect(() => fetchComments(slug), [fetchComments, slug]);
 
-  if (!comments.length > 0) {
+  if (comments.length === 0) {
     return null;
   }
 
@@ -41,7 +41,6 @@ const AllComments = ({ fetchComments, comments }) => {
             profilePic={comment?.user?.profilePic}
             body={comment?.body}
             likes={comment.likes}
-            replies={comment.replies}
             commentId={comment._id}
             createdAt={comment.createdAt}
             key={comment._id}
