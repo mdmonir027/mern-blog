@@ -107,19 +107,18 @@ controller.remove = async (req, res) => {
   try {
     const { commentId, postSlug } = req.params;
 
-    const commentFind = await Comment.findById(commentId);
     await Comment.findByIdAndRemove(commentId);
 
     await Profile.findOneAndUpdate(
       { user: req.user._id },
       {
-        $pull: { comments: commentFind._id },
+        $pull: { comments: commentId },
       }
     );
     await Post.findOneAndUpdate(
       { slug: postSlug },
       {
-        $pull: { comments: commentFind._id },
+        $pull: { comments: commentId },
       }
     );
 

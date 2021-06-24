@@ -71,6 +71,15 @@ const commentReducer = (state = init, action) => {
         comments,
       };
     }
+    case types.DELETE_COMMENT_PUBLIC: {
+      const { commentId } = action.payload;
+      const comments = state.comments.filter((com) => com._id !== commentId);
+
+      return {
+        ...state,
+        comments,
+      };
+    }
 
     case types.COMMENT_LIKE_UNLIKE: {
       const { liked, commentId, userId } = action.payload;

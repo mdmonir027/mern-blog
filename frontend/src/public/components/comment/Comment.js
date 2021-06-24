@@ -4,6 +4,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { deleteComment } from '../../../store/actions/author/commentAction';
 import { commentLikeUnlike } from '../../../store/actions/author/likeUnlikeAction';
 import { creationTime } from '../../utils/timeUtils';
 import AllReplies from '../reply/AllReplies';
@@ -51,6 +52,8 @@ const Comment = ({
   userId,
   isAuthenticated,
   commentLikeUnlike,
+  deleteComment,
+  postSlug,
 }) => {
   const classes = useStyles();
   const [allReplies, setAllReplies] = useState(false);
@@ -61,6 +64,10 @@ const Comment = ({
 
   const commentLikeUnlikeHandle = () => {
     commentLikeUnlike(commentId, userId, (result) => setIsLiked(result));
+  };
+
+  const handleCommentDelete = () => {
+    deleteComment({ postSlug, commentId });
   };
 
   return (
@@ -86,7 +93,10 @@ const Comment = ({
                     >
                       <EditIcon />
                     </div>
-                    <div className={style.panelIcon}>
+                    <div
+                      className={style.panelIcon}
+                      onClick={handleCommentDelete}
+                    >
                       <DeleteIcon />
                     </div>
                   </div>
@@ -95,7 +105,11 @@ const Comment = ({
             </Grid>
 
             {commentEdit ? (
-              <CommentEdit body={body} commentId={commentId} setCommentEdit={setCommentEdit} />
+              <CommentEdit
+                body={body}
+                commentId={commentId}
+                setCommentEdit={setCommentEdit}
+              />
             ) : (
               <Typography component='p' className={classes.body}>
                 {body}
@@ -141,6 +155,9 @@ const Comment = ({
 const mapStateToProps = (state) => ({
   userId: state.auth.user._id,
   isAuthenticated: state.auth.isAuthenticated,
+  postSlug: state.public.post.single.slug,
 });
 
-export default connect(mapStateToProps, { commentLikeUnlike })(Comment);
+export default connect(mapStateToProps, { commentLikeUnlike, deleteComment })(
+  Comment
+);
