@@ -56,6 +56,21 @@ const commentReducer = (state = init, action) => {
         comments,
       };
     }
+    case types.EDIT_COMMENT_PUBLIC: {
+      const { comment, commentId } = action.payload;
+
+      const comments = state.comments.map((com) => {
+        if (comment._id === commentId) {
+          return comment;
+        }
+        return com;
+      });
+
+      return {
+        ...state,
+        comments,
+      };
+    }
 
     case types.COMMENT_LIKE_UNLIKE: {
       const { liked, commentId, userId } = action.payload;

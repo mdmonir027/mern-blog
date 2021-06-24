@@ -28,6 +28,34 @@ export const addComment = (postSlug, body, callBack) => (dispatch) => {
     });
 };
 
+export const editComment =
+  ({ postSlug, commentId, body }, callBack) =>
+  (dispatch) => {
+    dispatchLoading(dispatch, true);
+    axios
+      .put(`/author/comment/${postSlug}/${commentId}`, { body })
+      .then((response) => {
+        const comment = response.data;
+        dispatch({
+          type: types.EDIT_COMMENT_PUBLIC,
+          payload: { comment, commentId },
+        });
+        dispatchLoading(dispatch, false);
+        callBack(true);
+      })
+      .catch((e) => {
+        dispatch({
+          type: types.SET_COMMENT_ERRORS,
+          payload: {
+            page: 'editComment',
+            errors: e.response.data,
+          },
+        });
+        dispatchLoading(dispatch, false);
+        callBack(false);
+      });
+  };
+
 export const commentReplyAdd = (commentId, body, callBack) => (dispatch) => {
   dispatchLoading(dispatch, true);
   axios

@@ -82,7 +82,22 @@ controller.update = async (req, res) => {
       { new: true }
     );
 
-    return res.status(200).json(updatedComment);
+    const comment = await Comment.findById(commentId)
+      .populate({
+        path: 'user',
+        select: 'username profilePic',
+      })
+      .populate({
+        path: 'replies',
+        select: 'body createdAt likes comment',
+        populate: {
+          path: 'user',
+          model: 'User',
+          select: 'username profilePic',
+        },
+      });
+
+    return res.status(200).json(comment);
   } catch (error) {
     internalServerError(res, error);
   }

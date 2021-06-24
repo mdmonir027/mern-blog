@@ -1,11 +1,15 @@
 import { Avatar, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { commentLikeUnlike } from '../../../store/actions/author/likeUnlikeAction';
 import { creationTime } from '../../utils/timeUtils';
 import AllReplies from '../reply/AllReplies';
 import ReplyAdd from '../reply/ReplyAdd';
+import CommentEdit from './CommentEdit';
+import style from './style/comment.module.css';
 const useStyles = makeStyles({
   commentBody: {
     marginTop: '12px',
@@ -51,6 +55,7 @@ const Comment = ({
   const classes = useStyles();
   const [allReplies, setAllReplies] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
+  const [commentEdit, setCommentEdit] = useState(false);
 
   React.useEffect(() => setIsLiked(likes.includes(userId)), [likes, userId]);
 
@@ -65,13 +70,37 @@ const Comment = ({
           <Avatar src={`http://${profilePic}`} alt={username} />
         </Grid>
         <Grid item style={{ minWidth: '210px' }}>
-          <div className={classes.commentDetails}>
-            <Typography component='h2' className={classes.username}>
-              {username}
-            </Typography>
-            <Typography component='p' className={classes.body}>
-              {body}
-            </Typography>
+          <div className={classes.commentDetails + ' ' + style.commentSec}>
+            <Grid container justify='space-between'>
+              <Grid item>
+                <Typography component='h2' className={classes.username}>
+                  {username}
+                </Typography>
+              </Grid>
+              {isAuthenticated && (
+                <Grid item>
+                  <div className={style.editPanel}>
+                    <div
+                      className={style.panelIcon}
+                      onClick={() => setCommentEdit(!commentEdit)}
+                    >
+                      <EditIcon />
+                    </div>
+                    <div className={style.panelIcon}>
+                      <DeleteIcon />
+                    </div>
+                  </div>
+                </Grid>
+              )}
+            </Grid>
+
+            {commentEdit ? (
+              <CommentEdit body={body} commentId={commentId} setCommentEdit={setCommentEdit} />
+            ) : (
+              <Typography component='p' className={classes.body}>
+                {body}
+              </Typography>
+            )}
           </div>
           <div className={classes.commentFooter}>
             <p className={classes.footerButton}>
