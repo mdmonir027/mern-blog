@@ -36,17 +36,16 @@ const AllComments = ({ fetchComments, comments }) => {
 
       <div className={classes.allComments}>
         {comments.map((comment) => (
-          <>
-            <Comment
-              username={comment?.user?.username}
-              profilePic={comment?.user?.profilePic}
-              body={comment?.body}
-              likes={comment.likes}
-              replies={comment.replies}
-              commentId={comment._id}
-              createdAt={comment.createdAt}
-            />
-          </>
+          <Comment
+            username={comment?.user?.username}
+            profilePic={comment?.user?.profilePic}
+            body={comment?.body}
+            likes={comment.likes}
+            replies={comment.replies}
+            commentId={comment._id}
+            createdAt={comment.createdAt}
+            key={comment._id}
+          />
         ))}
       </div>
     </div>

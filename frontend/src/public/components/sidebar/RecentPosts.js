@@ -45,7 +45,7 @@ const Post = ({ title, slug }) => {
   return (
     <div>
       <Link to={`/post/${slug}`} className={classes.link}>
-        <Typography variant='p'>{title}</Typography>
+        <Typography paragraph>{title}</Typography>
       </Link>
     </div>
   );
