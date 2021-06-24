@@ -52,10 +52,6 @@ controller.getSinglePost = async (req, res) => {
       .populate({
         path: 'category',
         select: 'name slug',
-      })
-      .populate({
-        path: 'likes',
-        select: 'username',
       });
 
     return res.status(200).json(post);
