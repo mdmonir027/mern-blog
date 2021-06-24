@@ -30,6 +30,15 @@ const commentReducer = (state = init, action) => {
         },
       };
     }
+
+    case types.DELETE_COMMENT_PUBLIC: {
+      const { commentId } = action.payload;
+      const comments = state.comments.filter((com) => com._id !== commentId);
+      return {
+        ...state,
+        comments,
+      };
+    }
     case types.SET_COMMENT_ERRORS: {
       const { errors, page } = action.payload;
       return {

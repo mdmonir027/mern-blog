@@ -4,6 +4,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { deleteComment } from '../../../store/actions/author/commentAction';
 import { commentLikeUnlike } from '../../../store/actions/author/likeUnlikeAction';
 import { creationTime } from '../../utils/timeUtils';
 import AllReplies from '../reply/AllReplies';
@@ -50,16 +52,23 @@ const Comment = ({
   userId,
   isAuthenticated,
   commentLikeUnlike,
+  deleteComment,
 }) => {
   const classes = useStyles();
   const [allRepliesShow, setAllRepliesShow] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [commentEdit, setCommentEdit] = useState(false);
 
+  const { slug } = useParams();
+
   React.useEffect(() => setIsLiked(likes.includes(userId)), [likes, userId]);
 
   const commentLikeUnlikeHandle = () => {
     commentLikeUnlike(commentId, userId, (result) => setIsLiked(result));
+  };
+
+  const deleteCommentHandler = () => {
+    deleteComment({ postSlug: slug, commentId });
   };
 
   return (
@@ -85,7 +94,10 @@ const Comment = ({
                     >
                       <EditIcon />
                     </div>
-                    <div className={style.panelIcon}>
+                    <div
+                      className={style.panelIcon}
+                      onClick={deleteCommentHandler}
+                    >
                       <DeleteIcon />
                     </div>
                   </div>
@@ -146,4 +158,6 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { commentLikeUnlike })(Comment);
+export default connect(mapStateToProps, { commentLikeUnlike, deleteComment })(
+  Comment
+);

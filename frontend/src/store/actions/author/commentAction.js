@@ -56,6 +56,31 @@ export const editComment =
       });
   };
 
+export const deleteComment =
+  ({ postSlug, commentId }) =>
+  (dispatch) => {
+    dispatchLoading(dispatch, true);
+    axios
+      .delete(`/author/comment/${postSlug}/${commentId}`)
+      .then(() => {
+        dispatch({
+          type: types.DELETE_COMMENT_PUBLIC,
+          payload: { commentId },
+        });
+        dispatchLoading(dispatch, false);
+      })
+      .catch((e) => {
+        dispatch({
+          type: types.SET_COMMENT_ERRORS,
+          payload: {
+            page: 'deleteComment',
+            errors: e.response.data,
+          },
+        });
+        dispatchLoading(dispatch, false);
+      });
+  };
+
 export const commentReplyAdd = (commentId, body, callBack) => (dispatch) => {
   dispatchLoading(dispatch, true);
   axios
