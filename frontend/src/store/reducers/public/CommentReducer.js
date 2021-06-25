@@ -65,6 +65,23 @@ const commentReducer = (state = init, action) => {
         comments,
       };
     }
+    case types.EDIT_REPLY_PUBLIC: {
+      const { reply, commentId, replyId } = action.payload;
+
+      const comments = state.comments.map((comment) => {
+        if (comment._id !== commentId) return comment;
+        const replies = comment.replies.map((r) =>
+          r._id === replyId ? reply : r
+        );
+
+        return { ...comment, replies };
+      });
+
+      return {
+        ...state,
+        comments,
+      };
+    }
     case types.EDIT_COMMENT_PUBLIC: {
       const { comment, commentId } = action.payload;
 

@@ -64,8 +64,12 @@ controller.update = async (req, res) => {
       },
       { new: true }
     );
+    const replyToResponse = await Reply.findById(replyUpdated._id).populate({
+      path: 'user',
+      select: 'username profilePic',
+    });
 
-    res.status(200).json(replyUpdated);
+    res.status(200).json(replyToResponse);
   } catch (error) {
     internalServerError(res, error);
   }

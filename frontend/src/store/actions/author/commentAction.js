@@ -107,3 +107,32 @@ export const commentReplyAdd = (commentId, body, callBack) => (dispatch) => {
       callBack(false);
     });
 };
+
+export const commentReplyEdit =
+  ({ commentId, replyId, body }, callBack) =>
+  (dispatch) => {
+    dispatchLoading(dispatch, true);
+    axios
+      .put(`/author/reply/${commentId}/${replyId}`, { body })
+      .then((response) => {
+        const reply = response.data;
+
+        dispatch({
+          type: types.EDIT_REPLY_PUBLIC,
+          payload: { reply, commentId, replyId },
+        });
+        dispatchLoading(dispatch, false);
+        callBack(true);
+      })
+      .catch((e) => {
+        dispatch({
+          type: types.SET_COMMENT_ERRORS,
+          payload: {
+            page: 'editReply',
+            errors: e.response.data,
+          },
+        });
+        dispatchLoading(dispatch, false);
+        callBack(false);
+      });
+  };

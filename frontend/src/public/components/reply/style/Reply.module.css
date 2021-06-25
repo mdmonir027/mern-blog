@@ -1,0 +1,17 @@
+.editPanel {
+  display: none;
+}
+
+.replySec:hover .editPanel {
+  display: flex;
+}
+.panelIcon {
+  color: #0e33fdc4;
+  margin-right: 10px;
+}
+.panelIcon svg {
+  font-size: 20px;
+}
+.panelIcon:hover {
+  cursor: pointer;
+}
