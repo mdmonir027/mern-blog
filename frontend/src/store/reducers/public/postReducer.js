@@ -34,7 +34,7 @@ const postReducer = (state = init, action) => {
     case types.POST_LIKE_UNLIKE: {
       const { liked, userId, postSlug } = action.payload;
 
-      const post = state.single;
+      const post = { ...state.single };
 
       if (post.slug === postSlug) {
         if (liked) {

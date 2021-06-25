@@ -4,6 +4,7 @@ import * as types from '../types';
 
 export const postLikeUnlike = (postSlug, callBack) => (dispatch) => {
   dispatchLoading(dispatch, true);
+
   axios
     .get(`/author/like/${postSlug}`)
     .then((res) => {

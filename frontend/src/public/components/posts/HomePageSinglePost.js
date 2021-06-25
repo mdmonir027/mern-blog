@@ -10,7 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import CommentIcon from '@material-ui/icons/Comment';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { postLikeUnlike } from '../../../store/actions/public/LikeUnlikeAction';
@@ -43,14 +43,20 @@ const HomePageSinglePost = ({
   createdAt,
   title,
   body,
-  likeCount,
+  likes,
   commentCount,
   isAuthenticated,
   postLikeUnlike,
   slug,
-  liked,
+  userId,
 }) => {
   const classes = useStyles();
+  const [isLiked, setIsLiked] = useState(false);
+  const handlePostLikeUnlike = () => {
+    postLikeUnlike(slug, (r) => setIsLiked(r));
+  };
+
+  React.useEffect(() => setIsLiked(likes.includes(userId)), [likes, userId]);
 
   return (
     <Card className={classes.root}>
@@ -86,9 +92,9 @@ const HomePageSinglePost = ({
           {isAuthenticated ? (
             <IconButton
               aria-label='add to favorites'
-              onClick={() => postLikeUnlike(slug)}
+              onClick={handlePostLikeUnlike}
             >
-              <FavoriteIcon style={{ color: liked ? 'red' : '' }} />
+              <FavoriteIcon style={{ color: isLiked ? 'red' : '' }} />
             </IconButton>
           ) : (
             <IconButton disabled>
@@ -96,7 +102,7 @@ const HomePageSinglePost = ({
             </IconButton>
           )}
 
-          {likeCount}
+          {likes.length}
         </div>
         <div className={classes.iconWrapper}>
           <IconButton aria-label='share'>
@@ -111,6 +117,7 @@ const HomePageSinglePost = ({
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
+  userId: state.auth.user._id,
 });
 
 export default connect(mapStateToProps, { postLikeUnlike })(HomePageSinglePost);

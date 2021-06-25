@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { fetchPosts } from '../../../store/actions/public/postActions';
 import HomePageSinglePost from './HomePageSinglePost';
 
-const HomePagePosts = ({ posts, fetchPosts, userId, totalPage }) => {
+const HomePagePosts = ({ posts, fetchPosts, totalPage }) => {
   const itemPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -12,12 +12,6 @@ const HomePagePosts = ({ posts, fetchPosts, userId, totalPage }) => {
     () => fetchPosts(itemPerPage, currentPage),
     [fetchPosts, currentPage, itemPerPage]
   );
-
-  const isLiked = (likesArray, userId) => {
-    if (!userId) return false;
-    if (likesArray.includes(userId)) return true;
-    return false;
-  };
 
   return (
     <div>
@@ -29,10 +23,9 @@ const HomePagePosts = ({ posts, fetchPosts, userId, totalPage }) => {
           key={post._id}
           createdAt={post.createdAt}
           body={post.body}
-          likeCount={post.likes.length}
-          commentCount={1}
+          likes={post.likes}
+          commentCount={post.comments.length}
           slug={post.slug}
-          liked={isLiked(post.likes, userId)}
         />
       ))}
       <Pagination
@@ -47,7 +40,6 @@ const HomePagePosts = ({ posts, fetchPosts, userId, totalPage }) => {
 
 const mapStateToProps = (state) => ({
   posts: state.public.post.posts,
-  userId: state.auth.user._id,
   totalPage: state.public.post.totalPage,
 });
 
