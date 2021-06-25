@@ -136,3 +136,28 @@ export const commentReplyEdit =
         callBack(false);
       });
   };
+
+export const commentReplyDelete =
+  ({ commentId, replyId }) =>
+  (dispatch) => {
+    dispatchLoading(dispatch, true);
+    axios
+      .delete(`/author/reply/${commentId}/${replyId}`)
+      .then(() => {
+        dispatch({
+          type: types.DELETE_REPLY_PUBLIC,
+          payload: { commentId, replyId },
+        });
+        dispatchLoading(dispatch, false);
+      })
+      .catch((e) => {
+        dispatch({
+          type: types.SET_COMMENT_ERRORS,
+          payload: {
+            page: 'deleteReply',
+            errors: e.response.data,
+          },
+        });
+        dispatchLoading(dispatch, false);
+      });
+  };

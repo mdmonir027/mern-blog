@@ -4,6 +4,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { commentReplyDelete } from '../../../store/actions/author/commentAction';
 import { replyLikeUnlike } from '../../../store/actions/author/likeUnlikeAction';
 import { creationTime } from '../../utils/timeUtils';
 import ReplyEdit from './ReplyEdit';
@@ -46,6 +47,7 @@ const Reply = ({
   isAuthenticated,
   replyLikeUnlike,
   replyId,
+  commentReplyDelete,
 }) => {
   const classes = useStyles();
   const [isLiked, setIsLiked] = useState(false);
@@ -56,7 +58,9 @@ const Reply = ({
     replyLikeUnlike(commentId, replyId, userId, (r) => setIsLiked(r));
   };
 
-  const deleteCommentHandler = () => {};
+  const deleteCommentReplyHandler = () => {
+    commentReplyDelete({ commentId, replyId });
+  };
 
   return (
     <Grid container spacing={2} wrap='nowrap' className={classes.commentBody}>
@@ -82,7 +86,7 @@ const Reply = ({
                   </div>
                   <div
                     className={style.panelIcon}
-                    onClick={deleteCommentHandler}
+                    onClick={deleteCommentReplyHandler}
                   >
                     <DeleteIcon />
                   </div>
@@ -129,4 +133,7 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { replyLikeUnlike })(Reply);
+export default connect(mapStateToProps, {
+  replyLikeUnlike,
+  commentReplyDelete,
+})(Reply);

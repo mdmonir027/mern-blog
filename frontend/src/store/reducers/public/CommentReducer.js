@@ -30,7 +30,21 @@ const commentReducer = (state = init, action) => {
         },
       };
     }
+    case types.EDIT_COMMENT_PUBLIC: {
+      const { comment, commentId } = action.payload;
 
+      const comments = state.comments.map((com) => {
+        if (comment._id === commentId) {
+          return comment;
+        }
+        return com;
+      });
+
+      return {
+        ...state,
+        comments,
+      };
+    }
     case types.DELETE_COMMENT_PUBLIC: {
       const { commentId } = action.payload;
       const comments = state.comments.filter((com) => com._id !== commentId);
@@ -82,14 +96,14 @@ const commentReducer = (state = init, action) => {
         comments,
       };
     }
-    case types.EDIT_COMMENT_PUBLIC: {
-      const { comment, commentId } = action.payload;
+    case types.DELETE_REPLY_PUBLIC: {
+      const { commentId, replyId } = action.payload;
 
-      const comments = state.comments.map((com) => {
-        if (comment._id === commentId) {
-          return comment;
-        }
-        return com;
+      const comments = state.comments.map((comment) => {
+        if (comment._id !== commentId) return comment;
+        const replies = comment.replies.filter((r) => r._id !== replyId);
+
+        return { ...comment, replies };
       });
 
       return {
