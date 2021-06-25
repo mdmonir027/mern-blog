@@ -1,9 +1,11 @@
-import { Avatar, IconButton } from '@material-ui/core';
+import { IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import AddIcon from '@material-ui/icons/Add';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import React from 'react';
-import { Link } from 'react-router-dom';
-
+import { connect } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
+import { logoutAction } from '../../store/actions/authActions.js';
 const useStyles = makeStyles((theme) => ({
   sectionDesktop: {
     display: 'none',
@@ -19,8 +21,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LoggedInUserMenu = () => {
+const LoggedInUserMenu = ({ logoutAction }) => {
   const classes = useStyles();
+
+  const history = useHistory();
 
   return (
     <div
@@ -31,24 +35,22 @@ const LoggedInUserMenu = () => {
       }}
     >
       <div className={classes.sectionDesktop}>
-        <Link to='/create' className={classes.menuItemLink}>
+        <Link to='/admin/dashboard' className={classes.menuItemLink}>
           <IconButton edge='end' color='inherit'>
-            <AddIcon />
+            <DashboardIcon />
           </IconButton>
         </Link>
 
-        <Link to='/admin/dashboard' className={classes.menuItemLink}>
-          <IconButton edge='end' color='inherit'>
-            <Avatar
-              alt='Remy Sharp'
-              src='/static/images/avatar/1.jpg'
-              style={{ width: '30px', height: '30px' }}
-            />
-          </IconButton>
-        </Link>
+        <IconButton
+          edge='end'
+          color='inherit'
+          onClick={() => logoutAction(history)}
+        >
+          <ExitToAppIcon />
+        </IconButton>
       </div>
     </div>
   );
 };
 
-export default LoggedInUserMenu;
+export default connect(null, { logoutAction })(LoggedInUserMenu);

@@ -18,7 +18,7 @@ export const loginAction = (user, history) => (dispatch) => {
           user: tokenDecodedUser,
         },
       });
-      history.push('/admin/dashboard');
+      history.push('/');
     })
     .catch((e) => {
       dispatch({
@@ -62,5 +62,8 @@ export const logoutAction = (history) => (dispatch) => {
     type: types.SET_USER,
     payload: { user: {} },
   });
-  setTimeout(() => dispatchLoading(dispatch, true), 500);
+  localStorage.removeItem('auth_token');
+  history.push('/');
+  dispatchLoading(dispatch, false);
+  // setTimeout(() => dispatchLoading(dispatch, true), 500);
 };
