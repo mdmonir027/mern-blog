@@ -1,25 +1,11 @@
 import { IconButton } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { logoutAction } from '../../store/actions/authActions.js';
-const useStyles = makeStyles((theme) => ({
-  sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'flex',
-    },
-  },
-  menuItemLink: {
-    all: 'inherit',
-    background: 'none',
-    width: '100%',
-    color: 'inherit',
-  },
-}));
+import useStyles from './style/logUserMenu';
 
 const LoggedInUserMenu = ({ logoutAction }) => {
   const classes = useStyles();

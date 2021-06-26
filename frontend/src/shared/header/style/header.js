@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     display: 'none',
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('xs')]: {
       display: 'block',
     },
   },
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
     marginLeft: 0,
     width: '100%',
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('xs')]: {
       marginLeft: theme.spacing(3),
       width: 'auto',
     },
@@ -46,19 +46,19 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('xs')]: {
       width: '20ch',
     },
   },
   sectionDesktop: {
     display: 'none',
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('xs')]: {
       display: 'flex',
     },
   },
   sectionMobile: {
     display: 'flex',
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('xs')]: {
       display: 'none',
     },
   },

@@ -2,7 +2,6 @@ import { Avatar } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Badge from '@material-ui/core/Badge';
 import IconButton from '@material-ui/core/IconButton';
-import InputBase from '@material-ui/core/InputBase';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -13,7 +12,6 @@ import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import SearchIcon from '@material-ui/icons/Search';
 import React, { useMemo } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -52,7 +50,7 @@ const Header = ({ auth }) => {
           <Typography className={classes.title} variant='h6' noWrap>
             BanCoders
           </Typography>
-          <div className={classes.search}>
+          {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -64,7 +62,7 @@ const Header = ({ auth }) => {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
-          </div>
+          </div> */}
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <Link to='/' className={classes.menuItemLink}>
