@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CommentIcon from '@material-ui/icons/Comment';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import moment from 'moment';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -35,6 +36,11 @@ const HomePageSinglePost = ({
 
   React.useEffect(() => setIsLiked(likes.includes(userId)), [likes, userId]);
 
+  const limitContent = (content, length = 50) => {
+    if (content.length > length) return content.slice(0, length) + '....';
+    return content;
+  };
+
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -47,16 +53,15 @@ const HomePageSinglePost = ({
           />
         }
         title={username}
-        subheader={new Date(createdAt).toLocaleDateString()}
+        subheader={moment(createdAt).format('MMMM Do YYYY, h:mm:ss a')}
       />
       <Divider />
       <CardContent>
         <Typography variant='h5' color='textPrimary' component='h1'>
           {title}
         </Typography>
-        <Typography variant='body2' color='textSecondary' component='p'>
-          {body}
-        </Typography>
+
+        <div dangerouslySetInnerHTML={{ __html: limitContent(body, 50) }} />
         <p>
           <Link className={classes.link} to={`/post/${slug}`}>
             Read more
