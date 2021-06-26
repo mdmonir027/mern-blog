@@ -4,7 +4,7 @@ import {
   Divider,
   Grid,
   IconButton,
-  Typography,
+  Typography
 } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CommentIcon from '@material-ui/icons/Comment';
@@ -47,6 +47,9 @@ const SinglePagePost = (props) => {
   const postLikeUnlikeHandler = () => {
     postLikeUnlike(slug, (result) => setIsLiked(result));
   };
+
+  useEffect(()=> document.title = title , [title])
+
 
   const deletePostHandle = () => {
     console.log('delete post');

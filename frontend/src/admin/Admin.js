@@ -28,6 +28,7 @@ const Admin = ({ auth, getAllCategories, getProfile, profile }) => {
   // }
 
   useEffect(() => setHasProfile(profile.hasProfile), [profile.hasProfile]);
+  useEffect(() => console.log(hasProfile), [hasProfile]);
 
   // useEffect(() => {
   //   if (hasProfile) {

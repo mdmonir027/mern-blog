@@ -23,9 +23,9 @@ const Sidebar = ({ logoutAction }) => {
   const classes = useStyles();
   const { url } = useRouteMatch();
   const history = useHistory();
-  const [categoryMenu, setCategoryMenu] = useState(false);
-  const [postMenu, setPostMenu] = useState(false);
-  const [profileMenu, setProfileMenu] = useState(false);
+  const [categoryMenu, setCategoryMenu] = useState(true);
+  const [postMenu, setPostMenu] = useState(true);
+  const [profileMenu, setProfileMenu] = useState(true);
 
   const logoutHandler = () => {
     logoutAction(history, '/login');
