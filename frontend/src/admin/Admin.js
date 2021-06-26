@@ -44,10 +44,10 @@ const Admin = ({ auth, getAllCategories, getProfile, profile }) => {
       }}
     >
       <Grid container spacing={4}>
-        <Grid md={3} item>
+        <Grid md={3} sm={12} xs={12} item>
           <Sidebar />
         </Grid>
-        <Grid md={9} item>
+        <Grid md={9} sm={12} xs={12} item>
           <Routes />
         </Grid>
       </Grid>

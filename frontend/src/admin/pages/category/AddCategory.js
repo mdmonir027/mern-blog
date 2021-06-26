@@ -31,20 +31,24 @@ const AddCategory = ({ auth, category, addCategory }) => {
     <Card>
       <Grid container justify='space-between' className={classes.Header}>
         <Grid item md={6}>
-          <Typography variant='h5' component='h5'>
+          <Typography variant='h5' component='h5' className={classes.title}>
             Manage All Category
           </Typography>
         </Grid>
         <Grid item md={6}>
           <Link to={`/admin/category`} className={classes.link}>
-            <Button variant='contained' color='primary'>
+            <Button
+              variant='contained'
+              color='primary'
+              className={classes.manageButton}
+            >
               Manage Category
             </Button>
           </Link>
         </Grid>
       </Grid>
       <Grid container className={classes.content}>
-        <Grid item md={12}>
+        <Grid item md={12} sm={12} xs={12}>
           <form className={classes.form} onSubmit={submitHandler}>
             <TextField
               type='text'

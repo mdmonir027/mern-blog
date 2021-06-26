@@ -43,7 +43,10 @@ const Sidebar = ({ logoutAction }) => {
             <ListItemIcon>
               <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary='Dashboard' />
+            <ListItemText
+              primary='Dashboard'
+              className={classes.smDisplayNone}
+            />
           </Link>
         </ListItem>
 
@@ -51,7 +54,7 @@ const Sidebar = ({ logoutAction }) => {
           <ListItemIcon>
             <CategoryIcon />
           </ListItemIcon>
-          <ListItemText primary='Category' />
+          <ListItemText primary='Category' className={classes.xsDisplayNone} />
         </ListItem>
         <Collapse in={categoryMenu} timeout='auto' unmountOnExit>
           <List component='div' disablePadding>
@@ -60,7 +63,10 @@ const Sidebar = ({ logoutAction }) => {
                 <ListItemIcon>
                   <AddCircleOutlineIcon />
                 </ListItemIcon>
-                <ListItemText primary='Add Category' />
+                <ListItemText
+                  primary='Add Category'
+                  className={classes.smDisplayNone}
+                />
               </Link>
             </ListItem>
             <ListItem button className={classes.nested}>
@@ -68,7 +74,10 @@ const Sidebar = ({ logoutAction }) => {
                 <ListItemIcon>
                   <ArrowRightAltIcon />
                 </ListItemIcon>
-                <ListItemText primary='Manage Category' />
+                <ListItemText
+                  primary='Manage Category'
+                  className={classes.smDisplayNone}
+                />
               </Link>
             </ListItem>
           </List>
@@ -78,7 +87,7 @@ const Sidebar = ({ logoutAction }) => {
           <ListItemIcon>
             <BookIcon />
           </ListItemIcon>
-          <ListItemText primary='Post' />
+          <ListItemText primary='Post' className={classes.xsDisplayNone} />
         </ListItem>
         <Collapse in={postMenu} timeout='auto' unmountOnExit>
           <List component='div' disablePadding>
@@ -87,7 +96,10 @@ const Sidebar = ({ logoutAction }) => {
                 <ListItemIcon>
                   <AddCircleOutlineIcon />
                 </ListItemIcon>
-                <ListItemText primary='Add Post' />
+                <ListItemText
+                  primary='Add Post'
+                  className={classes.smDisplayNone}
+                />
               </Link>
             </ListItem>
             <ListItem button className={classes.nested}>
@@ -95,7 +107,10 @@ const Sidebar = ({ logoutAction }) => {
                 <ListItemIcon>
                   <ArrowRightAltIcon />
                 </ListItemIcon>
-                <ListItemText primary='Manage Post' />
+                <ListItemText
+                  primary='Manage Post'
+                  className={classes.smDisplayNone}
+                />
               </Link>
             </ListItem>
           </List>
@@ -105,7 +120,7 @@ const Sidebar = ({ logoutAction }) => {
           <ListItemIcon>
             <PersonIcon />
           </ListItemIcon>
-          <ListItemText primary='Profile' />
+          <ListItemText primary='Profile' className={classes.smDisplayNone} />
         </ListItem>
         <Collapse in={profileMenu} timeout='auto' unmountOnExit>
           <List component='div' disablePadding>
@@ -114,7 +129,10 @@ const Sidebar = ({ logoutAction }) => {
                 <ListItemIcon>
                   <VisibilityOutlinedIcon />
                 </ListItemIcon>
-                <ListItemText primary='View' />
+                <ListItemText
+                  primary='View'
+                  className={classes.smDisplayNone}
+                />
               </Link>
             </ListItem>
 
@@ -126,7 +144,10 @@ const Sidebar = ({ logoutAction }) => {
                 <ListItemIcon>
                   <VpnKeyOutlinedIcon />
                 </ListItemIcon>
-                <ListItemText primary='Change Password' />
+                <ListItemText
+                  primary='Change Password'
+                  className={classes.smDisplayNone}
+                />
               </Link>
             </ListItem>
           </List>
@@ -136,7 +157,7 @@ const Sidebar = ({ logoutAction }) => {
           <ListItemIcon>
             <ExitToAppIcon />
           </ListItemIcon>
-          <ListItemText primary='Log Out' />
+          <ListItemText primary='Log Out' className={classes.smDisplayNone} />
         </ListItem>
       </List>
     </Card>

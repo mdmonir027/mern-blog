@@ -5,6 +5,10 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
+    [theme.breakpoints.down('sm')]: {
+      display: 'flex',
+      justifyContent: 'space-between',
+    },
   },
   nested: {
     paddingLeft: theme.spacing(4),
@@ -18,6 +22,16 @@ const useStyles = makeStyles((theme) => ({
   },
   logoutButton: {
     cursor: 'pointer',
+  },
+  smDisplayNone: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
+  },
+  xsDisplayNone: {
+    [theme.breakpoints.down('xs')]: {
+      display: 'none',
+    },
   },
 }));
 export default useStyles;

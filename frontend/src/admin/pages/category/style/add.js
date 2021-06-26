@@ -34,6 +34,17 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: '20px',
     boxSizing: 'border-box',
   },
+  title: {
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '18px',
+    },
+  },
+
+  manageButton: {
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '11px',
+    },
+  },
 }));
 
 export default useStyles;
