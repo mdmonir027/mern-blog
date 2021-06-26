@@ -56,14 +56,16 @@ export const registerAction = (data, history) => (dispatch) => {
     });
 };
 
-export const logoutAction = (history) => (dispatch) => {
-  dispatchLoading(dispatch, true);
-  dispatch({
-    type: types.SET_USER,
-    payload: { user: {} },
-  });
-  localStorage.removeItem('auth_token');
-  history.push('/');
-  dispatchLoading(dispatch, false);
-  // setTimeout(() => dispatchLoading(dispatch, true), 500);
-};
+export const logoutAction =
+  (history, path = '/') =>
+  (dispatch) => {
+    dispatchLoading(dispatch, true);
+    dispatch({
+      type: types.SET_USER,
+      payload: { user: {} },
+    });
+    localStorage.removeItem('auth_token');
+    history.push(path);
+    dispatchLoading(dispatch, false);
+    // setTimeout(() => dispatchLoading(dispatch, true), 500);
+  };

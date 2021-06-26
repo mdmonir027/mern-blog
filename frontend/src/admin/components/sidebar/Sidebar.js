@@ -15,7 +15,9 @@ import PersonIcon from '@material-ui/icons/Person';
 import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
 import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined';
 import React, { useState } from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Link, useHistory, useRouteMatch } from 'react-router-dom';
+import { logoutAction } from '../../../store/actions/authActions';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -32,14 +34,22 @@ const useStyles = makeStyles((theme) => ({
     flexBasis: '100%',
     color: 'inherit',
   },
+  logoutButton: {
+    cursor: 'pointer',
+  },
 }));
 
-const Sidebar = () => {
+const Sidebar = ({ logoutAction }) => {
   const classes = useStyles();
   const { url } = useRouteMatch();
+  const history = useHistory();
   const [categoryMenu, setCategoryMenu] = useState(false);
   const [postMenu, setPostMenu] = useState(false);
   const [profileMenu, setProfileMenu] = useState(false);
+
+  const logoutHandler = () => {
+    logoutAction(history, '/login');
+  };
 
   return (
     <Card>
@@ -142,7 +152,7 @@ const Sidebar = () => {
           </List>
         </Collapse>
 
-        <ListItem>
+        <ListItem onClick={logoutHandler} className={classes.logoutButton}>
           <ListItemIcon>
             <ExitToAppIcon />
           </ListItemIcon>
@@ -153,4 +163,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default connect(null, { logoutAction })(Sidebar);
