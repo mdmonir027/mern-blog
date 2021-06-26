@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { addPostAction } from '../../../store/actions/author/postActions';
 import useStyles from './style/add';
+import UploadPostImage from './UploadPostImage';
 
 const AddPost = ({ categories, postState, addPostAction }) => {
   const classes = useStyles();
@@ -22,6 +23,7 @@ const AddPost = ({ categories, postState, addPostAction }) => {
     title: '',
     body: '',
     category: '',
+    thumbnail: '',
   });
 
   const errors = useMemo(() => {
@@ -35,6 +37,8 @@ const AddPost = ({ categories, postState, addPostAction }) => {
       [event.target.name]: event.target.value,
     });
   };
+
+  const imageUploadHandler = (thumbnail) => setPost({ ...post, thumbnail });
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -62,7 +66,7 @@ const AddPost = ({ categories, postState, addPostAction }) => {
           <form className={classes.form} onSubmit={submitHandler}>
             <TextField
               type='text'
-              placeholder='Enter category name'
+              placeholder='Enter post title'
               error={!!errors?.title}
               helperText={errors?.title ? errors.title : ''}
               fullWidth
@@ -94,7 +98,7 @@ const AddPost = ({ categories, postState, addPostAction }) => {
                 <MenuItem value={cat.slug}>{cat.name}</MenuItem>
               ))}
             </Select>
-
+            <UploadPostImage imageUploadHandler={imageUploadHandler} />
             <div className={classes.input}>
               <CKEditor
                 editor={ClassicEditor}

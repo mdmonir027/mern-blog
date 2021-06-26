@@ -58,3 +58,28 @@ export const updateProfilePicture = (data) => (dispatch) => {
       dispatchLoading(dispatch, false);
     });
 };
+
+export const uploadPostImage = (data, callBack) => (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  };
+  axios
+    .post('/upload/post-image', data, config)
+    .then((response) => {
+      const { image } = response.data;
+      dispatchLoading(dispatch, false);
+      callBack(image);
+    })
+    .catch((e) => {
+      console.log(e); // todo remove later
+      dispatch({
+        type: types.SET_PROFILE_ERRORS,
+        payload: {
+          page: 'fetch',
+          errors: e.response.data,
+        },
+      });
+    });
+};

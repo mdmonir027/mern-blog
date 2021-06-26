@@ -30,12 +30,15 @@ controller.getAll = async (req, res) => {
 };
 controller.store = async (req, res) => {
   try {
-    const { title, body, categoryId } = req.body;
+    const { title, body, categoryId, thumbnail } = req.body;
 
     const postInstance = new Post({
       title,
       slug: slugify(title).toLowerCase(),
       body,
+      thumbnail: thumbnail
+        ? thumbnail
+        : `${req.get('host')}/images/default.png`,
       category: categoryId,
       readTime: readingTime(body).text,
       user: req.user._id,

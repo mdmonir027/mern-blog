@@ -53,4 +53,16 @@ controller.updateProfilePicture = async (req, res) => {
   }
 };
 
+controller.uploadPostImage = async (req, res) => {
+  if (req.file) {
+    const image = `${req.get('host')}/images/${req.file.filename}`;
+
+    return res.status(200).json({
+      image,
+    });
+  } else {
+    res.status(200).json({ image: `${req.get('host')}/images/default.png` });
+  }
+};
+
 module.exports = controller;

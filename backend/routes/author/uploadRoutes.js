@@ -4,6 +4,7 @@ const upload = require('../../middleware/uploadMiddleware');
 const {
   uploadProfilePicture,
   updateProfilePicture,
+  uploadPostImage,
 } = require('../../controller/author/uploadController');
 
 const authenticate = require('../../middleware/passport/authenticate');
@@ -19,6 +20,13 @@ router.put(
   authenticate,
   upload.single('profilePicture'),
   updateProfilePicture
+);
+
+router.post(
+  '/post-image',
+  authenticate,
+  upload.single('image'),
+  uploadPostImage
 );
 
 module.exports = router;

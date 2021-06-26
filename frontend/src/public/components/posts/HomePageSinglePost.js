@@ -61,7 +61,7 @@ const HomePageSinglePost = ({
           {title}
         </Typography>
 
-        <div dangerouslySetInnerHTML={{ __html: limitContent(body, 50) }} />
+        <div dangerouslySetInnerHTML={{ __html: limitContent(body, 500) }} />
         <p>
           <Link className={classes.link} to={`/post/${slug}`}>
             Read more

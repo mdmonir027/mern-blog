@@ -23,7 +23,7 @@ const SinglePostPage = ({ post, userId, fetchSinglePost }) => {
           commentCount={1}
           slug={post.slug}
           likes={post.likes}
-          image='https://images.pexels.com/photos/7903158/pexels-photo-7903158.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+          image={`http://${post.thumbnail}`}
         />
       ) : (
         <h3>Loading....</h3>
