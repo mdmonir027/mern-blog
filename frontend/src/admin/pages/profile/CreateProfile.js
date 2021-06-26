@@ -1,26 +1,11 @@
 import { Button, Card, Grid, TextField, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import React, { useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { createProfile } from '../../../store/actions/author/profileAction';
 import UploadProfilePicture from '../../components/proifle/UploadProfilePicture';
+import useStyles from './style/create';
 
-const useStyles = makeStyles((theme) => ({
-  input: {
-    marginTop: theme.spacing(2),
-  },
-  loginCard: {
-    padding: 15,
-  },
-  imagArea: {},
-  imageWrapper: {},
-  profileImage: {
-    height: 320,
-    width: '100%',
-  },
-  uploadImageButton: {},
-}));
 const CreateProfile = ({ auth, createProfile, profile }) => {
   const classes = useStyles();
   const history = useHistory();

@@ -1,25 +1,9 @@
 import { Button, Card, TextField, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import React, { useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { changePassword } from '../../../store/actions/author/profileAction';
-
-const useStyles = makeStyles((theme) => ({
-  input: {
-    marginTop: theme.spacing(2),
-  },
-  loginCard: {
-    padding: 15,
-  },
-  imagArea: {},
-  imageWrapper: {},
-  profileImage: {
-    height: 320,
-    width: '100%',
-  },
-  uploadImageButton: {},
-}));
+import useStyles from './style/password';
 
 const ChangePassword = ({ profile, changePassword }) => {
   const classes = useStyles();

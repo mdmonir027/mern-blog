@@ -1,26 +1,10 @@
 import { Button, Card, Grid, TextField, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import React, { useEffect, useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { updateProfile } from '../../../store/actions/author/profileAction';
 import UpdateProfilePicture from '../../components/proifle/UpdateProfilePicture';
-
-const useStyles = makeStyles((theme) => ({
-  input: {
-    marginTop: theme.spacing(2),
-  },
-  loginCard: {
-    padding: 15,
-  },
-  imagArea: {},
-  imageWrapper: {},
-  profileImage: {
-    height: 320,
-    width: '100%',
-  },
-  uploadImageButton: {},
-}));
+import useStyles from './style/edit';
 
 const EditProfile = ({ auth, profile, updateProfile }) => {
   const classes = useStyles();

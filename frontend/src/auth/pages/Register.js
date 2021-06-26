@@ -1,33 +1,10 @@
 import { Button, Card, Grid, TextField } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import React, { useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import SimpleBackdrop from '../../shared/backdrop/Backdrop';
 import { registerAction } from '../../store/actions/authActions';
-
-const useStyles = makeStyles((theme) => ({
-  form: {
-    marginTop: '20px',
-    marginBottom: '20px',
-  },
-  input: {
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2),
-  },
-  loginCard: {
-    padding: 15,
-  },
-  linkWrapper: {
-    textAlign: 'center',
-  },
-  link: {
-    textDecoration: 'none',
-    display: 'inline-block',
-    textAlign: 'center',
-    color: '#3f51b5',
-  },
-}));
+import useStyles from './style/register';
 
 const Register = ({ auth, registerAction }) => {
   const classes = useStyles();

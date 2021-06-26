@@ -2,7 +2,6 @@ import {
   Button,
   ButtonGroup,
   Grid,
-  makeStyles,
   TableCell,
   TextField,
 } from '@material-ui/core';
@@ -11,15 +10,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import React, { useEffect, useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import { updateCategoryAction } from '../../../store/actions/author/categoryActions';
-
-const useStyles = makeStyles((theme) => ({
-  input: {
-    margin: 0,
-  },
-  inputGrid: {
-    flex: 1,
-  },
-}));
+import useStyles from './style/editCategory';
 
 const EditCategory = ({
   name,

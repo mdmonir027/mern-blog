@@ -4,7 +4,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { makeStyles } from '@material-ui/core/styles';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import BookIcon from '@material-ui/icons/Book';
@@ -18,26 +17,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import { logoutAction } from '../../../store/actions/authActions';
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
-  nested: {
-    paddingLeft: theme.spacing(4),
-  },
-  link: {
-    display: 'flex',
-    alignItems: 'center',
-    textDecoration: 'none',
-    flexBasis: '100%',
-    color: 'inherit',
-  },
-  logoutButton: {
-    cursor: 'pointer',
-  },
-}));
+import useStyles from './style/sidebar';
 
 const Sidebar = ({ logoutAction }) => {
   const classes = useStyles();

@@ -1,26 +1,8 @@
 import Collapse from '@material-ui/core/Collapse';
-import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import HomePageSingleCategoryPosts from '../posts/HomePageSingleCategoryPosts';
-
-const useStyles = makeStyles((theme) => ({
-  wrapper: {
-    maxWidth: 345,
-    padding: '7px',
-    cursor: 'pointer',
-  },
-  link: {
-    textDecoration: 'none',
-  },
-  postLink: {
-    textDecoration: 'none',
-    color: '#000',
-  },
-  postsWrapper: {
-    background: '#F5F5F5',
-  },
-}));
+import useStyles from './style/singleCategory';
 
 const HomePageSingleCategory = ({ name, slug }) => {
   const classes = useStyles();

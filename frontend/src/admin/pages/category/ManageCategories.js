@@ -6,7 +6,6 @@ import {
   Typography,
 } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -18,26 +17,7 @@ import { connect } from 'react-redux';
 import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import { getAllCategories } from '../../../store/actions/author/categoryActions';
 import SingleCategory from '../../components/category/SingleCategory';
-
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-  tableHeader: {
-    background: '#F0F0F7',
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
-  },
-  link: {
-    textDecoration: 'none',
-    display: 'inline-block',
-    textAlign: 'center',
-    color: '#3f51b5',
-    float: 'right',
-  },
-});
+import useStyles from './style/manage';
 
 const ManageCategory = ({ auth, getAllCategories, category }) => {
   const classes = useStyles();

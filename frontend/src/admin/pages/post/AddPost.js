@@ -4,7 +4,6 @@ import {
   Button,
   Card,
   Grid,
-  makeStyles,
   MenuItem,
   Select,
   TextField,
@@ -14,41 +13,7 @@ import React, { useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { addPostAction } from '../../../store/actions/author/postActions';
-const useStyles = makeStyles((theme) => ({
-  form: {
-    marginTop: '20px',
-    marginBottom: '20px',
-  },
-  input: {
-    marginTop: theme.spacing(2),
-    marginBottom: '20px',
-  },
-  loginCard: {
-    padding: 15,
-  },
-  linkWrapper: {
-    textAlign: 'center',
-  },
-  link: {
-    textDecoration: 'none',
-    display: 'inline-block',
-    textAlign: 'center',
-    color: '#3f51b5',
-    float: 'right',
-  },
-  Header: {
-    background: '#F0F0F7',
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
-  },
-  content: {
-    paddingLeft: '20px',
-    paddingRight: '20px',
-    boxSizing: 'border-box',
-  },
-}));
+import useStyles from './style/add';
 
 const AddPost = ({ categories, postState, addPostAction }) => {
   const classes = useStyles();

@@ -1,19 +1,9 @@
 import { Card, CardContent, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchCategories } from '../../../store/actions/public/categoryActions';
 import HomePageSingleCategory from './HomePageSingleCategory';
-
-const useStyles = makeStyles((theme) => ({
-  title: {
-    background: '#0e33fd',
-    textAlign: 'center',
-    color: 'white',
-    paddingTop: '5px',
-    paddingBottom: '5px',
-  },
-}));
+import useStyles from './style/categories';
 
 const HomePageCategories = ({ categories, fetchCategories }) => {
   useEffect(() => fetchCategories(), [fetchCategories]);

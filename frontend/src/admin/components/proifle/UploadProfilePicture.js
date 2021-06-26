@@ -1,26 +1,8 @@
 import { Button } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { uploadProfilePicture } from '../../../store/actions/author/uploadActions';
-const useStyles = makeStyles((theme) => ({
-  imagArea: {},
-  imageWrapper: {},
-  profileImage: {
-    height: 320,
-    width: '100%',
-  },
-  uploadImageButton: {
-    width: '100%',
-  },
-  inputLabel: {
-    width: '100%',
-    cursor: 'pointer',
-  },
-  inputProfile: {
-    display: 'none',
-  },
-}));
+import useStyles from './style/upload';
 
 const UploadProfilePicture = ({ uploadProfilePicture, setProfilePic }) => {
   const classes = useStyles();

@@ -7,7 +7,6 @@ import {
   Typography,
 } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
-import { makeStyles } from '@material-ui/core/styles';
 import CommentIcon from '@material-ui/icons/Comment';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
@@ -21,42 +20,7 @@ import { deletePost } from '../../../store/actions/public/postActions';
 import AllComments from '../comment/AllComments';
 import CommentAdd from '../comment/CommentAdd';
 import style from './style/SinglePagePost.module.css';
-
-const useStyles = makeStyles({
-  cardBody: {
-    padding: '20px',
-    marginTop: ' 20px',
-  },
-  iconBox: {
-    display: 'flex',
-    justifyContent: 'space-around',
-  },
-  header: {
-    marginBottom: '5px',
-  },
-  imageWrapper: {
-    width: '100%',
-    height: '350px',
-    background: 'red',
-    marginBottom: '10px',
-    borderRadius: '10px',
-    overflow: 'hidden',
-  },
-  postImage: {
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-  },
-  title: {
-    marginTop: '15px',
-    marginBottom: '15px',
-  },
-  content: {
-    paddingTop: '30px',
-    paddingBottom: '30px',
-    fontSize: '16px',
-  },
-});
+import useStyles from './style/singlePost';
 
 const SinglePagePost = (props) => {
   const {

@@ -1,20 +1,9 @@
 import { TextField } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import React, { useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { addComment } from '../../../store/actions/author/commentAction';
-const useStyles = makeStyles({
-  commentForm: {
-    marginTop: '20px',
-    marginBottom: '20px',
-  },
-  loginTitle: {
-    marginTop: '20px',
-    marginBottom: '20px',
-    color: 'red',
-  },
-});
+import useStyles from './style/commentAdd';
 
 const CommentAdd = ({ addComment, isAuthenticated, comment }) => {
   const classes = useStyles();

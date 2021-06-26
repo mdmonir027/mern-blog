@@ -1,24 +1,9 @@
-import { Card, CardContent, makeStyles, Typography } from '@material-ui/core';
+import { Card, CardContent, Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchRecentPosts } from '../../../store/actions/public/postActions';
-const useStyles = makeStyles((theme) => ({
-  title: {
-    background: '#0e33fd',
-    textAlign: 'center',
-    color: 'white',
-    paddingTop: '5px',
-    paddingBottom: '5px',
-  },
-  link: {
-    textDecoration: 'none',
-    color: '#000',
-    display: 'block',
-    cursor: 'Pointer',
-    marginBottom: '5px',
-  },
-}));
+import useStyles from './style/recentPosts';
 const RecentPosts = ({ posts, fetchRecentPosts }) => {
   const classes = useStyles();
 

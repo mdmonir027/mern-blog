@@ -1,18 +1,11 @@
 import { Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchComments } from '../../../store/actions/public/commentActions';
 import Comment from './Comment';
+import useStyles from './style/allComment';
 
-const useStyles = makeStyles({
-  allCommentsTitle: {
-    marginBottom: '10px',
-    marginTop: '20px',
-    fontWeight: '600',
-  },
-});
 const AllComments = ({ fetchComments, comments }) => {
   const classes = useStyles();
 

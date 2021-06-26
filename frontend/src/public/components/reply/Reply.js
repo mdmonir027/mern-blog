@@ -1,5 +1,4 @@
 import { Avatar, Grid, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import React, { useState } from 'react';
@@ -8,33 +7,8 @@ import { commentReplyDelete } from '../../../store/actions/author/commentAction'
 import { replyLikeUnlike } from '../../../store/actions/author/likeUnlikeAction';
 import { creationTime } from '../../utils/timeUtils';
 import ReplyEdit from './ReplyEdit';
+import useStyles from './style/reply';
 import style from './style/Reply.module.css';
-const useStyles = makeStyles({
-  commentBody: {
-    marginTop: '12px',
-  },
-  commentDetails: {
-    background: '#F3F3F3',
-    paddingLeft: ' 10px',
-    paddingTop: ' 5px',
-    paddingBottom: ' 5px',
-    borderRadius: '5px',
-  },
-  username: {
-    fontWeight: 'bold',
-  },
-  commentFooter: {
-    display: 'flex',
-    paddingRight: '30px',
-    paddingLeft: '10px',
-    fontSize: '13px',
-    marginTop: '4px',
-  },
-  footerButton: {
-    cursor: 'pointer',
-    marginRight: '15px',
-  },
-});
 
 const Reply = ({
   username,
