@@ -5,18 +5,12 @@ import Routes from './Routes';
 
 const Public = () => {
   return (
-    <div
-      style={{
-        marginRight: '20px',
-        marginLeft: '20px',
-        boxSizing: 'border-box',
-      }}
-    >
+    <div>
       <Grid container spacing={4}>
-        <Grid md={9} item>
+        <Grid md={9} sm={12} xs={12} item>
           <Routes />
         </Grid>
-        <Grid md={3} item>
+        <Grid md={3} sm={12} xs={12} item>
           <Sidebar />
         </Grid>
       </Grid>
